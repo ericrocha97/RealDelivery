@@ -1,0 +1,413 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="db_a464fd_realdevModel.Store" Provider="MySql.Data.MySqlClient" ProviderManifestToken="5.6" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="endereco">
+          <Key>
+            <PropertyRef Name="endereco_cod" />
+          </Key>
+          <Property Name="endereco_cod" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="usuario_cod" Type="int" Nullable="false" />
+          <Property Name="endereco_cep" Type="varchar" MaxLength="15" />
+          <Property Name="endereco_rua" Type="varchar" MaxLength="100" />
+          <Property Name="endereco_bairro" Type="varchar" MaxLength="100" />
+          <Property Name="endereco_cidade" Type="varchar" MaxLength="100" />
+          <Property Name="endereco_uf" Type="varchar" MaxLength="100" />
+          <Property Name="endereco_comp" Type="text" />
+          <Property Name="endereco_num" Type="varchar" MaxLength="20" />
+        </EntityType>
+        <EntityType Name="grupo">
+          <Key>
+            <PropertyRef Name="grupo_cod" />
+          </Key>
+          <Property Name="grupo_cod" Type="uint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="grupo_nome" Type="varchar" MaxLength="50" />
+          <Property Name="grupo_ativo" Type="varchar" MaxLength="1" />
+          <Property Name="grupo_desc" Type="text" />
+          <Property Name="grupo_img" Type="longtext" />
+        </EntityType>
+        <EntityType Name="impress">
+          <Key>
+            <PropertyRef Name="impress_cod" />
+          </Key>
+          <Property Name="impress_cod" Type="uint" StoreGeneratedPattern="Identity" Nullable="false" />
+        </EntityType>
+        <EntityType Name="produto">
+          <Key>
+            <PropertyRef Name="produto_cod" />
+          </Key>
+          <Property Name="produto_cod" Type="uint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="produto_nome" Type="varchar" MaxLength="100" />
+          <Property Name="grupo_cod" Type="uint" Nullable="false" />
+          <Property Name="produto_preco" Type="float" />
+          <Property Name="produto_custo" Type="float" />
+          <Property Name="produto_ativo" Type="varchar" MaxLength="1" />
+          <Property Name="impress_cod" Type="uint" />
+          <Property Name="produto_desc" Type="text" />
+          <Property Name="produto_img" Type="longtext" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'def.db_a464fd_realdev.teste' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="teste">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="usuario">
+          <Key>
+            <PropertyRef Name="usuario_cod" />
+          </Key>
+          <Property Name="usuario_cod" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="usuario_email" Type="varchar" MaxLength="250" />
+          <Property Name="usuario_senha" Type="varchar" MaxLength="50" />
+          <Property Name="usuario_nome" Type="varchar" MaxLength="100" />
+          <Property Name="usuario_cel" Type="varchar" MaxLength="20" />
+        </EntityType>
+        <EntityType Name="usuario_perm">
+          <Key>
+            <PropertyRef Name="usuario_perm_cod" />
+          </Key>
+          <Property Name="usuario_perm_cod" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="usuario_cod" Type="int" Nullable="false" />
+          <Property Name="usuario_nivel" Type="int" />
+        </EntityType>
+        <Association Name="Pro_Gru_Const">
+          <End Role="grupo" Type="Self.grupo" Multiplicity="1" />
+          <End Role="produto" Type="Self.produto" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="grupo">
+              <PropertyRef Name="grupo_cod" />
+            </Principal>
+            <Dependent Role="produto">
+              <PropertyRef Name="grupo_cod" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="Pro_Imp_Const">
+          <End Role="impress" Type="Self.impress" Multiplicity="0..1" />
+          <End Role="produto" Type="Self.produto" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="impress">
+              <PropertyRef Name="impress_cod" />
+            </Principal>
+            <Dependent Role="produto">
+              <PropertyRef Name="impress_cod" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="Usu_End_Const">
+          <End Role="usuario" Type="Self.usuario" Multiplicity="1" />
+          <End Role="endereco" Type="Self.endereco" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="usuario">
+              <PropertyRef Name="usuario_cod" />
+            </Principal>
+            <Dependent Role="endereco">
+              <PropertyRef Name="usuario_cod" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="usu_usuperm_constraint">
+          <End Role="usuario" Type="Self.usuario" Multiplicity="1" />
+          <End Role="usuario_perm" Type="Self.usuario_perm" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="usuario">
+              <PropertyRef Name="usuario_cod" />
+            </Principal>
+            <Dependent Role="usuario_perm">
+              <PropertyRef Name="usuario_cod" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="db_a464fd_realdevModelStoreContainer">
+          <EntitySet Name="endereco" EntityType="Self.endereco" Schema="db_a464fd_realdev" store:Type="Tables" />
+          <EntitySet Name="grupo" EntityType="Self.grupo" Schema="db_a464fd_realdev" store:Type="Tables" />
+          <EntitySet Name="impress" EntityType="Self.impress" Schema="db_a464fd_realdev" store:Type="Tables" />
+          <EntitySet Name="produto" EntityType="Self.produto" Schema="db_a464fd_realdev" store:Type="Tables" />
+          <EntitySet Name="usuario" EntityType="Self.usuario" Schema="db_a464fd_realdev" store:Type="Tables" />
+          <EntitySet Name="usuario_perm" EntityType="Self.usuario_perm" Schema="db_a464fd_realdev" store:Type="Tables" />
+          <EntitySet Name="teste" EntityType="Self.teste" store:Type="Tables" store:Schema="db_a464fd_realdev">
+            <DefiningQuery>SELECT
+`teste`.`id`
+FROM `teste` AS `teste`</DefiningQuery>
+          </EntitySet>
+          <AssociationSet Name="Pro_Gru_Const" Association="Self.Pro_Gru_Const">
+            <End Role="grupo" EntitySet="grupo" />
+            <End Role="produto" EntitySet="produto" />
+          </AssociationSet>
+          <AssociationSet Name="Pro_Imp_Const" Association="Self.Pro_Imp_Const">
+            <End Role="impress" EntitySet="impress" />
+            <End Role="produto" EntitySet="produto" />
+          </AssociationSet>
+          <AssociationSet Name="Usu_End_Const" Association="Self.Usu_End_Const">
+            <End Role="usuario" EntitySet="usuario" />
+            <End Role="endereco" EntitySet="endereco" />
+          </AssociationSet>
+          <AssociationSet Name="usu_usuperm_constraint" Association="Self.usu_usuperm_constraint">
+            <End Role="usuario" EntitySet="usuario" />
+            <End Role="usuario_perm" EntitySet="usuario_perm" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="db_a464fd_realdevModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="endereco">
+          <Key>
+            <PropertyRef Name="endereco_cod" />
+          </Key>
+          <Property Name="endereco_cod" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="usuario_cod" Type="Int32" Nullable="false" />
+          <Property Name="endereco_cep" Type="String" MaxLength="15" FixedLength="false" Unicode="false" />
+          <Property Name="endereco_rua" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="endereco_bairro" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="endereco_cidade" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="endereco_uf" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="endereco_comp" Type="String" MaxLength="65535" FixedLength="false" Unicode="false" />
+          <Property Name="endereco_num" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="usuario" Relationship="Self.Usu_End_Const" FromRole="endereco" ToRole="usuario" />
+        </EntityType>
+        <EntityType Name="grupo">
+          <Key>
+            <PropertyRef Name="grupo_cod" />
+          </Key>
+          <Property Name="grupo_cod" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="grupo_nome" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="grupo_ativo" Type="String" MaxLength="1" FixedLength="false" Unicode="false" />
+          <Property Name="grupo_desc" Type="String" MaxLength="65535" FixedLength="false" Unicode="false" />
+          <Property Name="grupo_img" Type="String" MaxLength="1073741823" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="produto" Relationship="Self.Pro_Gru_Const" FromRole="grupo" ToRole="produto" />
+        </EntityType>
+        <EntityType Name="impress">
+          <Key>
+            <PropertyRef Name="impress_cod" />
+          </Key>
+          <Property Name="impress_cod" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <NavigationProperty Name="produto" Relationship="Self.Pro_Imp_Const" FromRole="impress" ToRole="produto" />
+        </EntityType>
+        <EntityType Name="produto">
+          <Key>
+            <PropertyRef Name="produto_cod" />
+          </Key>
+          <Property Name="produto_cod" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="produto_nome" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="grupo_cod" Type="Int64" Nullable="false" />
+          <Property Name="produto_preco" Type="Single" />
+          <Property Name="produto_custo" Type="Single" />
+          <Property Name="produto_ativo" Type="String" MaxLength="1" FixedLength="false" Unicode="false" />
+          <Property Name="impress_cod" Type="Int64" />
+          <Property Name="produto_desc" Type="String" MaxLength="65535" FixedLength="false" Unicode="false" />
+          <Property Name="produto_img" Type="String" MaxLength="1073741823" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="grupo" Relationship="Self.Pro_Gru_Const" FromRole="produto" ToRole="grupo" />
+          <NavigationProperty Name="impress" Relationship="Self.Pro_Imp_Const" FromRole="produto" ToRole="impress" />
+        </EntityType>
+        <EntityType Name="usuario">
+          <Key>
+            <PropertyRef Name="usuario_cod" />
+          </Key>
+          <Property Name="usuario_cod" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="usuario_email" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+          <Property Name="usuario_senha" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="usuario_nome" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="usuario_cel" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="endereco" Relationship="Self.Usu_End_Const" FromRole="usuario" ToRole="endereco" />
+          <NavigationProperty Name="usuario_perm" Relationship="Self.usu_usuperm_constraint" FromRole="usuario" ToRole="usuario_perm" />
+        </EntityType>
+        <EntityType Name="usuario_perm">
+          <Key>
+            <PropertyRef Name="usuario_perm_cod" />
+          </Key>
+          <Property Name="usuario_perm_cod" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="usuario_cod" Type="Int32" Nullable="false" />
+          <Property Name="usuario_nivel" Type="Int32" />
+          <NavigationProperty Name="usuario" Relationship="Self.usu_usuperm_constraint" FromRole="usuario_perm" ToRole="usuario" />
+        </EntityType>
+        <EntityType Name="teste">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" />
+        </EntityType>
+        <Association Name="Usu_End_Const">
+          <End Role="usuario" Type="Self.usuario" Multiplicity="1" />
+          <End Role="endereco" Type="Self.endereco" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="usuario">
+              <PropertyRef Name="usuario_cod" />
+            </Principal>
+            <Dependent Role="endereco">
+              <PropertyRef Name="usuario_cod" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="Pro_Gru_Const">
+          <End Role="grupo" Type="Self.grupo" Multiplicity="1" />
+          <End Role="produto" Type="Self.produto" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="grupo">
+              <PropertyRef Name="grupo_cod" />
+            </Principal>
+            <Dependent Role="produto">
+              <PropertyRef Name="grupo_cod" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="Pro_Imp_Const">
+          <End Role="impress" Type="Self.impress" Multiplicity="0..1" />
+          <End Role="produto" Type="Self.produto" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="impress">
+              <PropertyRef Name="impress_cod" />
+            </Principal>
+            <Dependent Role="produto">
+              <PropertyRef Name="impress_cod" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="usu_usuperm_constraint">
+          <End Role="usuario" Type="Self.usuario" Multiplicity="1" />
+          <End Role="usuario_perm" Type="Self.usuario_perm" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="usuario">
+              <PropertyRef Name="usuario_cod" />
+            </Principal>
+            <Dependent Role="usuario_perm">
+              <PropertyRef Name="usuario_cod" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="db_a464fd_realdevEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="endereco" EntityType="Self.endereco" />
+          <EntitySet Name="grupo" EntityType="Self.grupo" />
+          <EntitySet Name="impress" EntityType="Self.impress" />
+          <EntitySet Name="produto" EntityType="Self.produto" />
+          <EntitySet Name="usuario" EntityType="Self.usuario" />
+          <EntitySet Name="usuario_perm" EntityType="Self.usuario_perm" />
+          <EntitySet Name="teste" EntityType="Self.teste" />
+          <AssociationSet Name="Usu_End_Const" Association="Self.Usu_End_Const">
+            <End Role="usuario" EntitySet="usuario" />
+            <End Role="endereco" EntitySet="endereco" />
+          </AssociationSet>
+          <AssociationSet Name="Pro_Gru_Const" Association="Self.Pro_Gru_Const">
+            <End Role="grupo" EntitySet="grupo" />
+            <End Role="produto" EntitySet="produto" />
+          </AssociationSet>
+          <AssociationSet Name="Pro_Imp_Const" Association="Self.Pro_Imp_Const">
+            <End Role="impress" EntitySet="impress" />
+            <End Role="produto" EntitySet="produto" />
+          </AssociationSet>
+          <AssociationSet Name="usu_usuperm_constraint" Association="Self.usu_usuperm_constraint">
+            <End Role="usuario" EntitySet="usuario" />
+            <End Role="usuario_perm" EntitySet="usuario_perm" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="db_a464fd_realdevModelStoreContainer" CdmEntityContainer="db_a464fd_realdevEntities">
+          <EntitySetMapping Name="endereco">
+            <EntityTypeMapping TypeName="db_a464fd_realdevModel.endereco">
+              <MappingFragment StoreEntitySet="endereco">
+                <ScalarProperty Name="endereco_cod" ColumnName="endereco_cod" />
+                <ScalarProperty Name="usuario_cod" ColumnName="usuario_cod" />
+                <ScalarProperty Name="endereco_cep" ColumnName="endereco_cep" />
+                <ScalarProperty Name="endereco_rua" ColumnName="endereco_rua" />
+                <ScalarProperty Name="endereco_bairro" ColumnName="endereco_bairro" />
+                <ScalarProperty Name="endereco_cidade" ColumnName="endereco_cidade" />
+                <ScalarProperty Name="endereco_uf" ColumnName="endereco_uf" />
+                <ScalarProperty Name="endereco_comp" ColumnName="endereco_comp" />
+                <ScalarProperty Name="endereco_num" ColumnName="endereco_num" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="grupo">
+            <EntityTypeMapping TypeName="db_a464fd_realdevModel.grupo">
+              <MappingFragment StoreEntitySet="grupo">
+                <ScalarProperty Name="grupo_cod" ColumnName="grupo_cod" />
+                <ScalarProperty Name="grupo_nome" ColumnName="grupo_nome" />
+                <ScalarProperty Name="grupo_ativo" ColumnName="grupo_ativo" />
+                <ScalarProperty Name="grupo_desc" ColumnName="grupo_desc" />
+                <ScalarProperty Name="grupo_img" ColumnName="grupo_img" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="impress">
+            <EntityTypeMapping TypeName="db_a464fd_realdevModel.impress">
+              <MappingFragment StoreEntitySet="impress">
+                <ScalarProperty Name="impress_cod" ColumnName="impress_cod" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="produto">
+            <EntityTypeMapping TypeName="db_a464fd_realdevModel.produto">
+              <MappingFragment StoreEntitySet="produto">
+                <ScalarProperty Name="produto_cod" ColumnName="produto_cod" />
+                <ScalarProperty Name="produto_nome" ColumnName="produto_nome" />
+                <ScalarProperty Name="grupo_cod" ColumnName="grupo_cod" />
+                <ScalarProperty Name="produto_preco" ColumnName="produto_preco" />
+                <ScalarProperty Name="produto_custo" ColumnName="produto_custo" />
+                <ScalarProperty Name="produto_ativo" ColumnName="produto_ativo" />
+                <ScalarProperty Name="impress_cod" ColumnName="impress_cod" />
+                <ScalarProperty Name="produto_desc" ColumnName="produto_desc" />
+                <ScalarProperty Name="produto_img" ColumnName="produto_img" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="usuario">
+            <EntityTypeMapping TypeName="db_a464fd_realdevModel.usuario">
+              <MappingFragment StoreEntitySet="usuario">
+                <ScalarProperty Name="usuario_cod" ColumnName="usuario_cod" />
+                <ScalarProperty Name="usuario_email" ColumnName="usuario_email" />
+                <ScalarProperty Name="usuario_senha" ColumnName="usuario_senha" />
+                <ScalarProperty Name="usuario_nome" ColumnName="usuario_nome" />
+                <ScalarProperty Name="usuario_cel" ColumnName="usuario_cel" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="usuario_perm">
+            <EntityTypeMapping TypeName="db_a464fd_realdevModel.usuario_perm">
+              <MappingFragment StoreEntitySet="usuario_perm">
+                <ScalarProperty Name="usuario_perm_cod" ColumnName="usuario_perm_cod" />
+                <ScalarProperty Name="usuario_cod" ColumnName="usuario_cod" />
+                <ScalarProperty Name="usuario_nivel" ColumnName="usuario_nivel" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="teste">
+            <EntityTypeMapping TypeName="db_a464fd_realdevModel.teste">
+              <MappingFragment StoreEntitySet="teste">
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

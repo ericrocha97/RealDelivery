@@ -1,0 +1,55 @@
+﻿@model IEnumerable<RealDelivery.grupo>
+
+@{
+    ViewBag.Title = "Cadastro de grupos";
+}
+
+<h2 class="text-center mt-2">Cadastro de grupos</h2>
+
+
+<div class="float-right mb-2">
+    @Html.ActionLink("Adicionar novos", "Create", "", new { @class = "btn btn-primary" })
+</div>
+
+<div class="float-left mb-2">
+    @using (Html.BeginForm("Buscar", "Grupo", FormMethod.Get))
+    {
+
+        <input type="text" name="texto" value="" />
+        <labe for="ativo">Ativo?:</labe>
+        <input type="checkbox" name="ativo" value="S" checked />
+        <input type="submit" name="enviar" value="Buscar" />
+    }
+
+
+</div>
+
+<table class="table table-hover table-bordered">
+    <tr>
+        <th style="width: 150px;">
+            @Html.DisplayNameFor(model => model.grupo_nome)
+        </th>
+        <th style="width: 75px;">
+            @Html.DisplayNameFor(model => model.grupo_ativo)
+        </th>
+        <th style="width: 125px;"></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.grupo_nome)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.grupo_ativo)
+            </td>
+            <td>
+                @Html.ActionLink("Editar", "Edit", new { id = item.grupo_cod }, new { @class = "btn btn-primary", @style = "width: 116px;" })
+                @Html.ActionLink("Detalhes", "Details", new { id = item.grupo_cod }, new { @class = "btn btn-warning", @style = "width: 116px;" })
+
+            </td>
+        </tr>
+    }
+
+</table>

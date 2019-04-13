@@ -1,0 +1,50 @@
+﻿@model RealDelivery.grupo
+
+@{
+    ViewBag.Title = "Detalhes do grupo";
+}
+
+<h2 class="text-center text-uppercase mt-2">Detalhes do grupo</h2>
+
+<div>
+    <h4 class=" mt-3">Detalhes do cadastro do grupo</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.grupo_nome)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.grupo_nome)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.grupo_ativo)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.grupo_ativo)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.grupo_desc)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.grupo_desc)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.grupo_img)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.grupo_img)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Editar", "Edit", new { id = Model.grupo_cod }, new { @class = "btn btn-success", @style = "width: 116px;" }) 
+    @Html.ActionLink("Voltar", "Index", "", new { @class = "btn btn-primary", @style = "width: 116px;" })
+</p>

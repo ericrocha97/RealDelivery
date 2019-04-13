@@ -1,0 +1,80 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="db_a464fd_realdevModelStoreContainer" CdmEntityContainer="db_a464fd_realdevEntities">
+    <EntitySetMapping Name="endereco">
+      <EntityTypeMapping TypeName="db_a464fd_realdevModel.endereco">
+        <MappingFragment StoreEntitySet="endereco">
+          <ScalarProperty Name="endereco_cod" ColumnName="endereco_cod" />
+          <ScalarProperty Name="usuario_cod" ColumnName="usuario_cod" />
+          <ScalarProperty Name="endereco_cep" ColumnName="endereco_cep" />
+          <ScalarProperty Name="endereco_rua" ColumnName="endereco_rua" />
+          <ScalarProperty Name="endereco_bairro" ColumnName="endereco_bairro" />
+          <ScalarProperty Name="endereco_cidade" ColumnName="endereco_cidade" />
+          <ScalarProperty Name="endereco_uf" ColumnName="endereco_uf" />
+          <ScalarProperty Name="endereco_comp" ColumnName="endereco_comp" />
+          <ScalarProperty Name="endereco_num" ColumnName="endereco_num" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="grupo">
+      <EntityTypeMapping TypeName="db_a464fd_realdevModel.grupo">
+        <MappingFragment StoreEntitySet="grupo">
+          <ScalarProperty Name="grupo_cod" ColumnName="grupo_cod" />
+          <ScalarProperty Name="grupo_nome" ColumnName="grupo_nome" />
+          <ScalarProperty Name="grupo_ativo" ColumnName="grupo_ativo" />
+          <ScalarProperty Name="grupo_desc" ColumnName="grupo_desc" />
+          <ScalarProperty Name="grupo_img" ColumnName="grupo_img" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="impress">
+      <EntityTypeMapping TypeName="db_a464fd_realdevModel.impress">
+        <MappingFragment StoreEntitySet="impress">
+          <ScalarProperty Name="impress_cod" ColumnName="impress_cod" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="produto">
+      <EntityTypeMapping TypeName="db_a464fd_realdevModel.produto">
+        <MappingFragment StoreEntitySet="produto">
+          <ScalarProperty Name="produto_cod" ColumnName="produto_cod" />
+          <ScalarProperty Name="produto_nome" ColumnName="produto_nome" />
+          <ScalarProperty Name="grupo_cod" ColumnName="grupo_cod" />
+          <ScalarProperty Name="produto_preco" ColumnName="produto_preco" />
+          <ScalarProperty Name="produto_custo" ColumnName="produto_custo" />
+          <ScalarProperty Name="produto_ativo" ColumnName="produto_ativo" />
+          <ScalarProperty Name="impress_cod" ColumnName="impress_cod" />
+          <ScalarProperty Name="produto_desc" ColumnName="produto_desc" />
+          <ScalarProperty Name="produto_img" ColumnName="produto_img" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="usuario">
+      <EntityTypeMapping TypeName="db_a464fd_realdevModel.usuario">
+        <MappingFragment StoreEntitySet="usuario">
+          <ScalarProperty Name="usuario_cod" ColumnName="usuario_cod" />
+          <ScalarProperty Name="usuario_email" ColumnName="usuario_email" />
+          <ScalarProperty Name="usuario_senha" ColumnName="usuario_senha" />
+          <ScalarProperty Name="usuario_nome" ColumnName="usuario_nome" />
+          <ScalarProperty Name="usuario_cel" ColumnName="usuario_cel" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="usuario_perm">
+      <EntityTypeMapping TypeName="db_a464fd_realdevModel.usuario_perm">
+        <MappingFragment StoreEntitySet="usuario_perm">
+          <ScalarProperty Name="usuario_perm_cod" ColumnName="usuario_perm_cod" />
+          <ScalarProperty Name="usuario_cod" ColumnName="usuario_cod" />
+          <ScalarProperty Name="usuario_nivel" ColumnName="usuario_nivel" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="teste">
+      <EntityTypeMapping TypeName="db_a464fd_realdevModel.teste">
+        <MappingFragment StoreEntitySet="teste">
+          <ScalarProperty Name="id" ColumnName="id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>

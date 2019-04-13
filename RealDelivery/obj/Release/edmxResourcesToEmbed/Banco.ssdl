@@ -1,0 +1,150 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="db_a464fd_realdevModel.Store" Provider="MySql.Data.MySqlClient" ProviderManifestToken="5.6" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="endereco">
+    <Key>
+      <PropertyRef Name="endereco_cod" />
+    </Key>
+    <Property Name="endereco_cod" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="usuario_cod" Type="int" Nullable="false" />
+    <Property Name="endereco_cep" Type="varchar" MaxLength="15" />
+    <Property Name="endereco_rua" Type="varchar" MaxLength="100" />
+    <Property Name="endereco_bairro" Type="varchar" MaxLength="100" />
+    <Property Name="endereco_cidade" Type="varchar" MaxLength="100" />
+    <Property Name="endereco_uf" Type="varchar" MaxLength="100" />
+    <Property Name="endereco_comp" Type="text" />
+    <Property Name="endereco_num" Type="varchar" MaxLength="20" />
+  </EntityType>
+  <EntityType Name="grupo">
+    <Key>
+      <PropertyRef Name="grupo_cod" />
+    </Key>
+    <Property Name="grupo_cod" Type="uint" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="grupo_nome" Type="varchar" MaxLength="50" />
+    <Property Name="grupo_ativo" Type="varchar" MaxLength="1" />
+    <Property Name="grupo_desc" Type="text" />
+    <Property Name="grupo_img" Type="longtext" />
+  </EntityType>
+  <EntityType Name="impress">
+    <Key>
+      <PropertyRef Name="impress_cod" />
+    </Key>
+    <Property Name="impress_cod" Type="uint" StoreGeneratedPattern="Identity" Nullable="false" />
+  </EntityType>
+  <EntityType Name="produto">
+    <Key>
+      <PropertyRef Name="produto_cod" />
+    </Key>
+    <Property Name="produto_cod" Type="uint" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="produto_nome" Type="varchar" MaxLength="100" />
+    <Property Name="grupo_cod" Type="uint" Nullable="false" />
+    <Property Name="produto_preco" Type="float" />
+    <Property Name="produto_custo" Type="float" />
+    <Property Name="produto_ativo" Type="varchar" MaxLength="1" />
+    <Property Name="impress_cod" Type="uint" />
+    <Property Name="produto_desc" Type="text" />
+    <Property Name="produto_img" Type="longtext" />
+  </EntityType>
+  <!--Errors Found During Generation:
+warning 6002: The table/view 'def.db_a464fd_realdev.teste' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+  <EntityType Name="teste">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="usuario">
+    <Key>
+      <PropertyRef Name="usuario_cod" />
+    </Key>
+    <Property Name="usuario_cod" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="usuario_email" Type="varchar" MaxLength="250" />
+    <Property Name="usuario_senha" Type="varchar" MaxLength="50" />
+    <Property Name="usuario_nome" Type="varchar" MaxLength="100" />
+    <Property Name="usuario_cel" Type="varchar" MaxLength="20" />
+  </EntityType>
+  <EntityType Name="usuario_perm">
+    <Key>
+      <PropertyRef Name="usuario_perm_cod" />
+    </Key>
+    <Property Name="usuario_perm_cod" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="usuario_cod" Type="int" Nullable="false" />
+    <Property Name="usuario_nivel" Type="int" />
+  </EntityType>
+  <Association Name="Pro_Gru_Const">
+    <End Role="grupo" Type="Self.grupo" Multiplicity="1" />
+    <End Role="produto" Type="Self.produto" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="grupo">
+        <PropertyRef Name="grupo_cod" />
+      </Principal>
+      <Dependent Role="produto">
+        <PropertyRef Name="grupo_cod" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="Pro_Imp_Const">
+    <End Role="impress" Type="Self.impress" Multiplicity="0..1" />
+    <End Role="produto" Type="Self.produto" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="impress">
+        <PropertyRef Name="impress_cod" />
+      </Principal>
+      <Dependent Role="produto">
+        <PropertyRef Name="impress_cod" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="Usu_End_Const">
+    <End Role="usuario" Type="Self.usuario" Multiplicity="1" />
+    <End Role="endereco" Type="Self.endereco" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="usuario">
+        <PropertyRef Name="usuario_cod" />
+      </Principal>
+      <Dependent Role="endereco">
+        <PropertyRef Name="usuario_cod" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="usu_usuperm_constraint">
+    <End Role="usuario" Type="Self.usuario" Multiplicity="1" />
+    <End Role="usuario_perm" Type="Self.usuario_perm" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="usuario">
+        <PropertyRef Name="usuario_cod" />
+      </Principal>
+      <Dependent Role="usuario_perm">
+        <PropertyRef Name="usuario_cod" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="db_a464fd_realdevModelStoreContainer">
+    <EntitySet Name="endereco" EntityType="Self.endereco" Schema="db_a464fd_realdev" store:Type="Tables" />
+    <EntitySet Name="grupo" EntityType="Self.grupo" Schema="db_a464fd_realdev" store:Type="Tables" />
+    <EntitySet Name="impress" EntityType="Self.impress" Schema="db_a464fd_realdev" store:Type="Tables" />
+    <EntitySet Name="produto" EntityType="Self.produto" Schema="db_a464fd_realdev" store:Type="Tables" />
+    <EntitySet Name="usuario" EntityType="Self.usuario" Schema="db_a464fd_realdev" store:Type="Tables" />
+    <EntitySet Name="usuario_perm" EntityType="Self.usuario_perm" Schema="db_a464fd_realdev" store:Type="Tables" />
+    <EntitySet Name="teste" EntityType="Self.teste" store:Type="Tables" store:Schema="db_a464fd_realdev">
+      <DefiningQuery>SELECT
+`teste`.`id`
+FROM `teste` AS `teste`</DefiningQuery>
+    </EntitySet>
+    <AssociationSet Name="Pro_Gru_Const" Association="Self.Pro_Gru_Const">
+      <End Role="grupo" EntitySet="grupo" />
+      <End Role="produto" EntitySet="produto" />
+    </AssociationSet>
+    <AssociationSet Name="Pro_Imp_Const" Association="Self.Pro_Imp_Const">
+      <End Role="impress" EntitySet="impress" />
+      <End Role="produto" EntitySet="produto" />
+    </AssociationSet>
+    <AssociationSet Name="Usu_End_Const" Association="Self.Usu_End_Const">
+      <End Role="usuario" EntitySet="usuario" />
+      <End Role="endereco" EntitySet="endereco" />
+    </AssociationSet>
+    <AssociationSet Name="usu_usuperm_constraint" Association="Self.usu_usuperm_constraint">
+      <End Role="usuario" EntitySet="usuario" />
+      <End Role="usuario_perm" EntitySet="usuario_perm" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

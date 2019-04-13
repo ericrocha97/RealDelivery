@@ -1,0 +1,152 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="db_a464fd_realdevModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="endereco">
+    <Key>
+      <PropertyRef Name="endereco_cod" />
+    </Key>
+    <Property Name="endereco_cod" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="usuario_cod" Type="Int32" Nullable="false" />
+    <Property Name="endereco_cep" Type="String" MaxLength="15" FixedLength="false" Unicode="false" />
+    <Property Name="endereco_rua" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="endereco_bairro" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="endereco_cidade" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="endereco_uf" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="endereco_comp" Type="String" MaxLength="65535" FixedLength="false" Unicode="false" />
+    <Property Name="endereco_num" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="usuario" Relationship="Self.Usu_End_Const" FromRole="endereco" ToRole="usuario" />
+  </EntityType>
+  <EntityType Name="grupo">
+    <Key>
+      <PropertyRef Name="grupo_cod" />
+    </Key>
+    <Property Name="grupo_cod" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="grupo_nome" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="grupo_ativo" Type="String" MaxLength="1" FixedLength="false" Unicode="false" />
+    <Property Name="grupo_desc" Type="String" MaxLength="65535" FixedLength="false" Unicode="false" />
+    <Property Name="grupo_img" Type="String" MaxLength="1073741823" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="produto" Relationship="Self.Pro_Gru_Const" FromRole="grupo" ToRole="produto" />
+  </EntityType>
+  <EntityType Name="impress">
+    <Key>
+      <PropertyRef Name="impress_cod" />
+    </Key>
+    <Property Name="impress_cod" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <NavigationProperty Name="produto" Relationship="Self.Pro_Imp_Const" FromRole="impress" ToRole="produto" />
+  </EntityType>
+  <EntityType Name="produto">
+    <Key>
+      <PropertyRef Name="produto_cod" />
+    </Key>
+    <Property Name="produto_cod" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="produto_nome" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="grupo_cod" Type="Int64" Nullable="false" />
+    <Property Name="produto_preco" Type="Single" />
+    <Property Name="produto_custo" Type="Single" />
+    <Property Name="produto_ativo" Type="String" MaxLength="1" FixedLength="false" Unicode="false" />
+    <Property Name="impress_cod" Type="Int64" />
+    <Property Name="produto_desc" Type="String" MaxLength="65535" FixedLength="false" Unicode="false" />
+    <Property Name="produto_img" Type="String" MaxLength="1073741823" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="grupo" Relationship="Self.Pro_Gru_Const" FromRole="produto" ToRole="grupo" />
+    <NavigationProperty Name="impress" Relationship="Self.Pro_Imp_Const" FromRole="produto" ToRole="impress" />
+  </EntityType>
+  <EntityType Name="usuario">
+    <Key>
+      <PropertyRef Name="usuario_cod" />
+    </Key>
+    <Property Name="usuario_cod" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="usuario_email" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+    <Property Name="usuario_senha" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="usuario_nome" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="usuario_cel" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="endereco" Relationship="Self.Usu_End_Const" FromRole="usuario" ToRole="endereco" />
+    <NavigationProperty Name="usuario_perm" Relationship="Self.usu_usuperm_constraint" FromRole="usuario" ToRole="usuario_perm" />
+  </EntityType>
+  <EntityType Name="usuario_perm">
+    <Key>
+      <PropertyRef Name="usuario_perm_cod" />
+    </Key>
+    <Property Name="usuario_perm_cod" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="usuario_cod" Type="Int32" Nullable="false" />
+    <Property Name="usuario_nivel" Type="Int32" />
+    <NavigationProperty Name="usuario" Relationship="Self.usu_usuperm_constraint" FromRole="usuario_perm" ToRole="usuario" />
+  </EntityType>
+  <EntityType Name="teste">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" />
+  </EntityType>
+  <Association Name="Usu_End_Const">
+    <End Role="usuario" Type="Self.usuario" Multiplicity="1" />
+    <End Role="endereco" Type="Self.endereco" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="usuario">
+        <PropertyRef Name="usuario_cod" />
+      </Principal>
+      <Dependent Role="endereco">
+        <PropertyRef Name="usuario_cod" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="Pro_Gru_Const">
+    <End Role="grupo" Type="Self.grupo" Multiplicity="1" />
+    <End Role="produto" Type="Self.produto" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="grupo">
+        <PropertyRef Name="grupo_cod" />
+      </Principal>
+      <Dependent Role="produto">
+        <PropertyRef Name="grupo_cod" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="Pro_Imp_Const">
+    <End Role="impress" Type="Self.impress" Multiplicity="0..1" />
+    <End Role="produto" Type="Self.produto" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="impress">
+        <PropertyRef Name="impress_cod" />
+      </Principal>
+      <Dependent Role="produto">
+        <PropertyRef Name="impress_cod" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="usu_usuperm_constraint">
+    <End Role="usuario" Type="Self.usuario" Multiplicity="1" />
+    <End Role="usuario_perm" Type="Self.usuario_perm" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="usuario">
+        <PropertyRef Name="usuario_cod" />
+      </Principal>
+      <Dependent Role="usuario_perm">
+        <PropertyRef Name="usuario_cod" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="db_a464fd_realdevEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="endereco" EntityType="Self.endereco" />
+    <EntitySet Name="grupo" EntityType="Self.grupo" />
+    <EntitySet Name="impress" EntityType="Self.impress" />
+    <EntitySet Name="produto" EntityType="Self.produto" />
+    <EntitySet Name="usuario" EntityType="Self.usuario" />
+    <EntitySet Name="usuario_perm" EntityType="Self.usuario_perm" />
+    <EntitySet Name="teste" EntityType="Self.teste" />
+    <AssociationSet Name="Usu_End_Const" Association="Self.Usu_End_Const">
+      <End Role="usuario" EntitySet="usuario" />
+      <End Role="endereco" EntitySet="endereco" />
+    </AssociationSet>
+    <AssociationSet Name="Pro_Gru_Const" Association="Self.Pro_Gru_Const">
+      <End Role="grupo" EntitySet="grupo" />
+      <End Role="produto" EntitySet="produto" />
+    </AssociationSet>
+    <AssociationSet Name="Pro_Imp_Const" Association="Self.Pro_Imp_Const">
+      <End Role="impress" EntitySet="impress" />
+      <End Role="produto" EntitySet="produto" />
+    </AssociationSet>
+    <AssociationSet Name="usu_usuperm_constraint" Association="Self.usu_usuperm_constraint">
+      <End Role="usuario" EntitySet="usuario" />
+      <End Role="usuario_perm" EntitySet="usuario_perm" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>
