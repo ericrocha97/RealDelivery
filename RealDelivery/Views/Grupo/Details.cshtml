@@ -9,40 +9,36 @@
 <div>
     <h4 class=" mt-3">Detalhes do cadastro do grupo</h4>
     <hr />
-    <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.grupo_nome)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.grupo_nome)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.grupo_ativo)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.grupo_ativo)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.grupo_desc)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.grupo_desc)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.grupo_img)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.grupo_img)
-        </dd>
-
-    </dl>
+    <table class="table table-hover table-bordered">
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.grupo_nome)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.grupo_ativo)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.grupo_desc)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.grupo_img)
+            </th>
+        </tr>
+        <tr>
+            <td>
+                @Html.DisplayFor(model => model.grupo_nome)
+            </td>
+            <td>
+                @Html.DisplayFor(model => model.grupo_ativo)
+            </td>
+            <td>
+                @Html.DisplayFor(model => model.grupo_desc)
+            </td>
+            <td>
+                @Html.DisplayFor(model => model.grupo_img)
+            </td>
+        </tr>
+    </table>
 </div>
 <p>
     @Html.ActionLink("Editar", "Edit", new { id = Model.grupo_cod }, new { @class = "btn btn-success", @style = "width: 116px;" }) 

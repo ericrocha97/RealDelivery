@@ -309,6 +309,7 @@
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Models\" />
+    <Folder Include="Views\Imagem\Grupos\" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="db_a464fd_realdevModel.Store" Provider="MySql.Data.MySqlClient" ProviderManifestToken="5.6" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="db_a464fd_realdevModel.Store" Provider="MySql.Data.MySqlClient" ProviderManifestToken="5.6" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="endereco">
           <Key>
             <PropertyRef Name="endereco_cod" />
@@ -48,14 +48,6 @@
           <Property Name="impress_cod" Type="uint" />
           <Property Name="produto_desc" Type="text" />
           <Property Name="produto_img" Type="longtext" />
-        </EntityType>
-        <!--Errors Found During Generation:
-warning 6002: The table/view 'def.db_a464fd_realdev.teste' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
-        <EntityType Name="teste">
-          <Key>
-            <PropertyRef Name="id" />
-          </Key>
-          <Property Name="id" Type="int" Nullable="false" />
         </EntityType>
         <EntityType Name="usuario">
           <Key>
@@ -130,11 +122,6 @@ warning 6002: The table/view 'def.db_a464fd_realdev.teste' does not have a prima
           <EntitySet Name="produto" EntityType="Self.produto" Schema="db_a464fd_realdev" store:Type="Tables" />
           <EntitySet Name="usuario" EntityType="Self.usuario" Schema="db_a464fd_realdev" store:Type="Tables" />
           <EntitySet Name="usuario_perm" EntityType="Self.usuario_perm" Schema="db_a464fd_realdev" store:Type="Tables" />
-          <EntitySet Name="teste" EntityType="Self.teste" store:Type="Tables" store:Schema="db_a464fd_realdev">
-            <DefiningQuery>SELECT
-`teste`.`id`
-FROM `teste` AS `teste`</DefiningQuery>
-          </EntitySet>
           <AssociationSet Name="Pro_Gru_Const" Association="Self.Pro_Gru_Const">
             <End Role="grupo" EntitySet="grupo" />
             <End Role="produto" EntitySet="produto" />
@@ -152,8 +139,7 @@ FROM `teste` AS `teste`</DefiningQuery>
             <End Role="usuario_perm" EntitySet="usuario_perm" />
           </AssociationSet>
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="db_a464fd_realdevModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -180,7 +166,7 @@ FROM `teste` AS `teste`</DefiningQuery>
           <Property Name="grupo_nome" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="grupo_ativo" Type="String" MaxLength="1" FixedLength="false" Unicode="false" />
           <Property Name="grupo_desc" Type="String" MaxLength="65535" FixedLength="false" Unicode="false" />
-          <Property Name="grupo_img" Type="String" MaxLength="1073741823" FixedLength="false" Unicode="false" />
+          <Property Name="grupo_img" Type="String" />
           <NavigationProperty Name="produto" Relationship="Self.Pro_Gru_Const" FromRole="grupo" ToRole="produto" />
         </EntityType>
         <EntityType Name="impress">
@@ -226,12 +212,6 @@ FROM `teste` AS `teste`</DefiningQuery>
           <Property Name="usuario_cod" Type="Int32" Nullable="false" />
           <Property Name="usuario_nivel" Type="Int32" />
           <NavigationProperty Name="usuario" Relationship="Self.usu_usuperm_constraint" FromRole="usuario_perm" ToRole="usuario" />
-        </EntityType>
-        <EntityType Name="teste">
-          <Key>
-            <PropertyRef Name="id" />
-          </Key>
-          <Property Name="id" Type="Int32" Nullable="false" />
         </EntityType>
         <Association Name="Usu_End_Const">
           <End Role="usuario" Type="Self.usuario" Multiplicity="1" />
@@ -288,7 +268,6 @@ FROM `teste` AS `teste`</DefiningQuery>
           <EntitySet Name="produto" EntityType="Self.produto" />
           <EntitySet Name="usuario" EntityType="Self.usuario" />
           <EntitySet Name="usuario_perm" EntityType="Self.usuario_perm" />
-          <EntitySet Name="teste" EntityType="Self.teste" />
           <AssociationSet Name="Usu_End_Const" Association="Self.Usu_End_Const">
             <End Role="usuario" EntitySet="usuario" />
             <End Role="endereco" EntitySet="endereco" />
@@ -377,13 +356,6 @@ FROM `teste` AS `teste`</DefiningQuery>
                 <ScalarProperty Name="usuario_perm_cod" ColumnName="usuario_perm_cod" />
                 <ScalarProperty Name="usuario_cod" ColumnName="usuario_cod" />
                 <ScalarProperty Name="usuario_nivel" ColumnName="usuario_nivel" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="teste">
-            <EntityTypeMapping TypeName="db_a464fd_realdevModel.teste">
-              <MappingFragment StoreEntitySet="teste">
-                <ScalarProperty Name="id" ColumnName="id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

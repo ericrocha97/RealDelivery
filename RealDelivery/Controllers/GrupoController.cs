@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Data;
 using System.Data.Entity;
+using System.IO;
 using System.Linq;
 using System.Net;
 using System.Web;
@@ -64,11 +65,27 @@ namespace RealDelivery.Controllers
         // Para se proteger de mais ataques, ative as propriedades específicas a que você quer se conectar. Para 
         // obter mais detalhes, consulte https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "grupo_cod,grupo_nome,grupo_ativo,grupo_desc,grupo_img")] grupo grupo)
+        [ValidateInput(false)]
+       
+        public ActionResult Create([Bind(Include = "grupo_cod,grupo_nome,grupo_ativo,grupo_desc,grupo_img")] grupo grupo, HttpPostedFileBase img_grupo)
         {
             if (ModelState.IsValid)
             {
+                if(grupo.grupo_ativo == null)
+                {
+                    grupo.grupo_ativo = "N";
+                }
+                if(img_grupo != null)
+                {
+                    String[] strName = img_grupo.FileName.Split('.');
+                    String strExt = strName[strName.Count() - 1];
+                    string pathSave = String.Format("{0}{1}.{2}", Server.MapPath("~/Imagem/Grupos/"), grupo.grupo_cod, strExt);
+                    String pathBase = String.Format("/Imagem/Grupos/{0}.{1}", grupo.grupo_cod, strExt);
+                    img_grupo.SaveAs(pathSave);
+                    grupo.grupo_img = pathBase;
+                    
+                }
+      
                 db.grupo.Add(grupo);
                 db.SaveChanges();
                 return RedirectToAction("Index");
@@ -76,6 +93,7 @@ namespace RealDelivery.Controllers
 
             return View(grupo);
         }
+        
 
         // GET: Grupo/Edit/5
         public ActionResult Edit(long? id)
@@ -85,6 +103,7 @@ namespace RealDelivery.Controllers
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
             grupo grupo = db.grupo.Find(id);
+
             if (grupo == null)
             {
                 return HttpNotFound();
@@ -101,6 +120,10 @@ namespace RealDelivery.Controllers
         {
             if (ModelState.IsValid)
             {
+                if (grupo.grupo_ativo == null)
+                {
+                    grupo.grupo_ativo = "N";
+                }
                 db.Entry(grupo).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Index");

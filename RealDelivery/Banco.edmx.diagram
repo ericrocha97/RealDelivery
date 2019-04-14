@@ -11,7 +11,6 @@
         <EntityTypeShape EntityType="db_a464fd_realdevModel.produto" Width="1.5" PointX="8" PointY="1" IsExpanded="true" />
         <EntityTypeShape EntityType="db_a464fd_realdevModel.usuario" Width="1.5" PointX="0.75" PointY="2.625" IsExpanded="true" />
         <EntityTypeShape EntityType="db_a464fd_realdevModel.usuario_perm" Width="1.5" PointX="3" PointY="4.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="db_a464fd_realdevModel.teste" Width="1.5" PointX="0.75" PointY="7.75" IsExpanded="true" />
         <AssociationConnector Association="db_a464fd_realdevModel.Usu_End_Const" ManuallyRouted="false" />
         <AssociationConnector Association="db_a464fd_realdevModel.Pro_Gru_Const" ManuallyRouted="false" />
         <AssociationConnector Association="db_a464fd_realdevModel.Pro_Imp_Const" ManuallyRouted="false" />
