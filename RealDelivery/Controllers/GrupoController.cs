@@ -64,10 +64,8 @@ namespace RealDelivery.Controllers
         // POST: Grupo/Create
         // Para se proteger de mais ataques, ative as propriedades específicas a que você quer se conectar. Para 
         // obter mais detalhes, consulte https://go.microsoft.com/fwlink/?LinkId=317598.
-        [HttpPost]
-        [ValidateInput(false)]
-       
-        public ActionResult Create([Bind(Include = "grupo_cod,grupo_nome,grupo_ativo,grupo_desc,grupo_img")] grupo grupo, HttpPostedFileBase img_grupo)
+        [HttpPost]      
+        public ActionResult Create([Bind(Include = "grupo_cod,grupo_nome,grupo_ativo,grupo_desc,grupo_img, img_grupo")] grupo grupo)
         {
             if (ModelState.IsValid)
             {
@@ -75,17 +73,18 @@ namespace RealDelivery.Controllers
                 {
                     grupo.grupo_ativo = "N";
                 }
-                if(img_grupo != null)
+                
+                if(grupo.img_grupo != null)
                 {
-                    String[] strName = img_grupo.FileName.Split('.');
-                    String strExt = strName[strName.Count() - 1];
-                    string pathSave = String.Format("{0}{1}.{2}", Server.MapPath("~/Imagem/Grupos/"), grupo.grupo_cod, strExt);
-                    String pathBase = String.Format("/Imagem/Grupos/{0}.{1}", grupo.grupo_cod, strExt);
-                    img_grupo.SaveAs(pathSave);
-                    grupo.grupo_img = pathBase;
-                    
+                    string fileName = Path.GetFileNameWithoutExtension(grupo.img_grupo.FileName);
+                    string extension = Path.GetExtension(grupo.img_grupo.FileName);
+                    fileName = fileName + DateTime.Now.ToString("yymmssfff") + extension;
+                    grupo.grupo_img = "~/Imagem/Grupos/" + fileName;
+                    fileName = Path.Combine(Server.MapPath("~/Imagem/Grupos/"), fileName);
+                    grupo.img_grupo.SaveAs(fileName);
                 }
-      
+                
+
                 db.grupo.Add(grupo);
                 db.SaveChanges();
                 return RedirectToAction("Index");

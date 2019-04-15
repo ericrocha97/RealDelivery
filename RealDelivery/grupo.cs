@@ -12,6 +12,7 @@ namespace RealDelivery
     using System;
     using System.Collections.Generic;
     using System.ComponentModel;
+    using System.Web;
 
     public partial class grupo
     {
@@ -30,6 +31,7 @@ namespace RealDelivery
         public string grupo_desc { get; set; }
         [DisplayName("Imagem do Grupo")]
         public string grupo_img { get; set; }
+        public HttpPostedFileBase img_grupo { get; set; }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<produto> produto { get; set; }
