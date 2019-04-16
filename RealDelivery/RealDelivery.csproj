@@ -166,6 +166,7 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Banco.edmx</DependentUpon>
     </Compile>
+    <Compile Include="Controllers\AdministradorController.cs" />
     <Compile Include="Controllers\GrupoController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="endereco.cs">
@@ -257,6 +258,7 @@
     <Content Include="Scripts\jquery.validate.min.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
+    <Content Include="Scripts\js\my-login.js" />
     <Content Include="Scripts\modernizr-2.8.3.js" />
     <Content Include="Scripts\popper-utils.js" />
     <Content Include="Scripts\popper-utils.min.js" />
@@ -292,6 +294,9 @@
     <Content Include="Favicon\ms-icon-150x150.png" />
     <Content Include="Favicon\ms-icon-310x310.png" />
     <Content Include="Favicon\ms-icon-70x70.png" />
+    <Content Include="Content\css\my-login.css" />
+    <Content Include="Imagem\Adminstrador\logo512x512c-nome.png" />
+    <Content Include="Imagem\Adminstrador\logo512x512.png" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
@@ -322,6 +327,8 @@
     <Content Include="Views\Grupo\Index.cshtml" />
     <Content Include="Views\Cardapio\Index.cshtml" />
     <Content Include="Views\Grupo\Buscar.cshtml" />
+    <Content Include="Views\Administrador\Login.cshtml" />
+    <Content Include="Scripts\js\jquery.min.js" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

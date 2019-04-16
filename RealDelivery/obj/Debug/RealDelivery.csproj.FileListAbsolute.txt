@@ -181,7 +181,6 @@ C:\Users\ericr\Documents\RealDelivery\RealDelivery\RealDelivery\bin\pt-br\System
 C:\Users\ericr\Documents\RealDelivery\RealDelivery\RealDelivery\bin\pt-br\System.Web.WebPages.resources.dll
 C:\Users\ericr\Documents\RealDelivery\RealDelivery\RealDelivery\bin\pt-br\System.Web.WebPages.Deployment.resources.dll
 C:\Users\ericr\Documents\RealDelivery\RealDelivery\RealDelivery\bin\pt-br\System.Web.WebPages.Razor.resources.dll
-C:\Users\ericr\Documents\RealDelivery\RealDelivery\RealDelivery\obj\Debug\RealDelivery.csprojAssemblyReference.cache
 C:\Users\ericr\Documents\RealDelivery\RealDelivery\RealDelivery\obj\Debug\RealDelivery.csproj.CoreCompileInputs.cache
 C:\Users\ericr\Documents\RealDelivery\RealDelivery\RealDelivery\obj\Debug\RealDelivery.csproj.CopyComplete
 C:\Users\ericr\Documents\RealDelivery\RealDelivery\RealDelivery\obj\Debug\RealDelivery.dll
@@ -290,3 +289,13 @@ C:\Users\Bruno Espyl\source\repos\RealDelivery\RealDelivery-master\RealDelivery\
 C:\Users\Bruno Espyl\source\repos\RealDelivery\RealDelivery-master\RealDelivery\bin\pt-br\System.Web.WebPages.Deployment.resources.dll
 C:\Users\Bruno Espyl\source\repos\RealDelivery\RealDelivery-master\RealDelivery\bin\pt-br\System.Web.WebPages.Razor.resources.dll
 C:\Users\Bruno Espyl\source\repos\RealDelivery\RealDelivery-master\RealDelivery\obj\Debug\RealDelivery.csproj.CopyComplete
+C:\Users\ericr\Documents\RealDelivery\RealDelivery\RealDelivery\bin\Microsoft.Owin.dll
+C:\Users\ericr\Documents\RealDelivery\RealDelivery\RealDelivery\bin\Microsoft.Owin.Host.SystemWeb.dll
+C:\Users\ericr\Documents\RealDelivery\RealDelivery\RealDelivery\bin\Microsoft.Owin.Security.Cookies.dll
+C:\Users\ericr\Documents\RealDelivery\RealDelivery\RealDelivery\bin\Microsoft.Owin.Security.dll
+C:\Users\ericr\Documents\RealDelivery\RealDelivery\RealDelivery\bin\Owin.dll
+C:\Users\ericr\Documents\RealDelivery\RealDelivery\RealDelivery\bin\Microsoft.Owin.xml
+C:\Users\ericr\Documents\RealDelivery\RealDelivery\RealDelivery\bin\Microsoft.Owin.Host.SystemWeb.xml
+C:\Users\ericr\Documents\RealDelivery\RealDelivery\RealDelivery\bin\Microsoft.Owin.Security.xml
+C:\Users\ericr\Documents\RealDelivery\RealDelivery\RealDelivery\bin\Microsoft.Owin.Security.Cookies.xml
+C:\Users\ericr\Documents\RealDelivery\RealDelivery\RealDelivery\obj\Debug\RealDelivery.csprojAssemblyReference.cache

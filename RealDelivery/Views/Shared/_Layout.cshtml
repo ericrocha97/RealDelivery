@@ -45,6 +45,11 @@
                 </li>
             </ul>
         </div>
+        @using (Html.BeginForm("Index", "Home", FormMethod.Get))
+        {
+            <input type="submit" name="att" value="Login" class="btn btn-primary" />
+            <input type="submit" name="att" value="Logout" class="btn btn-danger"/>
+        }
     </nav>
     <div class="container body-content">
         @RenderBody()

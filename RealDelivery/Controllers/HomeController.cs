@@ -16,7 +16,7 @@ namespace RealDelivery.Controllers
         [HttpGet]
         public ActionResult Index(string att)
         {
-            if(att == "valido")
+            if(att == "Login")
             {
                 var identity = new ClaimsIdentity(new[]
             {
@@ -24,9 +24,9 @@ namespace RealDelivery.Controllers
                 new Claim("Login", "admin")
             }, "ApplicationCookie");
                 Request.GetOwinContext().Authentication.SignIn(identity);
-
+                
             }
-            if(att == "nao")
+            if(att == "Logout")
             {
                 Request.GetOwinContext().Authentication.SignOut("ApplicationCookie");
             }
