@@ -15,6 +15,7 @@ namespace RealDelivery.Controllers
     {
         private db_a464fd_realdevEntities db = new db_a464fd_realdevEntities();
         // GET: Grupo
+        [Authorize]
         public ActionResult Index()
         {
             var s = "S";

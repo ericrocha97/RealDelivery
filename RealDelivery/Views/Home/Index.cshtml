@@ -29,3 +29,11 @@
         <p><a class="btn btn-default" href="https://go.microsoft.com/fwlink/?LinkId=301867">Learn more &raquo;</a></p>
     </div>
 </div>
+<div>
+    @using (Html.BeginForm("Index", "Home", FormMethod.Get))
+    {
+        <input type="submit" name="att" value="valido" />
+        <input type="submit" name="att" value="nao" />
+    }
+
+</div>
