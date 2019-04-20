@@ -196,6 +196,7 @@
       <DependentUpon>Banco.tt</DependentUpon>
     </Compile>
     <Compile Include="Utils\Hash.cs" />
+    <Compile Include="ViewModels\LoginViewModel.cs" />
     <Compile Include="Views\Cardapio\Cardapio.cs" />
     <Compile Include="Views\Cardapio\RepositorioCardapio.cs" />
   </ItemGroup>

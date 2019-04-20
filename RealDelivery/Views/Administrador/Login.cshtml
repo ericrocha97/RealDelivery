@@ -1,4 +1,5 @@
-﻿@{
+﻿@model RealDelivery.ViewModels.LoginViewModel
+@{
     ViewBag.Title = "Login";
     Layout = null;
 }
@@ -44,37 +45,41 @@
                     <div class="card fat">
                         <div class="card-body">
                             <h4 class="card-title">Login</h4>
-                            <form id="form1" runat="server" class="was-validated"">
-                                <div>
-                                    <div class="form-group">
-                                        <label for="email">E-Mail</label>
-                                        <input id="email" type="email" class="form-control" name="email" value="" required autofocus>
-                                        <div class="invalid-feedback">Digite um e-mail valido.</div>
-                                    </div>
-                                    <div class="form-group">
-                                        <label for="password">
-                                            Senha
-                                            <a href="forgot.aspx" class="float-right text-danger">
-                                                Esqueceu a senha?
-                                            </a>
-                                        </label>
-                                        <input id="password" type="password" class="form-control" name="password" required data-eye>
-                                    </div>
-                                    <div class="form-group">
-                                        <div class="custom-checkbox custom-control">
-                                            <input type="checkbox" name="remember" id="remember" class="custom-control-input">
-                                            <label for="remember" class="custom-control-label">Lembre-me</label>
+                            <form id="form1" runat="server" class="was-validated" ">
+                                @using (Html.BeginForm("Login", "AdministradorController", FormMethod.Get))
+                                {
+                                    <div>
+                                        <div class="form-group">
+                                            <label for="email">E-Mail</label>
+                                            <input id="email" type="email" class="form-control" name="email" value="" required autofocus>
+                                            <div class="invalid-feedback">Digite um e-mail valido.</div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="password">
+                                                Senha
+                                                <a href="forgot.aspx" class="float-right text-danger">
+                                                    Esqueceu a senha?
+                                                </a>
+                                            </label>
+                                            <input id="password" type="password" class="form-control" name="password" required data-eye>
+                                        </div>
+                                        <div class="form-group">
+                                            <div class="custom-checkbox custom-control">
+                                                <input type="checkbox" name="remember" id="remember" class="custom-control-input">
+                                                <label for="remember" class="custom-control-label">Lembre-me</label>
+                                            </div>
+                                        </div>
+                                        <div class="form-group no-margin">
+                                            <button type="submit" class="btn btn-danger btn-block">
+                                                Login
+                                            </button>
+                                        </div>
+
+                                        <div class="margin-top20 text-center">
+                                            Não tem uma conta? @Html.ActionLink("Volte para o inicio.", "Index", "Home", new { area = "" }, new { @class = "text-danger" })
                                         </div>
                                     </div>
-                                    <div class="form-group no-margin">
-                                        <button type="submit" class="btn btn-danger btn-block">
-                                            Login
-                                        </button>
-                                    </div>
-                                    <div class="margin-top20 text-center">
-                                        Não tem uma conta? @Html.ActionLink("Volte para o inicio.", "Index", "Home", new { area = "" }, new { @class = "text-danger" })
-                                    </div>
-                                </div>
+                                }
                             </form>
                         </div>
                     </div>
@@ -93,3 +98,8 @@
     <script src="~/Scripts/js/my-login.js"></script>
 </body>
 </html>
+
+@section scripts {
+    <script src="~/Scripts/jquery.validate.min.js"></script>
+    <script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
+}

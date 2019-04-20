@@ -13,7 +13,8 @@ namespace RealDelivery.Controllers
         {
             return View();
         }
-        [HttpGet]
+        [Authorize]
+        [HttpPost]
         public ActionResult Index(string att)
         {
             if(att == "Login")
