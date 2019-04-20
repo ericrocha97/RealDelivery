@@ -330,6 +330,8 @@
     <Content Include="Views\Grupo\Buscar.cshtml" />
     <Content Include="Views\Administrador\Login.cshtml" />
     <Content Include="Scripts\js\jquery.min.js" />
+    <Content Include="Views\Administrador\_LayoutPanel.cshtml" />
+    <Content Include="Views\Administrador\Panel.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

@@ -19,6 +19,6 @@ namespace RealDelivery.ViewModels
         [Required(ErrorMessage = "Informe a senha")]
         [DataType(DataType.Password)]
         [MinLength(6, ErrorMessage = "A senha deve ter pelo menos 6 caracteres")]
-        public string Password { get; set; }
+        public string password { get; set; }
     }
 }

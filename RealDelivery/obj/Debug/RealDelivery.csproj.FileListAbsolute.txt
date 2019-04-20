@@ -298,7 +298,6 @@ C:\Users\ericr\Documents\RealDelivery\RealDelivery\RealDelivery\bin\Microsoft.Ow
 C:\Users\ericr\Documents\RealDelivery\RealDelivery\RealDelivery\bin\Microsoft.Owin.Host.SystemWeb.xml
 C:\Users\ericr\Documents\RealDelivery\RealDelivery\RealDelivery\bin\Microsoft.Owin.Security.xml
 C:\Users\ericr\Documents\RealDelivery\RealDelivery\RealDelivery\bin\Microsoft.Owin.Security.Cookies.xml
-C:\Users\ericr\Documents\RealDelivery\RealDelivery\RealDelivery\obj\Debug\RealDelivery.csprojAssemblyReference.cache
 C:\Users\Bruno Espyl\source\repos\Projeto_aplicar_login\RealDelivery\RealDelivery\bin\RealDelivery.dll.config
 C:\Users\Bruno Espyl\source\repos\Projeto_aplicar_login\RealDelivery\RealDelivery\bin\RealDelivery.dll
 C:\Users\Bruno Espyl\source\repos\Projeto_aplicar_login\RealDelivery\RealDelivery\bin\RealDelivery.pdb
@@ -404,3 +403,4 @@ C:\Users\Bruno Espyl\source\repos\Projeto_aplicar_login\RealDelivery\RealDeliver
 C:\Users\Bruno Espyl\source\repos\Projeto_aplicar_login\RealDelivery\RealDelivery\obj\Debug\RealDelivery.dll
 C:\Users\Bruno Espyl\source\repos\Projeto_aplicar_login\RealDelivery\RealDelivery\obj\Debug\RealDelivery.pdb
 C:\Users\Bruno Espyl\source\repos\Projeto_aplicar_login\RealDelivery\RealDelivery\obj\Debug\RealDelivery.csprojAssemblyReference.cache
+C:\Users\ericr\Documents\RealDelivery\RealDelivery\RealDelivery\obj\Debug\RealDelivery.csprojAssemblyReference.cache
