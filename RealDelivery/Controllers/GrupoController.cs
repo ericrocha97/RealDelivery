@@ -24,12 +24,14 @@ namespace RealDelivery.Controllers
 
 
         }
+        [Authorize]
         public ActionResult Buscar()
         {
             return View();
         }
 
         //GET
+        [Authorize]
         [HttpGet]
         public ActionResult Buscar(string texto, string ativo)
         {
@@ -42,6 +44,7 @@ namespace RealDelivery.Controllers
 
         }
         // GET: Grupo/Details/5
+        [Authorize]
         public ActionResult Details(long? id)
         {
             if (id == null)
@@ -57,6 +60,7 @@ namespace RealDelivery.Controllers
         }
 
         // GET: Grupo/Create
+        [Authorize]
         public ActionResult Create()
         {
             return View();
@@ -65,7 +69,8 @@ namespace RealDelivery.Controllers
         // POST: Grupo/Create
         // Para se proteger de mais ataques, ative as propriedades específicas a que você quer se conectar. Para 
         // obter mais detalhes, consulte https://go.microsoft.com/fwlink/?LinkId=317598.
-        [HttpPost]      
+        [HttpPost]
+        [Authorize]
         public ActionResult Create([Bind(Include = "grupo_cod,grupo_nome,grupo_ativo,grupo_desc,grupo_img, img_grupo")] grupo grupo)
         {
             if (ModelState.IsValid)
@@ -93,9 +98,10 @@ namespace RealDelivery.Controllers
 
             return View(grupo);
         }
-        
+
 
         // GET: Grupo/Edit/5
+        [Authorize]
         public ActionResult Edit(long? id)
         {
             if (id == null)
@@ -115,7 +121,7 @@ namespace RealDelivery.Controllers
         // Para se proteger de mais ataques, ative as propriedades específicas a que você quer se conectar. Para 
         // obter mais detalhes, consulte https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
-        [ValidateAntiForgeryToken]
+        [Authorize]
         public ActionResult Edit([Bind(Include = "grupo_cod,grupo_nome,grupo_ativo,grupo_desc,grupo_img")] grupo grupo)
         {
             if (ModelState.IsValid)

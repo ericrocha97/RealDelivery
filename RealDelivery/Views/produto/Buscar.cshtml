@@ -1,0 +1,69 @@
+﻿@model IEnumerable<RealDelivery.produto>
+
+@{
+    Layout = "~/Views/Administrador/_LayoutPanel.cshtml";
+    ViewBag.Title = "Cadastro de produtos";
+}
+
+<h2 class="text-center mt-2">Cadastro de produtos</h2>
+
+<div class="float-right mb-2">
+    @Html.ActionLink("Adicionar novos", "Create", "", new { @class = "btn btn-success" })
+</div>
+
+<div class="float-left mb-2">
+    @using (Html.BeginForm("Buscar", "produto", FormMethod.Get))
+    {
+        <div class="form-inline">
+            <input type="text" name="texto" class="form-control mr-2" />
+            <labe for="ativo" class="control-label mr-2">Ativo?:</labe>
+            <input type="checkbox" name="ativo" value="S" checked class="form-check mr-2" />
+            <input type="submit" name="enviar" value="Buscar" class="btn btn-info" />
+        </div>
+    }
+
+
+</div>
+
+<table class="table table-hover table-bordered">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.produto_nome)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.produto_preco)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.produto_ativo)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.grupo.grupo_nome)
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.produto_nome)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.produto_preco)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.produto_ativo)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.grupo.grupo_nome)
+            </td>
+            <td>
+
+                @Html.ActionLink("Editar", "Edit", new { id = item.produto_cod }, new { @class = "btn btn-primary", @style = "width: 116px;" })
+                @Html.ActionLink("Detalhes", "Details", new { id = item.produto_cod }, new { @class = "btn btn-warning", @style = "width: 116px;" })
+
+            </td>
+        </tr>
+    }
+
+</table>

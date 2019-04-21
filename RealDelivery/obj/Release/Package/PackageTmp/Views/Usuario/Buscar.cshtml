@@ -1,0 +1,57 @@
+﻿@model IEnumerable<RealDelivery.usuario>
+
+@{
+    ViewBag.Title = "Cadastro de usuários";
+    Layout = "~/Views/Administrador/_LayoutPanel.cshtml";
+}
+
+<h2 class="text-center mt-2">Cadastro de usuários</h2>
+
+<div class="float-right mb-2">
+    @Html.ActionLink("Adicionar novos", "Create", "", new { @class = "btn btn-success" })
+</div>
+
+<div class="float-left mb-2">
+    @using (Html.BeginForm("Buscar", "Usuario", FormMethod.Get))
+    {
+        <div class="form-inline">
+            <input type="text" name="texto" class="form-control mr-2" />
+            <input type="submit" name="enviar" value="Buscar" class="btn btn-info" />
+        </div>
+    }
+
+
+</div>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.usuario_email)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.usuario_nome)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.usuario_cel)
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.usuario_email)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.usuario_nome)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.usuario_cel)
+            </td>
+            <td>
+                @Html.ActionLink("Editar", "Edit", new { id = item.usuario_cod }, new { @class = "btn btn-primary", @style = "width: 116px;" })
+            </td>
+        </tr>
+    }
+
+</table>

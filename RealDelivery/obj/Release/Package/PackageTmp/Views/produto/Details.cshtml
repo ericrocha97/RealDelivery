@@ -1,0 +1,71 @@
+﻿@model RealDelivery.produto
+
+@{
+    Layout = "~/Views/Administrador/_LayoutPanel.cshtml";
+    ViewBag.Title = "Detalhes do produto";
+}
+
+    <h2 class="text-center text-uppercase mt-2">Detalhes do produto</h2>
+
+<div>
+    <h4 class=" mt-3">Detalhes do cadastro do produto</h4>
+    <hr />
+    <table class="table table-hover table-bordered">
+        <tr>
+            <td>
+                @Html.DisplayNameFor(model => model.produto_nome)
+            </td>
+            <td>
+                 @Html.DisplayNameFor(model => model.produto_preco)
+            </td>
+            <td>
+                 @Html.DisplayNameFor(model => model.produto_custo)
+            </td>
+            <td>
+                @Html.DisplayNameFor(model => model.produto_ativo)
+            </td>
+            <td>
+                @Html.DisplayNameFor(model => model.produto_desc)
+            </td>
+            <td>
+                 @Html.DisplayNameFor(model => model.produto_img)
+            </td>
+            <td>
+                @Html.DisplayNameFor(model => model.grupo.grupo_nome)
+            </td>
+            <td>
+                @Html.DisplayNameFor(model => model.impress.impress_cod)
+            </td>
+        </tr>
+        <tr>
+            <td>
+                 @Html.DisplayFor(model => model.produto_nome)
+            </td>
+            <td>
+                 @Html.DisplayFor(model => model.produto_preco)
+            </td>
+            <td>
+                 @Html.DisplayFor(model => model.produto_custo)
+            </td>
+            <td>
+                 @Html.DisplayFor(model => model.produto_ativo)
+            </td>
+            <td>
+                 @Html.DisplayFor(model => model.produto_desc)
+            </td>
+            <td>
+                 @Html.DisplayFor(model => model.produto_img)
+            </td>
+            <td>
+                @Html.DisplayFor(model => model.grupo.grupo_nome)
+            </td>
+            <td>
+                @Html.DisplayFor(model => model.impress.impress_cod)
+            </td>
+        </tr>
+    </table>
+</div>
+<p>
+    @Html.ActionLink("Editar", "Edit", new { id = Model.produto_cod }, new { @class = "btn btn-success", @style = "width: 116px;" })
+    @Html.ActionLink("Voltar", "Index", "", new { @class = "btn btn-primary", @style = "width: 116px;" })
+</p>

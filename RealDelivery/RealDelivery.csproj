@@ -169,6 +169,8 @@
     <Compile Include="Controllers\AdministradorController.cs" />
     <Compile Include="Controllers\GrupoController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\produtoController.cs" />
+    <Compile Include="Controllers\UsuarioController.cs" />
     <Compile Include="endereco.cs">
       <DependentUpon>Banco.tt</DependentUpon>
     </Compile>
@@ -249,6 +251,7 @@
     <Content Include="Banco.edmx.diagram">
       <DependentUpon>Banco.edmx</DependentUpon>
     </Content>
+    <None Include="Properties\PublishProfiles\CustomProfile.pubxml" />
     <None Include="Scripts\jquery-3.3.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.3.1.js" />
     <Content Include="Scripts\jquery-3.3.1.min.js" />
@@ -332,6 +335,16 @@
     <Content Include="Scripts\js\jquery.min.js" />
     <Content Include="Views\Administrador\_LayoutPanel.cshtml" />
     <Content Include="Views\Administrador\Panel.cshtml" />
+    <Content Include="Views\produto\Create.cshtml" />
+    <Content Include="Views\produto\Details.cshtml" />
+    <Content Include="Views\produto\Edit.cshtml" />
+    <Content Include="Views\produto\Index.cshtml" />
+    <Content Include="Views\produto\Buscar.cshtml" />
+    <Content Include="Views\Usuario\Create.cshtml" />
+    <Content Include="Views\Usuario\Edit.cshtml" />
+    <Content Include="Views\Usuario\Index.cshtml" />
+    <Content Include="Views\Usuario\EditPassword.cshtml" />
+    <Content Include="Views\Usuario\Buscar.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
