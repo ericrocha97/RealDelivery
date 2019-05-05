@@ -54,6 +54,12 @@ namespace RealDelivery.Controllers
         [Authorize]
         public ActionResult Create([Bind(Include = "usuario_cod,usuario_email,usuario_senha,usuario_nome,usuario_cel")] usuario usuario)
         {
+            if (db.usuario.Count(u => u.usuario_email == usuario.usuario_email) > 0)
+                {
+                ModelState.AddModelError("Create", "Esse e-mail já está cadastrado");
+                return View(usuario);
+            }
+
             if (ModelState.IsValid)
             {
                 var SenhaMD5 = GerarHashMd5(usuario.usuario_senha);
