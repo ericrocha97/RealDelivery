@@ -56,7 +56,7 @@ namespace RealDelivery.Controllers
         {
             if (db.usuario.Count(u => u.usuario_email == usuario.usuario_email) > 0)
                 {
-                ModelState.AddModelError("Create", "Esse e-mail já está cadastrado");
+                ModelState.AddModelError("usuario_email", "Esse e-mail já está cadastrado");
                 return View(usuario);
             }
 

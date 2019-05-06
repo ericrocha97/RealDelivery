@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net;
 using System.Security.Claims;
 using System.Web;
 using System.Web.Mvc;
@@ -9,29 +10,27 @@ namespace RealDelivery.Controllers
 {
     public class HomeController : Controller
     {
+        private db_a464fd_realdevEntities db = new db_a464fd_realdevEntities();
         public ActionResult Index()
         {
-            return View();
+            var s = "S";
+            var dataset = db.grupo.Where(x => x.grupo_ativo == s).ToList();
+            return View(dataset);
         }
-        [Authorize]
-        [HttpPost]
-        public ActionResult Index(string att)
+        public ActionResult Produtos(long? id)
         {
-            if(att == "Login")
+            if (id == null)
             {
-                var identity = new ClaimsIdentity(new[]
-            {
-                new Claim(ClaimTypes.Name, "admin"),
-                new Claim("Login", "admin")
-            }, "ApplicationCookie");
-                Request.GetOwinContext().Authentication.SignIn(identity);
-                
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            if(att == "Logout")
+            //produto produto = db.produto.;
+
+            var dataset = db.produto.Where(x => x.grupo_cod == id).ToList();
+            if (dataset == null)
             {
-                Request.GetOwinContext().Authentication.SignOut("ApplicationCookie");
+                return HttpNotFound();
             }
-            return View();
+            return View(dataset);
         }
 
         public ActionResult About()

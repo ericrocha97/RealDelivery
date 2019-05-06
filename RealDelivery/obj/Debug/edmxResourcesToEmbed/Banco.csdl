@@ -45,7 +45,7 @@
     <Property Name="produto_ativo" Type="String" MaxLength="1" FixedLength="false" Unicode="false" />
     <Property Name="impress_cod" Type="Int64" />
     <Property Name="produto_desc" Type="String" MaxLength="65535" FixedLength="false" Unicode="false" />
-    <Property Name="produto_img" Type="String" MaxLength="1073741823" FixedLength="false" Unicode="false" />
+    <Property Name="produto_img" Type="String" />
     <NavigationProperty Name="grupo" Relationship="Self.Pro_Gru_Const" FromRole="produto" ToRole="grupo" />
     <NavigationProperty Name="impress" Relationship="Self.Pro_Imp_Const" FromRole="produto" ToRole="impress" />
   </EntityType>

@@ -12,6 +12,7 @@ namespace RealDelivery
     using System;
     using System.Collections.Generic;
     using System.ComponentModel;
+    using System.ComponentModel.DataAnnotations;
     using System.Web;
 
     public partial class produto
@@ -20,10 +21,12 @@ namespace RealDelivery
         [DisplayName("Nome do Produto")]
         public string produto_nome { get; set; }
         [DisplayName("Grupo do produto")]
-        public long grupo_cod { get; set; }
+        public Nullable<long> grupo_cod { get; set; }
         [DisplayName("Preço do produto")]
+        [DisplayFormat(DataFormatString = "{0:C2}", ApplyFormatInEditMode = true)]
         public Nullable<float> produto_preco { get; set; }
         [DisplayName("Preço de custo")]
+        [DisplayFormat(DataFormatString = "{0:C2}", ApplyFormatInEditMode = true)]
         public Nullable<float> produto_custo { get; set; }
         [DisplayName("Ativo")]
         public string produto_ativo { get; set; }

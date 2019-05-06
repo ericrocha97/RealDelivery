@@ -36,30 +36,18 @@
         <div class="collapse navbar-collapse" id="navbarNav">
             <ul class="navbar-nav mr-auto">
                 <li class="nav-item active">
-                    @Html.ActionLink("Início", "Index", "Home", new { @class = "nav-link" })
+                    @Html.ActionLink("Início", "Index", "Home", "" , new { @class = "nav-link" })
                 </li>
                 <li class="nav-item">
-                    @Html.ActionLink("Sobre", "About", "Home", new { @class = "nav-link" })
+                    @Html.ActionLink("Sobre", "About", "Home","", new { @class = "nav-link" })
                 </li>
                 <li class="nav-item">
-                    @Html.ActionLink("Contato", "Contact", "Home", new { @class = "nav-link" })
+                    @Html.ActionLink("Contato", "Contact", "Home", "", new { @class = "nav-link" })
                 </li>
             </ul>
             <div class="form-inline">
-                @if (User.Identity.IsAuthenticated)
-                {
-                    //@Html.ActionLink("Sair", "Logout", "Administrador", "", new { @class = "btn btn-danger" })
-                    <a class="btn btn-danger my-2 my-sm-0" href="/Administrador/Logout">
-                        Logout <i class="fas fa-sign-out-alt"></i>
-                    </a>
-                }
-                else
-                {
-                    //@Html.ActionLink("Login", "Login", "Administrador", "", new { @class = "btn btn-success" })
-                    <a class="btn btn-success my-2 my-sm-0" href="/Administrador/Login">
-                        Login <i class="fas fa-sign-in-alt"></i>
-                    </a>
-                }
+               <button class="btn btn-primary mr-2"> Carrinho</button>
+               <button class="btn btn-success mr-2"> Login</button>
             </div>
         </div>
     </nav>

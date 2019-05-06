@@ -50,7 +50,7 @@
     </Key>
     <Property Name="usuario_cod" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="usuario_email" Type="varchar" MaxLength="250" />
-    <Property Name="usuario_senha" Type="varchar" MaxLength="50" />
+    <Property Name="usuario_senha" Type="varchar" MaxLength="250" />
     <Property Name="usuario_nome" Type="varchar" MaxLength="100" />
     <Property Name="usuario_cel" Type="varchar" MaxLength="20" />
   </EntityType>

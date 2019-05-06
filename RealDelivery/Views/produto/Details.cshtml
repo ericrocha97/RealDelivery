@@ -54,8 +54,11 @@
                  @Html.DisplayFor(model => model.produto_desc)
             </td>
             <td>
-                 @Html.DisplayFor(model => model.produto_img)
-            </td>
+                @if (Model.produto_img != null)
+                {
+                    <img src="@Model.produto_img" alt="@Model.produto_img image" class="img-thumbnail" />
+                }
+                </td>
             <td>
                 @Html.DisplayFor(model => model.grupo.grupo_nome)
             </td>

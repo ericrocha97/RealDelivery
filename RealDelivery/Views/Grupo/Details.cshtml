@@ -36,7 +36,11 @@
                 @Html.DisplayFor(model => model.grupo_desc)
             </td>
             <td>
-                @Html.DisplayFor(model => model.grupo_img)
+                @if (Model.grupo_img != null)
+                {
+                    <img src="@Model.grupo_img" alt="@Model.grupo_img image" class="img-thumbnail" />
+                }
+
             </td>
         </tr>
     </table>

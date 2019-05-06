@@ -1,7 +1,6 @@
 ﻿@model RealDelivery.grupo
 
 @{
-    /*comentario*/
     Layout = "~/Views/Administrador/_LayoutPanel.cshtml";
     ViewBag.Title = "Adicionar grupo";
 }
@@ -9,10 +8,8 @@
 <h2 class="text-center text-uppercase mt-2">Adicionar grupo</h2>
 
 
-@using (Html.BeginForm("Create","Grupo",FormMethod.Post, new {enctype = "mulpipart/form-data" }))
+@using (Html.BeginForm("Create", "Grupo", FormMethod.Post, new { enctype = "multipart/form-data" }))
 {
-
-
     <div class="form-horizontal">
         <h4 class=" mt-3">Adicionar novos grupos</h4>
         <hr />
@@ -41,14 +38,14 @@
         </div>
 
         <div class="form-group">
-
             <div class="custom-file">
+                @Html.LabelFor(model => model.img_grupo, htmlAttributes: new { @class = "control-label col-md-2" })
                 <div class="col-md-10">
-                    <label class="btn btn-primary" for="img_grupo">Escolher a imagem do grupo...</label>
-                    <input type="file" name="img_grupo" class="invisible" id="img_grupo">
+                    @Html.ValidationMessageFor(model => model.img_grupo, "", new { @class = "text-danger" })
+                    <label class="btn btn-primary" for="file">Escolher a imagem do grupo...</label>
+                    <input type="file" id="file" name="file" class="invisible" />
                 </div>
             </div>
-
         </div>
 
         <div class="form-group">
