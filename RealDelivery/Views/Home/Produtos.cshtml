@@ -7,32 +7,34 @@
 <h2 class="text-center mt-2">Cardapío</h2>
 
 
-<table class="table table-hover table-bordered">
+<table class="table table-hover">
 
     @foreach (var item in Model)
     {
-    <tr>
-        <td>
-            @if (item.produto_img != null)
-            {
-                <img src="@Html.DisplayFor(modelItem => item.produto_img)" alt=" image" class="img-thumbnail" style="width:128px;height:128px;" />
-            }
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.produto_nome)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.produto_preco)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.produto_desc)
-        </td>
-        <td>
-
-            @Html.ActionLink("Adicionar ao carrinho", "Carrinho", new { id = item.produto_cod }, new { @class = "btn btn-info"})
-
-        </td>
-    </tr>
+        <tr>
+            <td class="text-center align-middle">
+                @if (item.produto_img != null)
+                {
+                    <img src="@Html.DisplayFor(modelItem => item.produto_img)" alt=" image" class="img-thumbnail" style="width:128px;height:128px;" />
+                }
+                else
+                {
+                    <img src="/Imagem/sem-foto.png" alt=" image" class="img-thumbnail" style="width:128px;height:128px;" />
+                }
+            </td>
+            <td class="text-center align-middle">
+                @Html.DisplayFor(modelItem => item.produto_nome)
+            </td>
+            <td class="text-center align-middle">
+                @Html.DisplayFor(modelItem => item.produto_preco)
+            </td>
+            <td class="text-center align-middle">
+                @Html.DisplayFor(modelItem => item.produto_desc)
+            </td>
+            <td class="text-center align-middle">
+                @Html.ActionLink("Adicionar ao carrinho", "Carrinho", new { id = item.produto_cod }, new { @class = "btn btn-info" })
+            </td>
+        </tr>
     }
 
 </table>

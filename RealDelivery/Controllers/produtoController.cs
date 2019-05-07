@@ -235,12 +235,15 @@ namespace RealDelivery.Controllers
                 ModelState.AddModelError("produto_preco", "Preco do produto deve ser preenchido.");
                 return View(produto);
             }
-
-            if (produto.produto_desc.Length > 500)
+            if (produto.produto_desc != null)
             {
-                ModelState.AddModelError("produto_desc", "Descrição é muito grande.");
-                return View(produto);
+                if (produto.produto_desc.Length > 500)
+                {
+                    ModelState.AddModelError("produto_desc", "Descrição é muito grande.");
+                    return View(produto);
+                }
             }
+            
 
 
             //if (ModelState.IsValid)

@@ -25,7 +25,7 @@ namespace RealDelivery.Controllers
             }
             //produto produto = db.produto.;
 
-            var dataset = db.produto.Where(x => x.grupo_cod == id).ToList();
+            var dataset = db.produto.Where(x => x.grupo_cod == id && x.produto_ativo == "S").ToList();
             if (dataset == null)
             {
                 return HttpNotFound();

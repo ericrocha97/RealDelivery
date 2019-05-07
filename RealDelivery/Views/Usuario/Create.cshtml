@@ -23,7 +23,6 @@
                 @Html.ValidationMessageFor(model => model.usuario_email, "", new { @class = "text-danger" })
             </div>
         </div>
-
         <div class="form-group">
             @Html.LabelFor(model => model.usuario_senha, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
@@ -31,7 +30,6 @@
                 @Html.ValidationMessageFor(model => model.usuario_senha, "", new { @class = "text-danger" })
             </div>
         </div>
-
         <div class="form-group">
             @Html.LabelFor(model => model.usuario_nome, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
@@ -39,7 +37,6 @@
                 @Html.ValidationMessageFor(model => model.usuario_nome, "", new { @class = "text-danger" })
             </div>
         </div>
-
         <div class="form-group">
             @Html.LabelFor(model => model.usuario_cel, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
@@ -47,7 +44,6 @@
                 @Html.ValidationMessageFor(model => model.usuario_cel, "", new { @class = "text-danger" })
             </div>
         </div>
-
         <div class="form-group">
             <div class="col-md-offset-2 col-md-10">
                 <input type="submit" value="Salvar" class="btn btn-success mr-2" style="width: 116px;" />
@@ -59,7 +55,7 @@
 
 
 @section Scripts {
-        <script src="~/Scripts/jquery.validate.min.js"></script>
-        <script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
+    <script src="~/Scripts/jquery.validate.min.js"></script>
+    <script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
     @Scripts.Render("~/bundles/jqueryval")
 }

@@ -1,40 +1,33 @@
 ﻿@model IEnumerable<RealDelivery.grupo>
 
 @{
-    ViewBag.Title = "Home Page";
+    ViewBag.Title = "Home";
 
 }
 
 <h2 class="text-center mt-2">Cardapío</h2>
 
 
-<table class="table table-hover table-bordered">
-    <tr>
-        <th style="width: 150px;">
-            @Html.DisplayNameFor(model => model.grupo_nome)
-        </th>
-        <th style="width: 75px;">
-            
-        </th>
-        <th style="width: 125px;"></th>
-    </tr>
-
+<table class="table table-hover">
+ 
     @foreach (var item in Model)
     {
         <tr>
-            <td>
+            <td class="text-center align-middle">
                 @Html.DisplayFor(modelItem => item.grupo_nome)
             </td>
-            <td> 
+            <td class="text-center align-middle">
                 @if (item.grupo_img != null)
                 {
                     <img src="@Html.DisplayFor(modelItem => item.grupo_img)" alt=" image" class="img-thumbnail" style="width:128px;height:128px;" />
                 }
+                else
+                {
+                    <img src="/Imagem/sem-foto.png" alt=" image" class="img-thumbnail" style="width:128px;height:128px;" />
+                }
             </td>
-            <td>
-                
+            <td class="text-center align-middle">
                 @Html.ActionLink("Produtos", "Produtos", new { id = item.grupo_cod }, new { @class = "btn btn-info", @style = "width: 116px;" })
-
             </td>
         </tr>
     }

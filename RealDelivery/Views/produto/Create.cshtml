@@ -25,7 +25,7 @@
         <div class="form-group">
             <label for="grupo_cod" class="control-label col-md-2">Grupo do produto</label>
             <div class="col-md-10">
-           |     @Html.DropDownList("grupo_cod", null, htmlAttributes: new { @class = "form-control" })
+                @Html.DropDownList("grupo_cod", null, htmlAttributes: new { @class = "form-control" })
                 @Html.ValidationMessageFor(model => model.grupo_cod, "", new { @class = "text-danger" })
             </div>
         </div>
@@ -71,7 +71,7 @@
 
         <div class="form-group">
             <div class="custom-file">
-                @Html.LabelFor(model => model.img_produto, htmlAttributes: new { @class = "control-label col-md-2" })
+                @Html.LabelFor(model => model.produto_img, htmlAttributes: new { @class = "control-label col-md-2" })
                 <div class="col-md-10">
                     @Html.ValidationMessageFor(model => model.img_produto, "", new { @class = "text-danger" })
                     <label class="btn btn-primary" for="img_produto">Escolher a imagem do produto...</label>
