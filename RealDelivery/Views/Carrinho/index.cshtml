@@ -1,0 +1,43 @@
+﻿@model RealDelivery.ViewModels.CarrinhoViewModel
+
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    ViewBag.Title = "Carrinho";
+}
+
+<h2 class="text-center mt-2">Carrinho</h2>
+
+
+<table class="table table-hover">
+
+    @foreach (var item in Model.car.ItensCarrinho)
+    {
+        <tr>
+            <td class="text-center align-middle">
+                
+                @if (item.Produto.produto_img != null)
+                {
+                    <img src="@Html.DisplayFor(modelItem => item.Produto.produto_img)" alt=" image" class="img-thumbnail" style="width:128px;height:128px;" />
+                }
+                else
+                {
+                    <img src="/Imagem/sem-foto.png" alt=" image" class="img-thumbnail" style="width:128px;height:128px;" />
+                }
+            </td>
+            <td class="text-center align-middle">
+                @Html.DisplayFor(modelItem => item.Produto.produto_nome)
+            </td>
+            <td class="text-center align-middle">
+                @Html.DisplayFor(modelItem => item.Produto.produto_preco)
+            </td>
+            <td class="text-center align-middle">
+                @Html.DisplayFor(modelItem => item.Quantidade)
+            </td>
+            <td class="text-center align-middle">
+                @Html.ActionLink("Remover do carrinho", "remove", "Carrinho", new { id_prod = item.Produto.produto_cod }, new { @class = "btn btn-danger" })
+            </td>
+        </tr>
+    }
+</table>
+
+

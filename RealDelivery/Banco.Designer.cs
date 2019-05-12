@@ -1,4 +1,4 @@
-﻿// T4 code generation is enabled for model 'C:\Users\ericr\Desktop\RealDelivery\RealDelivery\RealDelivery\Banco.edmx'. 
+﻿// T4 code generation is enabled for model 'C:\Users\ericr\Documents\RealDelivery\RealDelivery\RealDelivery\Banco.edmx'. 
 // To enable legacy code generation, change the value of the 'Code Generation Strategy' designer
 // property to 'Legacy ObjectContext'. This property is available in the Properties Window when the model
 // is open in the designer.

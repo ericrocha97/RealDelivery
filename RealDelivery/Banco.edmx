@@ -4,13 +4,23 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-    <Schema Namespace="db_a464fd_realdevModel.Store" Provider="MySql.Data.MySqlClient" ProviderManifestToken="5.6" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+      <Schema Namespace="db_a464fd_realdevModel.Store" Provider="MySql.Data.MySqlClient" ProviderManifestToken="5.6" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="cliente">
+          <Key>
+            <PropertyRef Name="cliente_cod" />
+          </Key>
+          <Property Name="cliente_cod" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="cliente_nome" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="cliente_telefone" Type="varchar" MaxLength="20" />
+          <Property Name="cliente_email" Type="varchar" MaxLength="250" />
+          <Property Name="cliente_senha" Type="varchar" MaxLength="250" />
+        </EntityType>
         <EntityType Name="endereco">
           <Key>
             <PropertyRef Name="endereco_cod" />
           </Key>
           <Property Name="endereco_cod" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="usuario_cod" Type="int" Nullable="false" />
+          <Property Name="cliente_cod" Type="int" Nullable="false" />
           <Property Name="endereco_cep" Type="varchar" MaxLength="15" />
           <Property Name="endereco_rua" Type="varchar" MaxLength="100" />
           <Property Name="endereco_bairro" Type="varchar" MaxLength="100" />
@@ -35,11 +45,32 @@
           </Key>
           <Property Name="impress_cod" Type="uint" StoreGeneratedPattern="Identity" Nullable="false" />
         </EntityType>
+        <EntityType Name="item_pedido">
+          <Key>
+            <PropertyRef Name="item_pedido_cod" />
+          </Key>
+          <Property Name="item_pedido_cod" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="pedido_cod" Type="int" Nullable="false" />
+          <Property Name="produto_cod" Type="int" Nullable="false" />
+          <Property Name="item_pedido_qtd" Type="int" Nullable="false" />
+          <Property Name="produto_valor" Type="float" Nullable="false" />
+          <Property Name="produto_nome" Type="varchar" MaxLength="250" Nullable="false" />
+        </EntityType>
+        <EntityType Name="pedido">
+          <Key>
+            <PropertyRef Name="pedido_cod" />
+          </Key>
+          <Property Name="pedido_cod" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="cliente_cod" Type="int" Nullable="false" />
+          <Property Name="pedido_data" Type="datetime" Precision="0" Nullable="false" />
+          <Property Name="pedido_valor" Type="float" Nullable="false" />
+          <Property Name="pedido_obs" Type="mediumtext" />
+        </EntityType>
         <EntityType Name="produto">
           <Key>
             <PropertyRef Name="produto_cod" />
           </Key>
-          <Property Name="produto_cod" Type="uint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="produto_cod" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="produto_nome" Type="varchar" MaxLength="100" />
           <Property Name="grupo_cod" Type="uint" Nullable="false" />
           <Property Name="produto_preco" Type="float" />
@@ -67,6 +98,54 @@
           <Property Name="usuario_cod" Type="int" Nullable="false" />
           <Property Name="usuario_nivel" Type="int" />
         </EntityType>
+        <Association Name="Clie_End_Const">
+          <End Role="cliente" Type="Self.cliente" Multiplicity="1" />
+          <End Role="endereco" Type="Self.endereco" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="cliente">
+              <PropertyRef Name="cliente_cod" />
+            </Principal>
+            <Dependent Role="endereco">
+              <PropertyRef Name="cliente_cod" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="item_pedido_ibfk_1">
+          <End Role="produto" Type="Self.produto" Multiplicity="1" />
+          <End Role="item_pedido" Type="Self.item_pedido" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="produto">
+              <PropertyRef Name="produto_cod" />
+            </Principal>
+            <Dependent Role="item_pedido">
+              <PropertyRef Name="produto_cod" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="Ped_Cli_Const">
+          <End Role="cliente" Type="Self.cliente" Multiplicity="1" />
+          <End Role="pedido" Type="Self.pedido" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="cliente">
+              <PropertyRef Name="cliente_cod" />
+            </Principal>
+            <Dependent Role="pedido">
+              <PropertyRef Name="cliente_cod" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="Ped_item_Const">
+          <End Role="pedido" Type="Self.pedido" Multiplicity="1" />
+          <End Role="item_pedido" Type="Self.item_pedido" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="pedido">
+              <PropertyRef Name="pedido_cod" />
+            </Principal>
+            <Dependent Role="item_pedido">
+              <PropertyRef Name="pedido_cod" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="Pro_Gru_Const">
           <End Role="grupo" Type="Self.grupo" Multiplicity="1" />
           <End Role="produto" Type="Self.produto" Multiplicity="*" />
@@ -88,18 +167,6 @@
             </Principal>
             <Dependent Role="produto">
               <PropertyRef Name="impress_cod" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="Usu_End_Const">
-          <End Role="usuario" Type="Self.usuario" Multiplicity="1" />
-          <End Role="endereco" Type="Self.endereco" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="usuario">
-              <PropertyRef Name="usuario_cod" />
-            </Principal>
-            <Dependent Role="endereco">
-              <PropertyRef Name="usuario_cod" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -116,12 +183,31 @@
           </ReferentialConstraint>
         </Association>
         <EntityContainer Name="db_a464fd_realdevModelStoreContainer">
+          <EntitySet Name="cliente" EntityType="Self.cliente" Schema="db_a464fd_realdev" store:Type="Tables" />
           <EntitySet Name="endereco" EntityType="Self.endereco" Schema="db_a464fd_realdev" store:Type="Tables" />
           <EntitySet Name="grupo" EntityType="Self.grupo" Schema="db_a464fd_realdev" store:Type="Tables" />
           <EntitySet Name="impress" EntityType="Self.impress" Schema="db_a464fd_realdev" store:Type="Tables" />
+          <EntitySet Name="item_pedido" EntityType="Self.item_pedido" Schema="db_a464fd_realdev" store:Type="Tables" />
+          <EntitySet Name="pedido" EntityType="Self.pedido" Schema="db_a464fd_realdev" store:Type="Tables" />
           <EntitySet Name="produto" EntityType="Self.produto" Schema="db_a464fd_realdev" store:Type="Tables" />
           <EntitySet Name="usuario" EntityType="Self.usuario" Schema="db_a464fd_realdev" store:Type="Tables" />
           <EntitySet Name="usuario_perm" EntityType="Self.usuario_perm" Schema="db_a464fd_realdev" store:Type="Tables" />
+          <AssociationSet Name="Clie_End_Const" Association="Self.Clie_End_Const">
+            <End Role="cliente" EntitySet="cliente" />
+            <End Role="endereco" EntitySet="endereco" />
+          </AssociationSet>
+          <AssociationSet Name="item_pedido_ibfk_1" Association="Self.item_pedido_ibfk_1">
+            <End Role="produto" EntitySet="produto" />
+            <End Role="item_pedido" EntitySet="item_pedido" />
+          </AssociationSet>
+          <AssociationSet Name="Ped_Cli_Const" Association="Self.Ped_Cli_Const">
+            <End Role="cliente" EntitySet="cliente" />
+            <End Role="pedido" EntitySet="pedido" />
+          </AssociationSet>
+          <AssociationSet Name="Ped_item_Const" Association="Self.Ped_item_Const">
+            <End Role="pedido" EntitySet="pedido" />
+            <End Role="item_pedido" EntitySet="item_pedido" />
+          </AssociationSet>
           <AssociationSet Name="Pro_Gru_Const" Association="Self.Pro_Gru_Const">
             <End Role="grupo" EntitySet="grupo" />
             <End Role="produto" EntitySet="produto" />
@@ -130,25 +216,34 @@
             <End Role="impress" EntitySet="impress" />
             <End Role="produto" EntitySet="produto" />
           </AssociationSet>
-          <AssociationSet Name="Usu_End_Const" Association="Self.Usu_End_Const">
-            <End Role="usuario" EntitySet="usuario" />
-            <End Role="endereco" EntitySet="endereco" />
-          </AssociationSet>
           <AssociationSet Name="usu_usuperm_constraint" Association="Self.usu_usuperm_constraint">
             <End Role="usuario" EntitySet="usuario" />
             <End Role="usuario_perm" EntitySet="usuario_perm" />
           </AssociationSet>
         </EntityContainer>
-      </Schema></edmx:StorageModels>
+      </Schema>
+    </edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="db_a464fd_realdevModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="cliente">
+          <Key>
+            <PropertyRef Name="cliente_cod" />
+          </Key>
+          <Property Name="cliente_cod" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="cliente_nome" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="cliente_telefone" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="cliente_email" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+          <Property Name="cliente_senha" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="endereco" Relationship="Self.Clie_End_Const" FromRole="cliente" ToRole="endereco" />
+          <NavigationProperty Name="pedido" Relationship="Self.Ped_Cli_Const" FromRole="cliente" ToRole="pedido" />
+        </EntityType>
         <EntityType Name="endereco">
           <Key>
             <PropertyRef Name="endereco_cod" />
           </Key>
           <Property Name="endereco_cod" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="usuario_cod" Type="Int32" Nullable="false" />
+          <Property Name="cliente_cod" Type="Int32" Nullable="false" />
           <Property Name="endereco_cep" Type="String" MaxLength="15" FixedLength="false" Unicode="false" />
           <Property Name="endereco_rua" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
           <Property Name="endereco_bairro" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
@@ -156,7 +251,7 @@
           <Property Name="endereco_uf" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
           <Property Name="endereco_comp" Type="String" MaxLength="65535" FixedLength="false" Unicode="false" />
           <Property Name="endereco_num" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
-          <NavigationProperty Name="usuario" Relationship="Self.Usu_End_Const" FromRole="endereco" ToRole="usuario" />
+          <NavigationProperty Name="cliente" Relationship="Self.Clie_End_Const" FromRole="endereco" ToRole="cliente" />
         </EntityType>
         <EntityType Name="grupo">
           <Key>
@@ -166,7 +261,7 @@
           <Property Name="grupo_nome" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="grupo_ativo" Type="String" MaxLength="1" FixedLength="false" Unicode="false" />
           <Property Name="grupo_desc" Type="String" MaxLength="65535" FixedLength="false" Unicode="false" />
-          <Property Name="grupo_img" Type="String" />
+          <Property Name="grupo_img" Type="String" MaxLength="1073741823" FixedLength="false" Unicode="false" />
           <NavigationProperty Name="produto" Relationship="Self.Pro_Gru_Const" FromRole="grupo" ToRole="produto" />
         </EntityType>
         <EntityType Name="impress">
@@ -176,11 +271,36 @@
           <Property Name="impress_cod" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <NavigationProperty Name="produto" Relationship="Self.Pro_Imp_Const" FromRole="impress" ToRole="produto" />
         </EntityType>
+        <EntityType Name="item_pedido">
+          <Key>
+            <PropertyRef Name="item_pedido_cod" />
+          </Key>
+          <Property Name="item_pedido_cod" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="pedido_cod" Type="Int32" Nullable="false" />
+          <Property Name="produto_cod" Type="Int32" Nullable="false" />
+          <Property Name="item_pedido_qtd" Type="Int32" Nullable="false" />
+          <Property Name="produto_valor" Type="Single" Nullable="false" />
+          <Property Name="produto_nome" Type="String" MaxLength="250" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="produto" Relationship="Self.item_pedido_ibfk_1" FromRole="item_pedido" ToRole="produto" />
+          <NavigationProperty Name="pedido" Relationship="Self.Ped_item_Const" FromRole="item_pedido" ToRole="pedido" />
+        </EntityType>
+        <EntityType Name="pedido">
+          <Key>
+            <PropertyRef Name="pedido_cod" />
+          </Key>
+          <Property Name="pedido_cod" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="cliente_cod" Type="Int32" Nullable="false" />
+          <Property Name="pedido_data" Type="DateTime" Nullable="false" />
+          <Property Name="pedido_valor" Type="Single" Nullable="false" />
+          <Property Name="pedido_obs" Type="String" MaxLength="16777215" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="cliente" Relationship="Self.Ped_Cli_Const" FromRole="pedido" ToRole="cliente" />
+          <NavigationProperty Name="item_pedido" Relationship="Self.Ped_item_Const" FromRole="pedido" ToRole="item_pedido" />
+        </EntityType>
         <EntityType Name="produto">
           <Key>
             <PropertyRef Name="produto_cod" />
           </Key>
-          <Property Name="produto_cod" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="produto_cod" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="produto_nome" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
           <Property Name="grupo_cod" Type="Int64" Nullable="false" />
           <Property Name="produto_preco" Type="Single" />
@@ -188,9 +308,10 @@
           <Property Name="produto_ativo" Type="String" MaxLength="1" FixedLength="false" Unicode="false" />
           <Property Name="impress_cod" Type="Int64" />
           <Property Name="produto_desc" Type="String" MaxLength="65535" FixedLength="false" Unicode="false" />
-          <Property Name="produto_img" Type="String" />
+          <Property Name="produto_img" Type="String" MaxLength="1073741823" FixedLength="false" Unicode="false" />
           <NavigationProperty Name="grupo" Relationship="Self.Pro_Gru_Const" FromRole="produto" ToRole="grupo" />
           <NavigationProperty Name="impress" Relationship="Self.Pro_Imp_Const" FromRole="produto" ToRole="impress" />
+          <NavigationProperty Name="item_pedido" Relationship="Self.item_pedido_ibfk_1" FromRole="produto" ToRole="item_pedido" />
         </EntityType>
         <EntityType Name="usuario">
           <Key>
@@ -198,10 +319,9 @@
           </Key>
           <Property Name="usuario_cod" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="usuario_email" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
-          <Property Name="usuario_senha" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="usuario_senha" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
           <Property Name="usuario_nome" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
           <Property Name="usuario_cel" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
-          <NavigationProperty Name="endereco" Relationship="Self.Usu_End_Const" FromRole="usuario" ToRole="endereco" />
           <NavigationProperty Name="usuario_perm" Relationship="Self.usu_usuperm_constraint" FromRole="usuario" ToRole="usuario_perm" />
         </EntityType>
         <EntityType Name="usuario_perm">
@@ -213,15 +333,27 @@
           <Property Name="usuario_nivel" Type="Int32" />
           <NavigationProperty Name="usuario" Relationship="Self.usu_usuperm_constraint" FromRole="usuario_perm" ToRole="usuario" />
         </EntityType>
-        <Association Name="Usu_End_Const">
-          <End Role="usuario" Type="Self.usuario" Multiplicity="1" />
+        <Association Name="Clie_End_Const">
+          <End Role="cliente" Type="Self.cliente" Multiplicity="1" />
           <End Role="endereco" Type="Self.endereco" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="usuario">
-              <PropertyRef Name="usuario_cod" />
+            <Principal Role="cliente">
+              <PropertyRef Name="cliente_cod" />
             </Principal>
             <Dependent Role="endereco">
-              <PropertyRef Name="usuario_cod" />
+              <PropertyRef Name="cliente_cod" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="Ped_Cli_Const">
+          <End Role="cliente" Type="Self.cliente" Multiplicity="1" />
+          <End Role="pedido" Type="Self.pedido" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="cliente">
+              <PropertyRef Name="cliente_cod" />
+            </Principal>
+            <Dependent Role="pedido">
+              <PropertyRef Name="cliente_cod" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -249,6 +381,30 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="item_pedido_ibfk_1">
+          <End Role="produto" Type="Self.produto" Multiplicity="1" />
+          <End Role="item_pedido" Type="Self.item_pedido" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="produto">
+              <PropertyRef Name="produto_cod" />
+            </Principal>
+            <Dependent Role="item_pedido">
+              <PropertyRef Name="produto_cod" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="Ped_item_Const">
+          <End Role="pedido" Type="Self.pedido" Multiplicity="1" />
+          <End Role="item_pedido" Type="Self.item_pedido" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="pedido">
+              <PropertyRef Name="pedido_cod" />
+            </Principal>
+            <Dependent Role="item_pedido">
+              <PropertyRef Name="pedido_cod" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="usu_usuperm_constraint">
           <End Role="usuario" Type="Self.usuario" Multiplicity="1" />
           <End Role="usuario_perm" Type="Self.usuario_perm" Multiplicity="*" />
@@ -262,15 +418,22 @@
           </ReferentialConstraint>
         </Association>
         <EntityContainer Name="db_a464fd_realdevEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="cliente" EntityType="Self.cliente" />
           <EntitySet Name="endereco" EntityType="Self.endereco" />
           <EntitySet Name="grupo" EntityType="Self.grupo" />
           <EntitySet Name="impress" EntityType="Self.impress" />
+          <EntitySet Name="item_pedido" EntityType="Self.item_pedido" />
+          <EntitySet Name="pedido" EntityType="Self.pedido" />
           <EntitySet Name="produto" EntityType="Self.produto" />
           <EntitySet Name="usuario" EntityType="Self.usuario" />
           <EntitySet Name="usuario_perm" EntityType="Self.usuario_perm" />
-          <AssociationSet Name="Usu_End_Const" Association="Self.Usu_End_Const">
-            <End Role="usuario" EntitySet="usuario" />
+          <AssociationSet Name="Clie_End_Const" Association="Self.Clie_End_Const">
+            <End Role="cliente" EntitySet="cliente" />
             <End Role="endereco" EntitySet="endereco" />
+          </AssociationSet>
+          <AssociationSet Name="Ped_Cli_Const" Association="Self.Ped_Cli_Const">
+            <End Role="cliente" EntitySet="cliente" />
+            <End Role="pedido" EntitySet="pedido" />
           </AssociationSet>
           <AssociationSet Name="Pro_Gru_Const" Association="Self.Pro_Gru_Const">
             <End Role="grupo" EntitySet="grupo" />
@@ -279,6 +442,14 @@
           <AssociationSet Name="Pro_Imp_Const" Association="Self.Pro_Imp_Const">
             <End Role="impress" EntitySet="impress" />
             <End Role="produto" EntitySet="produto" />
+          </AssociationSet>
+          <AssociationSet Name="item_pedido_ibfk_1" Association="Self.item_pedido_ibfk_1">
+            <End Role="produto" EntitySet="produto" />
+            <End Role="item_pedido" EntitySet="item_pedido" />
+          </AssociationSet>
+          <AssociationSet Name="Ped_item_Const" Association="Self.Ped_item_Const">
+            <End Role="pedido" EntitySet="pedido" />
+            <End Role="item_pedido" EntitySet="item_pedido" />
           </AssociationSet>
           <AssociationSet Name="usu_usuperm_constraint" Association="Self.usu_usuperm_constraint">
             <End Role="usuario" EntitySet="usuario" />
@@ -291,11 +462,22 @@
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
         <EntityContainerMapping StorageEntityContainer="db_a464fd_realdevModelStoreContainer" CdmEntityContainer="db_a464fd_realdevEntities">
+          <EntitySetMapping Name="cliente">
+            <EntityTypeMapping TypeName="db_a464fd_realdevModel.cliente">
+              <MappingFragment StoreEntitySet="cliente">
+                <ScalarProperty Name="cliente_cod" ColumnName="cliente_cod" />
+                <ScalarProperty Name="cliente_nome" ColumnName="cliente_nome" />
+                <ScalarProperty Name="cliente_telefone" ColumnName="cliente_telefone" />
+                <ScalarProperty Name="cliente_email" ColumnName="cliente_email" />
+                <ScalarProperty Name="cliente_senha" ColumnName="cliente_senha" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           <EntitySetMapping Name="endereco">
             <EntityTypeMapping TypeName="db_a464fd_realdevModel.endereco">
               <MappingFragment StoreEntitySet="endereco">
                 <ScalarProperty Name="endereco_cod" ColumnName="endereco_cod" />
-                <ScalarProperty Name="usuario_cod" ColumnName="usuario_cod" />
+                <ScalarProperty Name="cliente_cod" ColumnName="cliente_cod" />
                 <ScalarProperty Name="endereco_cep" ColumnName="endereco_cep" />
                 <ScalarProperty Name="endereco_rua" ColumnName="endereco_rua" />
                 <ScalarProperty Name="endereco_bairro" ColumnName="endereco_bairro" />
@@ -321,6 +503,29 @@
             <EntityTypeMapping TypeName="db_a464fd_realdevModel.impress">
               <MappingFragment StoreEntitySet="impress">
                 <ScalarProperty Name="impress_cod" ColumnName="impress_cod" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="item_pedido">
+            <EntityTypeMapping TypeName="db_a464fd_realdevModel.item_pedido">
+              <MappingFragment StoreEntitySet="item_pedido">
+                <ScalarProperty Name="item_pedido_cod" ColumnName="item_pedido_cod" />
+                <ScalarProperty Name="pedido_cod" ColumnName="pedido_cod" />
+                <ScalarProperty Name="produto_cod" ColumnName="produto_cod" />
+                <ScalarProperty Name="item_pedido_qtd" ColumnName="item_pedido_qtd" />
+                <ScalarProperty Name="produto_valor" ColumnName="produto_valor" />
+                <ScalarProperty Name="produto_nome" ColumnName="produto_nome" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="pedido">
+            <EntityTypeMapping TypeName="db_a464fd_realdevModel.pedido">
+              <MappingFragment StoreEntitySet="pedido">
+                <ScalarProperty Name="pedido_cod" ColumnName="pedido_cod" />
+                <ScalarProperty Name="cliente_cod" ColumnName="cliente_cod" />
+                <ScalarProperty Name="pedido_data" ColumnName="pedido_data" />
+                <ScalarProperty Name="pedido_valor" ColumnName="pedido_valor" />
+                <ScalarProperty Name="pedido_obs" ColumnName="pedido_obs" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

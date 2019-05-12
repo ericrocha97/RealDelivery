@@ -18,7 +18,6 @@ namespace RealDelivery
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public usuario()
         {
-            this.endereco = new HashSet<endereco>();
             this.usuario_perm = new HashSet<usuario_perm>();
         }
     
@@ -32,8 +31,6 @@ namespace RealDelivery
         [DisplayName("Telefone")]
         public string usuario_cel { get; set; }
     
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<endereco> endereco { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<usuario_perm> usuario_perm { get; set; }
     }

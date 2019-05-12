@@ -15,7 +15,7 @@ namespace RealDelivery
     public partial class endereco
     {
         public int endereco_cod { get; set; }
-        public int usuario_cod { get; set; }
+        public int cliente_cod { get; set; }
         public string endereco_cep { get; set; }
         public string endereco_rua { get; set; }
         public string endereco_bairro { get; set; }
@@ -24,6 +24,6 @@ namespace RealDelivery
         public string endereco_comp { get; set; }
         public string endereco_num { get; set; }
     
-        public virtual usuario usuario { get; set; }
+        public virtual cliente cliente { get; set; }
     }
 }

@@ -25,12 +25,14 @@ namespace RealDelivery
             throw new UnintentionalCodeFirstException();
         }
     
+        public virtual DbSet<cliente> cliente { get; set; }
         public virtual DbSet<endereco> endereco { get; set; }
         public virtual DbSet<grupo> grupo { get; set; }
         public virtual DbSet<impress> impress { get; set; }
+        public virtual DbSet<item_pedido> item_pedido { get; set; }
+        public virtual DbSet<pedido> pedido { get; set; }
         public virtual DbSet<produto> produto { get; set; }
         public virtual DbSet<usuario> usuario { get; set; }
         public virtual DbSet<usuario_perm> usuario_perm { get; set; }
-        public virtual DbSet<teste> teste { get; set; }
     }
 }

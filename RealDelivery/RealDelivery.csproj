@@ -166,7 +166,11 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Banco.edmx</DependentUpon>
     </Compile>
+    <Compile Include="cliente.cs">
+      <DependentUpon>Banco.tt</DependentUpon>
+    </Compile>
     <Compile Include="Controllers\AdministradorController.cs" />
+    <Compile Include="Controllers\CarrinhoController.cs" />
     <Compile Include="Controllers\GrupoController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\produtoController.cs" />
@@ -183,14 +187,17 @@
     <Compile Include="impress.cs">
       <DependentUpon>Banco.tt</DependentUpon>
     </Compile>
+    <Compile Include="item_pedido.cs">
+      <DependentUpon>Banco.tt</DependentUpon>
+    </Compile>
+    <Compile Include="pedido.cs">
+      <DependentUpon>Banco.tt</DependentUpon>
+    </Compile>
     <Compile Include="produto.cs">
       <DependentUpon>Banco.tt</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
-    <Compile Include="teste.cs">
-      <DependentUpon>Banco.tt</DependentUpon>
-    </Compile>
     <Compile Include="usuario.cs">
       <DependentUpon>Banco.tt</DependentUpon>
     </Compile>
@@ -198,9 +205,9 @@
       <DependentUpon>Banco.tt</DependentUpon>
     </Compile>
     <Compile Include="Utils\Hash.cs" />
+    <Compile Include="ViewModels\Carrinho.cs" />
+    <Compile Include="ViewModels\CarrinhoViewModel.cs" />
     <Compile Include="ViewModels\LoginViewModel.cs" />
-    <Compile Include="Views\Cardapio\Cardapio.cs" />
-    <Compile Include="Views\Cardapio\RepositorioCardapio.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Banco.Context.tt">
@@ -332,7 +339,6 @@
     <Content Include="Views\Grupo\Details.cshtml" />
     <Content Include="Views\Grupo\Edit.cshtml" />
     <Content Include="Views\Grupo\Index.cshtml" />
-    <Content Include="Views\Cardapio\Index.cshtml" />
     <Content Include="Views\Grupo\Buscar.cshtml" />
     <Content Include="Views\Administrador\Login.cshtml" />
     <Content Include="Scripts\js\jquery.min.js" />
@@ -349,6 +355,7 @@
     <Content Include="Views\Usuario\EditPassword.cshtml" />
     <Content Include="Views\Usuario\Buscar.cshtml" />
     <Content Include="Views\Home\Produtos.cshtml" />
+    <Content Include="Views\Carrinho\index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

@@ -21,7 +21,7 @@ namespace RealDelivery
         {
             this.produto = new HashSet<produto>();
         }
-
+    
         public long grupo_cod { get; set; }
         [DisplayName("Nome do Grupo")]
         public string grupo_nome { get; set; }
@@ -31,6 +31,7 @@ namespace RealDelivery
         public string grupo_desc { get; set; }
         [DisplayName("Imagem do Grupo")]
         public string grupo_img { get; set; }
+
         public HttpPostedFileBase img_grupo { get; set; }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

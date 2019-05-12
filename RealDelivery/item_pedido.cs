@@ -12,8 +12,16 @@ namespace RealDelivery
     using System;
     using System.Collections.Generic;
     
-    public partial class teste
+    public partial class item_pedido
     {
-        public int id { get; set; }
+        public int item_pedido_cod { get; set; }
+        public int pedido_cod { get; set; }
+        public int produto_cod { get; set; }
+        public int item_pedido_qtd { get; set; }
+        public float produto_valor { get; set; }
+        public string produto_nome { get; set; }
+    
+        public virtual produto produto { get; set; }
+        public virtual pedido pedido { get; set; }
     }
 }

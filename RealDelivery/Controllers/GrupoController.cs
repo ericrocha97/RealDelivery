@@ -230,7 +230,7 @@ namespace RealDelivery.Controllers
 
                     using (var img = System.Drawing.Image.FromStream(file.InputStream))
                     {
-                        grupo.grupo_img = String.Format("/Imagem/Grupos/{0}{1}", imagemNome, extensao);
+                        grupo.grupo_img = String.Format("/Imagem/Grupos/{0}{1}", imagemNome           , extensao);
                         // Salva imagem 
                         SalvarNaPasta(img, grupo.grupo_img);
                     }

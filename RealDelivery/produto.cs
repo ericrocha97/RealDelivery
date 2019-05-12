@@ -17,11 +17,17 @@ namespace RealDelivery
 
     public partial class produto
     {
-        public long produto_cod { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public produto()
+        {
+            this.item_pedido = new HashSet<item_pedido>();
+        }
+    
+        public int produto_cod { get; set; }
         [DisplayName("Nome do Produto")]
         public string produto_nome { get; set; }
         [DisplayName("Grupo do produto")]
-        public Nullable<long> grupo_cod { get; set; }
+        public long grupo_cod { get; set; }
         [DisplayName("Preço do produto")]
         [DisplayFormat(DataFormatString = "{0:C2}", ApplyFormatInEditMode = true)]
         public Nullable<float> produto_preco { get; set; }
@@ -38,8 +44,9 @@ namespace RealDelivery
         public string produto_img { get; set; }
 
         public HttpPostedFileBase img_produto { get; set; }
-
         public virtual grupo grupo { get; set; }
         public virtual impress impress { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<item_pedido> item_pedido { get; set; }
     }
 }

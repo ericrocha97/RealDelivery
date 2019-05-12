@@ -1,11 +1,23 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Schema Namespace="db_a464fd_realdevModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="cliente">
+    <Key>
+      <PropertyRef Name="cliente_cod" />
+    </Key>
+    <Property Name="cliente_cod" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="cliente_nome" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="cliente_telefone" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+    <Property Name="cliente_email" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+    <Property Name="cliente_senha" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="endereco" Relationship="Self.Clie_End_Const" FromRole="cliente" ToRole="endereco" />
+    <NavigationProperty Name="pedido" Relationship="Self.Ped_Cli_Const" FromRole="cliente" ToRole="pedido" />
+  </EntityType>
   <EntityType Name="endereco">
     <Key>
       <PropertyRef Name="endereco_cod" />
     </Key>
     <Property Name="endereco_cod" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-    <Property Name="usuario_cod" Type="Int32" Nullable="false" />
+    <Property Name="cliente_cod" Type="Int32" Nullable="false" />
     <Property Name="endereco_cep" Type="String" MaxLength="15" FixedLength="false" Unicode="false" />
     <Property Name="endereco_rua" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
     <Property Name="endereco_bairro" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
@@ -13,7 +25,7 @@
     <Property Name="endereco_uf" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
     <Property Name="endereco_comp" Type="String" MaxLength="65535" FixedLength="false" Unicode="false" />
     <Property Name="endereco_num" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
-    <NavigationProperty Name="usuario" Relationship="Self.Usu_End_Const" FromRole="endereco" ToRole="usuario" />
+    <NavigationProperty Name="cliente" Relationship="Self.Clie_End_Const" FromRole="endereco" ToRole="cliente" />
   </EntityType>
   <EntityType Name="grupo">
     <Key>
@@ -23,7 +35,7 @@
     <Property Name="grupo_nome" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
     <Property Name="grupo_ativo" Type="String" MaxLength="1" FixedLength="false" Unicode="false" />
     <Property Name="grupo_desc" Type="String" MaxLength="65535" FixedLength="false" Unicode="false" />
-    <Property Name="grupo_img" Type="String" />
+    <Property Name="grupo_img" Type="String" MaxLength="1073741823" FixedLength="false" Unicode="false" />
     <NavigationProperty Name="produto" Relationship="Self.Pro_Gru_Const" FromRole="grupo" ToRole="produto" />
   </EntityType>
   <EntityType Name="impress">
@@ -33,11 +45,36 @@
     <Property Name="impress_cod" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
     <NavigationProperty Name="produto" Relationship="Self.Pro_Imp_Const" FromRole="impress" ToRole="produto" />
   </EntityType>
+  <EntityType Name="item_pedido">
+    <Key>
+      <PropertyRef Name="item_pedido_cod" />
+    </Key>
+    <Property Name="item_pedido_cod" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="pedido_cod" Type="Int32" Nullable="false" />
+    <Property Name="produto_cod" Type="Int32" Nullable="false" />
+    <Property Name="item_pedido_qtd" Type="Int32" Nullable="false" />
+    <Property Name="produto_valor" Type="Single" Nullable="false" />
+    <Property Name="produto_nome" Type="String" MaxLength="250" FixedLength="false" Unicode="false" Nullable="false" />
+    <NavigationProperty Name="produto" Relationship="Self.item_pedido_ibfk_1" FromRole="item_pedido" ToRole="produto" />
+    <NavigationProperty Name="pedido" Relationship="Self.Ped_item_Const" FromRole="item_pedido" ToRole="pedido" />
+  </EntityType>
+  <EntityType Name="pedido">
+    <Key>
+      <PropertyRef Name="pedido_cod" />
+    </Key>
+    <Property Name="pedido_cod" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="cliente_cod" Type="Int32" Nullable="false" />
+    <Property Name="pedido_data" Type="DateTime" Nullable="false" />
+    <Property Name="pedido_valor" Type="Single" Nullable="false" />
+    <Property Name="pedido_obs" Type="String" MaxLength="16777215" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="cliente" Relationship="Self.Ped_Cli_Const" FromRole="pedido" ToRole="cliente" />
+    <NavigationProperty Name="item_pedido" Relationship="Self.Ped_item_Const" FromRole="pedido" ToRole="item_pedido" />
+  </EntityType>
   <EntityType Name="produto">
     <Key>
       <PropertyRef Name="produto_cod" />
     </Key>
-    <Property Name="produto_cod" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="produto_cod" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
     <Property Name="produto_nome" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
     <Property Name="grupo_cod" Type="Int64" Nullable="false" />
     <Property Name="produto_preco" Type="Single" />
@@ -45,9 +82,10 @@
     <Property Name="produto_ativo" Type="String" MaxLength="1" FixedLength="false" Unicode="false" />
     <Property Name="impress_cod" Type="Int64" />
     <Property Name="produto_desc" Type="String" MaxLength="65535" FixedLength="false" Unicode="false" />
-    <Property Name="produto_img" Type="String" />
+    <Property Name="produto_img" Type="String" MaxLength="1073741823" FixedLength="false" Unicode="false" />
     <NavigationProperty Name="grupo" Relationship="Self.Pro_Gru_Const" FromRole="produto" ToRole="grupo" />
     <NavigationProperty Name="impress" Relationship="Self.Pro_Imp_Const" FromRole="produto" ToRole="impress" />
+    <NavigationProperty Name="item_pedido" Relationship="Self.item_pedido_ibfk_1" FromRole="produto" ToRole="item_pedido" />
   </EntityType>
   <EntityType Name="usuario">
     <Key>
@@ -55,10 +93,9 @@
     </Key>
     <Property Name="usuario_cod" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
     <Property Name="usuario_email" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
-    <Property Name="usuario_senha" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="usuario_senha" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
     <Property Name="usuario_nome" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
     <Property Name="usuario_cel" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
-    <NavigationProperty Name="endereco" Relationship="Self.Usu_End_Const" FromRole="usuario" ToRole="endereco" />
     <NavigationProperty Name="usuario_perm" Relationship="Self.usu_usuperm_constraint" FromRole="usuario" ToRole="usuario_perm" />
   </EntityType>
   <EntityType Name="usuario_perm">
@@ -70,15 +107,27 @@
     <Property Name="usuario_nivel" Type="Int32" />
     <NavigationProperty Name="usuario" Relationship="Self.usu_usuperm_constraint" FromRole="usuario_perm" ToRole="usuario" />
   </EntityType>
-  <Association Name="Usu_End_Const">
-    <End Role="usuario" Type="Self.usuario" Multiplicity="1" />
+  <Association Name="Clie_End_Const">
+    <End Role="cliente" Type="Self.cliente" Multiplicity="1" />
     <End Role="endereco" Type="Self.endereco" Multiplicity="*" />
     <ReferentialConstraint>
-      <Principal Role="usuario">
-        <PropertyRef Name="usuario_cod" />
+      <Principal Role="cliente">
+        <PropertyRef Name="cliente_cod" />
       </Principal>
       <Dependent Role="endereco">
-        <PropertyRef Name="usuario_cod" />
+        <PropertyRef Name="cliente_cod" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="Ped_Cli_Const">
+    <End Role="cliente" Type="Self.cliente" Multiplicity="1" />
+    <End Role="pedido" Type="Self.pedido" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="cliente">
+        <PropertyRef Name="cliente_cod" />
+      </Principal>
+      <Dependent Role="pedido">
+        <PropertyRef Name="cliente_cod" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
@@ -106,6 +155,30 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
+  <Association Name="item_pedido_ibfk_1">
+    <End Role="produto" Type="Self.produto" Multiplicity="1" />
+    <End Role="item_pedido" Type="Self.item_pedido" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="produto">
+        <PropertyRef Name="produto_cod" />
+      </Principal>
+      <Dependent Role="item_pedido">
+        <PropertyRef Name="produto_cod" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="Ped_item_Const">
+    <End Role="pedido" Type="Self.pedido" Multiplicity="1" />
+    <End Role="item_pedido" Type="Self.item_pedido" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="pedido">
+        <PropertyRef Name="pedido_cod" />
+      </Principal>
+      <Dependent Role="item_pedido">
+        <PropertyRef Name="pedido_cod" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
   <Association Name="usu_usuperm_constraint">
     <End Role="usuario" Type="Self.usuario" Multiplicity="1" />
     <End Role="usuario_perm" Type="Self.usuario_perm" Multiplicity="*" />
@@ -119,15 +192,22 @@
     </ReferentialConstraint>
   </Association>
   <EntityContainer Name="db_a464fd_realdevEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="cliente" EntityType="Self.cliente" />
     <EntitySet Name="endereco" EntityType="Self.endereco" />
     <EntitySet Name="grupo" EntityType="Self.grupo" />
     <EntitySet Name="impress" EntityType="Self.impress" />
+    <EntitySet Name="item_pedido" EntityType="Self.item_pedido" />
+    <EntitySet Name="pedido" EntityType="Self.pedido" />
     <EntitySet Name="produto" EntityType="Self.produto" />
     <EntitySet Name="usuario" EntityType="Self.usuario" />
     <EntitySet Name="usuario_perm" EntityType="Self.usuario_perm" />
-    <AssociationSet Name="Usu_End_Const" Association="Self.Usu_End_Const">
-      <End Role="usuario" EntitySet="usuario" />
+    <AssociationSet Name="Clie_End_Const" Association="Self.Clie_End_Const">
+      <End Role="cliente" EntitySet="cliente" />
       <End Role="endereco" EntitySet="endereco" />
+    </AssociationSet>
+    <AssociationSet Name="Ped_Cli_Const" Association="Self.Ped_Cli_Const">
+      <End Role="cliente" EntitySet="cliente" />
+      <End Role="pedido" EntitySet="pedido" />
     </AssociationSet>
     <AssociationSet Name="Pro_Gru_Const" Association="Self.Pro_Gru_Const">
       <End Role="grupo" EntitySet="grupo" />
@@ -136,6 +216,14 @@
     <AssociationSet Name="Pro_Imp_Const" Association="Self.Pro_Imp_Const">
       <End Role="impress" EntitySet="impress" />
       <End Role="produto" EntitySet="produto" />
+    </AssociationSet>
+    <AssociationSet Name="item_pedido_ibfk_1" Association="Self.item_pedido_ibfk_1">
+      <End Role="produto" EntitySet="produto" />
+      <End Role="item_pedido" EntitySet="item_pedido" />
+    </AssociationSet>
+    <AssociationSet Name="Ped_item_Const" Association="Self.Ped_item_Const">
+      <End Role="pedido" EntitySet="pedido" />
+      <End Role="item_pedido" EntitySet="item_pedido" />
     </AssociationSet>
     <AssociationSet Name="usu_usuperm_constraint" Association="Self.usu_usuperm_constraint">
       <End Role="usuario" EntitySet="usuario" />

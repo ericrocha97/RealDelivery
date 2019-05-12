@@ -1,11 +1,22 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
   <EntityContainerMapping StorageEntityContainer="db_a464fd_realdevModelStoreContainer" CdmEntityContainer="db_a464fd_realdevEntities">
+    <EntitySetMapping Name="cliente">
+      <EntityTypeMapping TypeName="db_a464fd_realdevModel.cliente">
+        <MappingFragment StoreEntitySet="cliente">
+          <ScalarProperty Name="cliente_cod" ColumnName="cliente_cod" />
+          <ScalarProperty Name="cliente_nome" ColumnName="cliente_nome" />
+          <ScalarProperty Name="cliente_telefone" ColumnName="cliente_telefone" />
+          <ScalarProperty Name="cliente_email" ColumnName="cliente_email" />
+          <ScalarProperty Name="cliente_senha" ColumnName="cliente_senha" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
     <EntitySetMapping Name="endereco">
       <EntityTypeMapping TypeName="db_a464fd_realdevModel.endereco">
         <MappingFragment StoreEntitySet="endereco">
           <ScalarProperty Name="endereco_cod" ColumnName="endereco_cod" />
-          <ScalarProperty Name="usuario_cod" ColumnName="usuario_cod" />
+          <ScalarProperty Name="cliente_cod" ColumnName="cliente_cod" />
           <ScalarProperty Name="endereco_cep" ColumnName="endereco_cep" />
           <ScalarProperty Name="endereco_rua" ColumnName="endereco_rua" />
           <ScalarProperty Name="endereco_bairro" ColumnName="endereco_bairro" />
@@ -31,6 +42,29 @@
       <EntityTypeMapping TypeName="db_a464fd_realdevModel.impress">
         <MappingFragment StoreEntitySet="impress">
           <ScalarProperty Name="impress_cod" ColumnName="impress_cod" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="item_pedido">
+      <EntityTypeMapping TypeName="db_a464fd_realdevModel.item_pedido">
+        <MappingFragment StoreEntitySet="item_pedido">
+          <ScalarProperty Name="item_pedido_cod" ColumnName="item_pedido_cod" />
+          <ScalarProperty Name="pedido_cod" ColumnName="pedido_cod" />
+          <ScalarProperty Name="produto_cod" ColumnName="produto_cod" />
+          <ScalarProperty Name="item_pedido_qtd" ColumnName="item_pedido_qtd" />
+          <ScalarProperty Name="produto_valor" ColumnName="produto_valor" />
+          <ScalarProperty Name="produto_nome" ColumnName="produto_nome" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="pedido">
+      <EntityTypeMapping TypeName="db_a464fd_realdevModel.pedido">
+        <MappingFragment StoreEntitySet="pedido">
+          <ScalarProperty Name="pedido_cod" ColumnName="pedido_cod" />
+          <ScalarProperty Name="cliente_cod" ColumnName="cliente_cod" />
+          <ScalarProperty Name="pedido_data" ColumnName="pedido_data" />
+          <ScalarProperty Name="pedido_valor" ColumnName="pedido_valor" />
+          <ScalarProperty Name="pedido_obs" ColumnName="pedido_obs" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>

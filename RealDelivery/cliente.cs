@@ -12,17 +12,24 @@ namespace RealDelivery
     using System;
     using System.Collections.Generic;
     
-    public partial class impress
+    public partial class cliente
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public impress()
+        public cliente()
         {
-            this.produto = new HashSet<produto>();
+            this.endereco = new HashSet<endereco>();
+            this.pedido = new HashSet<pedido>();
         }
     
-        public long impress_cod { get; set; }
+        public int cliente_cod { get; set; }
+        public string cliente_nome { get; set; }
+        public string cliente_telefone { get; set; }
+        public string cliente_email { get; set; }
+        public string cliente_senha { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<produto> produto { get; set; }
+        public virtual ICollection<endereco> endereco { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<pedido> pedido { get; set; }
     }
 }
