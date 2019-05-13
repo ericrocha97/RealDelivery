@@ -30,7 +30,7 @@ namespace RealDelivery.Controllers
             }
 
             var cliente = db.cliente.FirstOrDefault(u => u.cliente_email == viewmodel.cliente_email);
-            var SenhaMD5 = viewmodel.password;
+            var SenhaMD5 = GerarHashMd5(viewmodel.password);
 
             if (cliente == null)
             {
@@ -62,7 +62,50 @@ namespace RealDelivery.Controllers
         public ActionResult Logout()
         {
             Request.GetOwinContext().Authentication.SignOut("ApplicationCookie");
-            return RedirectToAction("Index", "Home");
+            return RedirectToAction("Index", "Home"); //ApplicationCookie
+        }
+
+
+        public ActionResult Create()
+        {
+            return View();
+        }
+
+        // POST: ex/Create
+        // Para se proteger de mais ataques, ative as propriedades específicas a que você quer se conectar. Para 
+        // obter mais detalhes, consulte https://go.microsoft.com/fwlink/?LinkId=317598.
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Create([Bind(Include = "cliente_cod,cliente_nome,cliente_telefone,cliente_email,cliente_senha")] cliente cliente)
+        {
+            if (ModelState.IsValid)
+            {
+                var senha = GerarHashMd5(cliente.cliente_senha);
+                cliente.cliente_senha = senha;
+                db.cliente.Add(cliente);
+                db.SaveChanges();
+                return RedirectToAction("Login");
+            }
+
+            return View(cliente);
+        }
+
+        public static string GerarHashMd5(string input)
+        {
+            MD5 md5Hash = MD5.Create();
+            // Converter a String para array de bytes, que é como a biblioteca trabalha.
+            byte[] data = md5Hash.ComputeHash(Encoding.UTF8.GetBytes(input));
+
+            // Cria-se um StringBuilder para recompôr a string.
+            StringBuilder sBuilder = new StringBuilder();
+
+            // Loop para formatar cada byte como uma String em hexadecimal
+            for (int i = 0; i < data.Length; i++)
+            {
+                sBuilder.Append(data[i].ToString("x2"));
+            }
+
+            return sBuilder.ToString();
         }
 
 

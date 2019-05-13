@@ -11,7 +11,8 @@ namespace RealDelivery
 {
     using System;
     using System.Collections.Generic;
-    
+    using System.ComponentModel;
+
     public partial class cliente
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
@@ -22,9 +23,13 @@ namespace RealDelivery
         }
     
         public int cliente_cod { get; set; }
+        [DisplayName("Nome")]
         public string cliente_nome { get; set; }
+        [DisplayName("Telefone")]
         public string cliente_telefone { get; set; }
+        [DisplayName("E-mail")]
         public string cliente_email { get; set; }
+        [DisplayName("Senha")]
         public string cliente_senha { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
