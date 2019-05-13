@@ -57,10 +57,6 @@ namespace RealDelivery.Controllers
             else
                 return RedirectToAction("Panel", "Administrador");
 
-
-
-
-
         }
         [Authorize]
         public ActionResult Panel()

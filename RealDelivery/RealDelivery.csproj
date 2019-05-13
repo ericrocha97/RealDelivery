@@ -171,6 +171,7 @@
     </Compile>
     <Compile Include="Controllers\AdministradorController.cs" />
     <Compile Include="Controllers\CarrinhoController.cs" />
+    <Compile Include="Controllers\ClienteController.cs" />
     <Compile Include="Controllers\GrupoController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\produtoController.cs" />
@@ -207,6 +208,7 @@
     <Compile Include="Utils\Hash.cs" />
     <Compile Include="ViewModels\Carrinho.cs" />
     <Compile Include="ViewModels\CarrinhoViewModel.cs" />
+    <Compile Include="ViewModels\LoginClienteViewModel.cs" />
     <Compile Include="ViewModels\LoginViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -356,6 +358,7 @@
     <Content Include="Views\Usuario\Buscar.cshtml" />
     <Content Include="Views\Home\Produtos.cshtml" />
     <Content Include="Views\Carrinho\index.cshtml" />
+    <Content Include="Views\Cliente\Login.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

@@ -46,8 +46,22 @@
                 </li>
             </ul>
             <div class="form-inline">
+                @if (User.Identity.IsAuthenticated)
+                {
+                    //@Html.ActionLink("Sair", "Logout", "Administrador", "", new { @class = "btn btn-danger" })
+                    <a class="btn btn-danger my-2 my-sm-0" href="/Cliente/Logout">
+                        Logout <i class="fas fa-sign-out-alt"></i>
+                    </a>
+                }
+                else
+                {
+                    //@Html.ActionLink("Login", "Login", "Administrador", "", new { @class = "btn btn-success" })
+                    <a class="btn btn-success my-2 my-sm-0" href="/Cliente/Login">
+                        Login <i class="fas fa-sign-in-alt"></i>
+                    </a>
+                }
                 @Html.ActionLink("Carrinho", "Index", "Carrinho", "", new { @class = "btn btn-primary mr-2" })
-                <button class="btn btn-success mr-2"> Login</button>
+                <!--  <button class="btn btn-success mr-2"> Login</button>-->
             </div>
         </div>
     </nav>
