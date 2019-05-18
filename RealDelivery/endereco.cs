@@ -11,17 +11,25 @@ namespace RealDelivery
 {
     using System;
     using System.Collections.Generic;
-    
+    using System.ComponentModel;
+
     public partial class endereco
     {
         public int endereco_cod { get; set; }
         public int cliente_cod { get; set; }
+        [DisplayName("Cep")]
         public string endereco_cep { get; set; }
+        [DisplayName("Rua")]
         public string endereco_rua { get; set; }
+        [DisplayName("Bairro")]
         public string endereco_bairro { get; set; }
+        [DisplayName("Cidade")]
         public string endereco_cidade { get; set; }
+        [DisplayName("Estado")]
         public string endereco_uf { get; set; }
+        [DisplayName("Complemento")]
         public string endereco_comp { get; set; }
+        [DisplayName("Número")]
         public string endereco_num { get; set; }
     
         public virtual cliente cliente { get; set; }

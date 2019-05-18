@@ -7,6 +7,8 @@ using System.Security.Claims;
 using RealDelivery.ViewModels;
 using System.Security.Cryptography;
 using System.Text;
+using System.Data.Entity;
+using System.Net;
 
 namespace RealDelivery.Controllers
 {
@@ -47,7 +49,7 @@ namespace RealDelivery.Controllers
             var identity = new ClaimsIdentity(new[]
             {
                 new Claim(ClaimTypes.NameIdentifier, cliente.cliente_nome),
-                new Claim("Login", cliente.cliente_email)
+                new Claim(ClaimTypes.Name, cliente.cliente_email)
             }, "ApplicationCookie");
 
             Request.GetOwinContext().Authentication.SignIn(identity);
@@ -75,7 +77,6 @@ namespace RealDelivery.Controllers
         // Para se proteger de mais ataques, ative as propriedades específicas a que você quer se conectar. Para 
         // obter mais detalhes, consulte https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
-        [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "cliente_cod,cliente_nome,cliente_telefone,cliente_email,cliente_senha")] cliente cliente)
         {
             if (ModelState.IsValid)
@@ -85,6 +86,61 @@ namespace RealDelivery.Controllers
                 db.cliente.Add(cliente);
                 db.SaveChanges();
                 return RedirectToAction("Login");
+            }
+
+            return View(cliente);
+        }
+
+        // GET: ex/Edit/5
+        public ActionResult Edit(int? id)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            cliente cliente = db.cliente.Find(id);
+            if (cliente == null)
+            {
+                return HttpNotFound();
+            }
+            return View(cliente);
+        }
+
+        public ActionResult Panel()
+        {
+            if (User.Identity.IsAuthenticated)
+            {
+                var userName = User.Identity.Name;
+                var cliente = db.cliente.FirstOrDefault(x => x.cliente_email == userName);
+
+                if (cliente != null)
+                    return View(cliente);
+            }
+
+
+            return View(db.cliente.ToList());
+        }
+
+        // POST: ex/Edit/5
+        // Para se proteger de mais ataques, ative as propriedades específicas a que você quer se conectar. Para 
+        // obter mais detalhes, consulte https://go.microsoft.com/fwlink/?LinkId=317598.
+        [HttpPost]
+        public ActionResult Edit([Bind(Include = "cliente_cod,cliente_nome,cliente_telefone,cliente_email,cliente_senha")] cliente cliente, string SenhaNova)
+        {
+            if (ModelState.IsValid)
+            {
+
+                if (SenhaNova != "")
+                {
+
+                    cliente.cliente_senha = GerarHashMd5(SenhaNova);
+
+                }
+
+
+                db.Entry(cliente).State = EntityState.Modified;
+                db.SaveChanges();
+                return RedirectToAction("Panel");
             }
 
             return View(cliente);

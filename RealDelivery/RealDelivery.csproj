@@ -172,7 +172,7 @@
     <Compile Include="Controllers\AdministradorController.cs" />
     <Compile Include="Controllers\CarrinhoController.cs" />
     <Compile Include="Controllers\ClienteController.cs" />
-    <Compile Include="Controllers\exController.cs" />
+    <Compile Include="Controllers\EnderecoController.cs" />
     <Compile Include="Controllers\GrupoController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\produtoController.cs" />
@@ -360,14 +360,12 @@
     <Content Include="Views\Home\Produtos.cshtml" />
     <Content Include="Views\Carrinho\index.cshtml" />
     <Content Include="Views\Cliente\Login.cshtml" />
-    <Content Include="Views\ex\Create.cshtml" />
-    <Content Include="Views\ex\Delete.cshtml" />
-    <Content Include="Views\ex\Details.cshtml" />
-    <Content Include="Views\ex\Edit.cshtml" />
-    <Content Include="Views\ex\Index.cshtml" />
     <Content Include="Views\Cliente\Create.cshtml" />
     <Content Include="Views\Cliente\Panel.cshtml" />
     <Content Include="Views\Cliente\Edit.cshtml" />
+    <Content Include="Views\Endereco\Create.cshtml" />
+    <Content Include="Views\Endereco\Edit.cshtml" />
+    <Content Include="Views\Endereco\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
