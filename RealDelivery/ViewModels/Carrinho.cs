@@ -1,6 +1,8 @@
 ﻿using RealDelivery;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
+using System.Globalization;
 using System.Linq;
 using System.Web;
 
@@ -36,9 +38,13 @@ namespace RealDelivery.ViewModels
         }
 
         //TOTAL
+        //[DisplayFormat(DataFormatString = "{0:C2}", ApplyFormatInEditMode = true)]
         public float? ObterValorTotal()
         {
-            return _itemCarrinho.Sum(e => e.Produto.produto_preco * e.Quantidade);
+            var resultado = _itemCarrinho.Sum(e => e.Produto.produto_preco * e.Quantidade);
+            //var valorFormatado = string.Format("{0:C}", resultado.ToString());
+            //var valorFormatado = string.Format(CultureInfo.GetCultureInfo("pt-BR"), "{0:C}", resultado);
+            return resultado;
         }
 
         //CLEAR

@@ -14,7 +14,7 @@ namespace RealDelivery.Controllers
     {
         private db_a464fd_realdevEntities db = new db_a464fd_realdevEntities();
 
-        
+        [Authorize]
         // GET: Endereco
         public ActionResult Index(int? id)
         {
@@ -31,8 +31,8 @@ namespace RealDelivery.Controllers
             return View(endereco.ToList());
         }
 
-      
 
+        [Authorize]
         // GET: Endereco/Create
         public ActionResult Create(Int32 id)
         {
@@ -48,7 +48,7 @@ namespace RealDelivery.Controllers
         // Para se proteger de mais ataques, ative as propriedades específicas a que você quer se conectar. Para 
         // obter mais detalhes, consulte https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
-
+        [Authorize]
         public ActionResult Create([Bind(Include = "endereco_cod,cliente_cod,endereco_cep,endereco_rua,endereco_bairro,endereco_cidade,endereco_uf,endereco_comp,endereco_num")] endereco endereco)
         {
             if (ModelState.IsValid)
@@ -61,7 +61,7 @@ namespace RealDelivery.Controllers
             ViewBag.cliente_cod = endereco.cliente_cod;
             return View(endereco);
         }
-
+        [Authorize]
         // GET: Endereco/Edit/5
         public ActionResult Edit(int? id)
         {
@@ -82,7 +82,7 @@ namespace RealDelivery.Controllers
         // Para se proteger de mais ataques, ative as propriedades específicas a que você quer se conectar. Para 
         // obter mais detalhes, consulte https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
-
+        [Authorize]
         public ActionResult Edit([Bind(Include = "endereco_cod,cliente_cod,endereco_cep,endereco_rua,endereco_bairro,endereco_cidade,endereco_uf,endereco_comp,endereco_num")] endereco endereco)
         {
             if (ModelState.IsValid)
@@ -96,7 +96,7 @@ namespace RealDelivery.Controllers
             ViewBag.cliente_cod = new SelectList(db.cliente, "cliente_cod", "cliente_nome", endereco.cliente_cod);
             return View(endereco);
         }
-
+        [Authorize]
         public ActionResult Delete(int id)
         {
             

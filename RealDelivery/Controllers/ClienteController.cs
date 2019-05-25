@@ -60,7 +60,7 @@ namespace RealDelivery.Controllers
                 return RedirectToAction("Index", "Home");
 
         }
-
+        [Authorize]
         public ActionResult Logout()
         {
             Request.GetOwinContext().Authentication.SignOut("ApplicationCookie");
@@ -90,7 +90,7 @@ namespace RealDelivery.Controllers
 
             return View(cliente);
         }
-
+        [Authorize]
         // GET: ex/Edit/5
         public ActionResult Edit(int? id)
         {
@@ -105,7 +105,7 @@ namespace RealDelivery.Controllers
             }
             return View(cliente);
         }
-
+        [Authorize]
         public ActionResult Panel()
         {
             if (User.Identity.IsAuthenticated)
@@ -124,6 +124,7 @@ namespace RealDelivery.Controllers
         // POST: ex/Edit/5
         // Para se proteger de mais ataques, ative as propriedades específicas a que você quer se conectar. Para 
         // obter mais detalhes, consulte https://go.microsoft.com/fwlink/?LinkId=317598.
+        [Authorize]
         [HttpPost]
         public ActionResult Edit([Bind(Include = "cliente_cod,cliente_nome,cliente_telefone,cliente_email,cliente_senha")] cliente cliente, string SenhaNova)
         {

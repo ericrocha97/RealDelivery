@@ -4,8 +4,21 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
     ViewBag.Title = "Carrinho";
 }
+<div class="row">
+    <div class="col-4 ">
+        <!--<a href="#" class="btn btn-danger mt-2">Voltar</a>-->
+        @Html.ActionLink("Voltar", "index", "home", new { @class = "btn btn-danger mt-2" })
+    </div>
+    <div class="col-4">
+        <h2 class="text-center mt-2">Carrinho</h2>
 
-<h2 class="text-center mt-2">Carrinho</h2>
+    </div>
+    <div class="col-4 ">
+        <a href="#" class="btn btn-success mt-2 float-right">Finalizar Pedido</a>
+
+    </div>
+
+</div>
 
 
 <table class="table table-hover">
@@ -14,7 +27,7 @@
     {
         <tr>
             <td class="text-center align-middle">
-                
+
                 @if (item.Produto.produto_img != null)
                 {
                     <img src="@Html.DisplayFor(modelItem => item.Produto.produto_img)" alt=" image" class="img-thumbnail" style="width:128px;height:128px;" />
@@ -39,5 +52,20 @@
         </tr>
     }
 </table>
+<div class="row">
+    <div class="col-6">
+
+        @Html.ActionLink("Limpar carrinho", "limpa", "Carrinho", new { @class = "btn btn-danger" })
+    </div>
+    <div class="col-6">
+        @if (Model.car.ObterValorTotal() > 0)
+        {
+            var valor = Model.car.ObterValorTotal();
+            var valorFormatado = string.Format("{0:C}", valor);
+        <p class="float-right text-center">Total: @valorFormatado</p>
+        }
+    </div>
+</div>
+    
 
 

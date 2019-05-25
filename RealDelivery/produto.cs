@@ -27,7 +27,7 @@ namespace RealDelivery
         [DisplayName("Nome do Produto")]
         public string produto_nome { get; set; }
         [DisplayName("Grupo do produto")]
-        public long grupo_cod { get; set; }
+        public Nullable<long> grupo_cod { get; set; }
         [DisplayName("Preço do produto")]
         [DisplayFormat(DataFormatString = "{0:C2}", ApplyFormatInEditMode = true)]
         public Nullable<float> produto_preco { get; set; }

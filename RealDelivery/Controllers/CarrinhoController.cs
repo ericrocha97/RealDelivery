@@ -38,7 +38,7 @@ namespace RealDelivery.Controllers
             produto produto = db.produto.Find(id_prod);
             ObterCarrinho().AdicionarItem(produto, quantidade);
 
-            return RedirectToAction("index");
+            return RedirectToAction("index","home");
 
         }
         [HttpGet]
@@ -47,7 +47,15 @@ namespace RealDelivery.Controllers
             produto produto = db.produto.Find(id_prod);
             ObterCarrinho().RemevorItem(produto);
             return RedirectToAction("index");
-            }
+        }
 
+        [HttpGet]
+        public ActionResult limpa()
+        {
+            ObterCarrinho().LimparCarrinho();
+            return RedirectToAction("index", "home");
+        }
     }
+
 }
+
