@@ -111,11 +111,13 @@ namespace RealDelivery.Controllers
                     return View(grupo);
                 }
             }
-
-            if (grupo.grupo_desc.Length > 500)
+            if (grupo.grupo_desc != null)
             {
-                ModelState.AddModelError("grupo_desc", "Descrição é muito grande.");
-                return View(grupo);
+                if (grupo.grupo_desc.Length > 500)
+                {
+                    ModelState.AddModelError("grupo_desc", "Descrição é muito grande.");
+                    return View(grupo);
+                }
             }
 
 
@@ -209,11 +211,13 @@ namespace RealDelivery.Controllers
                     return View(grupo);
                 }
             }
-
-            if (grupo.grupo_desc.Length > 500)
+            if (grupo.grupo_desc != null)
             {
-                ModelState.AddModelError("grupo_desc", "Descrição é muito grande.");
-                return View(grupo);
+                if (grupo.grupo_desc.Length > 500)
+                {
+                    ModelState.AddModelError("grupo_desc", "Descrição é muito grande.");
+                    return View(grupo);
+                }
             }
 
             //if (ModelState.IsValid)
@@ -242,7 +246,7 @@ namespace RealDelivery.Controllers
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            return View(grupo);
+            //return View(grupo);
         }
 
         private void SalvarNaPasta(Image img, string caminho)

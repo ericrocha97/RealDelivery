@@ -3,7 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Web.Mvc;
+using RealDelivery.Models;
 
 namespace RealDelivery.ViewModels
 {
@@ -20,5 +22,9 @@ namespace RealDelivery.ViewModels
         [DataType(DataType.Password)]
         [MinLength(6, ErrorMessage = "A senha deve ter pelo menos 6 caracteres")]
         public string password { get; set; }
+
+        public TipoUsuario Tipo { get; set; }
     }
+
+  
 }

@@ -21,7 +21,7 @@ namespace RealDelivery
         {
             this.produto = new HashSet<produto>();
         }
-    
+
         public long grupo_cod { get; set; }
         [DisplayName("Nome do Grupo")]
         public string grupo_nome { get; set; }

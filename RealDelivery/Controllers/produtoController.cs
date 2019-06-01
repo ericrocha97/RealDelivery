@@ -101,10 +101,10 @@ namespace RealDelivery.Controllers
                 }
             }
 
-            if (!imageTypes.Contains(produto.img_produto.ContentType))
+            /*if (!imageTypes.Contains(produto.img_produto.ContentType))
             {
                 ModelState.AddModelError("img_produto", "Escolha uma imagem GIF, JPG ou PNG.");
-            }
+            }*/
 
             if (produto.produto_nome == null)
             {
@@ -127,10 +127,13 @@ namespace RealDelivery.Controllers
                 return View(produto);
             }
 
-            if (produto.produto_desc.Length > 500)
+            if (produto.produto_desc != null)
             {
-                ModelState.AddModelError("produto_desc", "Descrição é muito grande.");
-                return View(produto);
+                if (produto.produto_desc.Length > 500)
+                {
+                    ModelState.AddModelError("produto_desc", "Descrição é muito grande.");
+                    return View(produto);
+                }
             }
 
             //if (ModelState.IsValid)

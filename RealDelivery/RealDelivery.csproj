@@ -175,6 +175,7 @@
     <Compile Include="Controllers\EnderecoController.cs" />
     <Compile Include="Controllers\GrupoController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\PedidoController.cs" />
     <Compile Include="Controllers\produtoController.cs" />
     <Compile Include="Controllers\UsuarioController.cs" />
     <Compile Include="endereco.cs">
@@ -192,6 +193,7 @@
     <Compile Include="item_pedido.cs">
       <DependentUpon>Banco.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\TipoUsuario.cs" />
     <Compile Include="pedido.cs">
       <DependentUpon>Banco.tt</DependentUpon>
     </Compile>
@@ -211,6 +213,8 @@
     <Compile Include="ViewModels\CarrinhoViewModel.cs" />
     <Compile Include="ViewModels\LoginClienteViewModel.cs" />
     <Compile Include="ViewModels\LoginViewModel.cs" />
+    <Compile Include="ViewModels\Pedido.cs" />
+    <Compile Include="ViewModels\PedidoViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Banco.Context.tt">
@@ -366,12 +370,17 @@
     <Content Include="Views\Endereco\Create.cshtml" />
     <Content Include="Views\Endereco\Edit.cshtml" />
     <Content Include="Views\Endereco\Index.cshtml" />
+    <Content Include="Views\Pedido\Create.cshtml" />
+    <Content Include="Views\Pedido\Delete.cshtml" />
+    <Content Include="Views\Pedido\Details.cshtml" />
+    <Content Include="Views\Pedido\Edit.cshtml" />
+    <Content Include="Views\Pedido\Index.cshtml" />
+    <Content Include="Views\Pedido\ConcluirPedido.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Imagem\Grupos\" />
     <Folder Include="Imagem\Produto\" />
-    <Folder Include="Models\" />
     <Folder Include="Views\Imagem\Grupos\" />
   </ItemGroup>
   <ItemGroup>

@@ -1,0 +1,76 @@
+﻿@model IEnumerable<RealDelivery.pedido>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.pedido_data)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.pedido_valor)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.pedido_obs)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.pedido_ent)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.pedido_fpgto)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.pedido_troco)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.cliente.cliente_nome)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.endereco.endereco_cep)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.pedido_data)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.pedido_valor)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.pedido_obs)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.pedido_ent)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.pedido_fpgto)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.pedido_troco)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.cliente.cliente_nome)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.endereco.endereco_cep)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.pedido_cod }) |
+            @Html.ActionLink("Details", "Details", new { id=item.pedido_cod }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.pedido_cod })
+        </td>
+    </tr>
+}
+
+</table>

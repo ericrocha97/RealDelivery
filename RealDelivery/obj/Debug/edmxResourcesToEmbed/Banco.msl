@@ -65,6 +65,10 @@
           <ScalarProperty Name="pedido_data" ColumnName="pedido_data" />
           <ScalarProperty Name="pedido_valor" ColumnName="pedido_valor" />
           <ScalarProperty Name="pedido_obs" ColumnName="pedido_obs" />
+          <ScalarProperty Name="pedido_ent" ColumnName="pedido_ent" />
+          <ScalarProperty Name="endereco_cod" ColumnName="endereco_cod" />
+          <ScalarProperty Name="pedido_fpgto" ColumnName="pedido_fpgto" />
+          <ScalarProperty Name="pedido_troco" ColumnName="pedido_troco" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>

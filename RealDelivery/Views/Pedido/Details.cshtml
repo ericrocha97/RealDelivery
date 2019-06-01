@@ -1,0 +1,83 @@
+﻿@model RealDelivery.pedido
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>pedido</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.pedido_data)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.pedido_data)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.pedido_valor)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.pedido_valor)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.pedido_obs)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.pedido_obs)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.pedido_ent)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.pedido_ent)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.pedido_fpgto)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.pedido_fpgto)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.pedido_troco)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.pedido_troco)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.cliente.cliente_nome)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.cliente.cliente_nome)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.endereco.endereco_cep)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.endereco.endereco_cep)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.pedido_cod }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

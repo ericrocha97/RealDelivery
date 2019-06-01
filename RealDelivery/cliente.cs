@@ -21,7 +21,7 @@ namespace RealDelivery
             this.endereco = new HashSet<endereco>();
             this.pedido = new HashSet<pedido>();
         }
-    
+
         public int cliente_cod { get; set; }
         [DisplayName("Nome")]
         public string cliente_nome { get; set; }
@@ -31,7 +31,7 @@ namespace RealDelivery
         public string cliente_email { get; set; }
         [DisplayName("Senha")]
         public string cliente_senha { get; set; }
-    
+
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<endereco> endereco { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

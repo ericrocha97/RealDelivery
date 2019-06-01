@@ -1,0 +1,89 @@
+﻿@model RealDelivery.pedido
+
+@{
+    ViewBag.Title = "Delete";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Delete</h2>
+
+<h3>Are you sure you want to delete this?</h3>
+<div>
+    <h4>pedido</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.pedido_data)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.pedido_data)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.pedido_valor)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.pedido_valor)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.pedido_obs)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.pedido_obs)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.pedido_ent)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.pedido_ent)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.pedido_fpgto)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.pedido_fpgto)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.pedido_troco)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.pedido_troco)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.cliente.cliente_nome)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.cliente.cliente_nome)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.endereco.endereco_cep)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.endereco.endereco_cep)
+        </dd>
+
+    </dl>
+
+    @using (Html.BeginForm()) {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Delete" class="btn btn-default" /> |
+            @Html.ActionLink("Back to List", "Index")
+        </div>
+    }
+</div>
