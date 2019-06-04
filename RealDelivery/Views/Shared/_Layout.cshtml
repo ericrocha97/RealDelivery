@@ -24,6 +24,11 @@
     <meta name="theme-color" content="#a3a5a8">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
     <title>@ViewBag.Title - RealDelivery</title>
+    <style>
+        body{
+            font-family: 'Roboto', sans-serif !important;
+        }
+    </style>
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
 </head>
@@ -35,7 +40,7 @@
         </button>
         <div class="collapse navbar-collapse" id="navbarNav">
             <ul class="navbar-nav mr-auto">
-                <li class="nav-item active">
+                <li class="nav-item">
                     @Html.ActionLink("Início", "Index", "Home", "", new { @class = "nav-link" })
                 </li>
                 <li class="nav-item">
