@@ -17,7 +17,7 @@ namespace RealDelivery.Controllers
     {
         private db_a464fd_realdevEntities db = new db_a464fd_realdevEntities();
         // GET: Grupo
-        [Authorize]
+        [Authorize(Roles = "Administrador")]
         public ActionResult Index()
         {
             var s = "S";
@@ -26,14 +26,14 @@ namespace RealDelivery.Controllers
 
 
         }
-        [Authorize]
+        [Authorize(Roles = "Administrador")]
         public ActionResult Buscar()
         {
             return View();
         }
 
         //GET
-        [Authorize]
+        [Authorize(Roles = "Administrador")]
         [HttpGet]
         public ActionResult Buscar(string texto, string ativo)
         {
@@ -46,7 +46,7 @@ namespace RealDelivery.Controllers
 
         }
         // GET: Grupo/Details/5
-        [Authorize]
+        [Authorize(Roles = "Administrador")]
         public ActionResult Details(long? id)
         {
             if (id == null)
@@ -62,7 +62,7 @@ namespace RealDelivery.Controllers
         }
 
         // GET: Grupo/Create
-        [Authorize]
+        [Authorize(Roles = "Administrador")]
         public ActionResult Create()
         {
             return View();
@@ -72,7 +72,7 @@ namespace RealDelivery.Controllers
         // Para se proteger de mais ataques, ative as propriedades específicas a que você quer se conectar. Para 
         // obter mais detalhes, consulte https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
-        [Authorize]
+        [Authorize(Roles = "Administrador")]
         public ActionResult Create([Bind(Include = "grupo_cod,grupo_nome,grupo_ativo,grupo_desc,grupo_img, img_grupo")] grupo grupo, HttpPostedFileBase file)
         {
             if (db.grupo.Count(u => u.grupo_nome == grupo.grupo_nome) > 0)
@@ -152,7 +152,7 @@ namespace RealDelivery.Controllers
 
 
         // GET: Grupo/Edit/5
-        [Authorize]
+        [Authorize(Roles = "Administrador")]
         public ActionResult Edit(long? id)
         {
             if (id == null)
@@ -172,7 +172,7 @@ namespace RealDelivery.Controllers
         // Para se proteger de mais ataques, ative as propriedades específicas a que você quer se conectar. Para 
         // obter mais detalhes, consulte https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
-        [Authorize]
+        [Authorize(Roles = "Cliente,Administrador")]
         public ActionResult Edit([Bind(Include = "grupo_cod,grupo_nome,grupo_ativo,grupo_desc,grupo_img")] grupo grupo, HttpPostedFileBase file)
         {
             if (db.grupo.Count(u => u.grupo_nome == grupo.grupo_nome && u.grupo_cod != grupo.grupo_cod) > 0)

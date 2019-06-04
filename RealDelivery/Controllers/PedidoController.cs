@@ -29,7 +29,7 @@ namespace RealDelivery.Controllers
         }
         public List<ItensPedidoViewModel> _ItemPedido;
 
-        [Authorize]
+        [Authorize(Roles = "Cliente")]
         public ActionResult ConcluirPedido(CarrinhoViewModel Carrinho)
         {
             if (User.Identity.IsAuthenticated)
@@ -94,7 +94,7 @@ namespace RealDelivery.Controllers
             return View("index", "Carrinho");
 
         }
-        [Authorize]
+        [Authorize(Roles = "Cliente")]
         [HttpPost]
         public ActionResult ConcluirPedido([Bind(Include = "pedido_cod,cliente_cod,pedido_data,pedido_valor,pedido_obs,pedido_ent,endereco_cod,pedido_fpgto,pedido_troco")] pedido pedido)
         {

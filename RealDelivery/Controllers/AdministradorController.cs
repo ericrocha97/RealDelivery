@@ -47,7 +47,8 @@ namespace RealDelivery.Controllers
             var identity = new ClaimsIdentity(new[]
             {
                 new Claim(ClaimTypes.NameIdentifier, usuario.usuario_nome),
-                new Claim("Login", usuario.usuario_email)
+                new Claim("Login", usuario.usuario_email),
+                new Claim(ClaimTypes.Role, "Administrador")
             }, "ApplicationCookie");
 
             Request.GetOwinContext().Authentication.SignIn(identity);
@@ -58,7 +59,7 @@ namespace RealDelivery.Controllers
                 return RedirectToAction("Panel", "Administrador");
 
         }
-        [Authorize]
+        [Authorize(Roles = "Administrador")]
         public ActionResult Panel()
         {
             return View();

@@ -17,7 +17,7 @@ namespace RealDelivery.Controllers
         private db_a464fd_realdevEntities db = new db_a464fd_realdevEntities();
 
         // GET: Usuario
-        [Authorize]
+        [Authorize(Roles = "Administrador")]
         public ActionResult Index()
         {
             return View(db.usuario.ToList());
@@ -25,7 +25,7 @@ namespace RealDelivery.Controllers
 
 
         // GET: Usuario/Create
-        [Authorize]
+        [Authorize(Roles = "Administrador")]
         public ActionResult Create()
         {
             return View();
@@ -51,7 +51,7 @@ namespace RealDelivery.Controllers
         // Para se proteger de mais ataques, ative as propriedades específicas a que você quer se conectar. Para 
         // obter mais detalhes, consulte https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
-        [Authorize]
+        [Authorize(Roles = "Administrador")]
         public ActionResult Create([Bind(Include = "usuario_cod,usuario_email,usuario_senha,usuario_nome,usuario_cel")] usuario usuario)
         {
             if (db.usuario.Count(u => u.usuario_email == usuario.usuario_email) > 0)
@@ -71,7 +71,7 @@ namespace RealDelivery.Controllers
 
             return View(usuario);
         }
-        [Authorize]
+        [Authorize(Roles = "Administrador")]
         public ActionResult Buscar()
         {
             return View();
@@ -79,7 +79,7 @@ namespace RealDelivery.Controllers
 
         //GET
         [HttpGet]
-        [Authorize]
+        [Authorize(Roles = "Administrador")]
         public ActionResult Buscar(string texto)
         {
 
@@ -89,7 +89,7 @@ namespace RealDelivery.Controllers
         }
 
         // GET: Usuario/Edit/5
-        [Authorize]
+        [Authorize(Roles = "Administrador")]
         public ActionResult Edit(int? id)
         {
             if (id == null)
@@ -108,7 +108,7 @@ namespace RealDelivery.Controllers
         // Para se proteger de mais ataques, ative as propriedades específicas a que você quer se conectar. Para 
         // obter mais detalhes, consulte https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
-        [Authorize]
+        [Authorize(Roles = "Administrador")]
         public ActionResult Edit([Bind(Include = "usuario_cod,usuario_email,usuario_senha,usuario_nome,usuario_cel")] usuario usuario)
         {
             if (ModelState.IsValid)
@@ -121,7 +121,7 @@ namespace RealDelivery.Controllers
             }
             return View(usuario);
         }
-        [Authorize]
+        [Authorize(Roles = "Administrador")]
         public ActionResult EditPassword(int? id)
         {
             if (id == null)
@@ -136,7 +136,7 @@ namespace RealDelivery.Controllers
             return View(usuario);
         }
         [HttpPost]
-        [Authorize]
+        [Authorize(Roles = "Administrador")]
         public ActionResult EditPassword([Bind(Include = "usuario_cod,usuario_email,usuario_senha,usuario_nome,usuario_cel")] usuario usuario, string senha_nova, string senha_nova_confirm)
         {
             if (ModelState.IsValid)
