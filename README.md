@@ -1,8 +1,8 @@
 # RealDelivery
 Uma e-commerce para venda de alimentos online.
 
-http://realdelivery.ddns.net/
-http://realdelivery.ddns.net/Administrador/Login
+https://realdelivery.ddns.net/
+https://realdelivery.ddns.net/Administrador/Login
 (admin@realdelivery.gq admin123456)
 
 
