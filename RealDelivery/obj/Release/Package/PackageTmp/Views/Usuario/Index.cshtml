@@ -1,6 +1,7 @@
 ﻿@model IEnumerable<RealDelivery.usuario>
 
 @{
+    /*Comentario*/
     ViewBag.Title = "Cadastro de usuários";
     Layout = "~/Views/Administrador/_LayoutPanel.cshtml";
 }
@@ -22,33 +23,33 @@
 
 
 </div>
-<table class="table">
+<table class="table table-hover table-bordered">
     <tr>
-        <th>
+        <th class="text-center align-middle">
             @Html.DisplayNameFor(model => model.usuario_email)
         </th>
-        <th>
+        <th class="text-center align-middle">
             @Html.DisplayNameFor(model => model.usuario_nome)
         </th>
-        <th>
+        <th class="text-center align-middle">
             @Html.DisplayNameFor(model => model.usuario_cel)
         </th>
-        <th></th>
+        <th class="text-center align-middle"></th>
     </tr>
 
     @foreach (var item in Model)
     {
         <tr>
-            <td>
+            <td class="text-center align-middle">
                 @Html.DisplayFor(modelItem => item.usuario_email)
             </td>
-            <td>
+            <td class="text-center align-middle">
                 @Html.DisplayFor(modelItem => item.usuario_nome)
             </td>
-            <td>
+            <td class="text-center align-middle">
                 @Html.DisplayFor(modelItem => item.usuario_cel)
             </td>
-            <td>
+            <td class="text-center align-middle">
                 @Html.ActionLink("Editar", "Edit", new { id = item.usuario_cod }, new { @class = "btn btn-primary", @style = "width: 116px;" })
             </td>
         </tr>

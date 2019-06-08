@@ -1,0 +1,67 @@
+﻿@model IEnumerable<RealDelivery.endereco>
+
+@{
+    ViewBag.Title = "Meus Endereços";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2 class="text-center mt-2">Meus endereços</h2>
+
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.endereco_rua)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.endereco_num)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.endereco_comp)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.endereco_bairro)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.endereco_cep)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.endereco_cidade)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.endereco_uf)
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.endereco_rua)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.endereco_num)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.endereco_comp)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.endereco_bairro)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.endereco_cep)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.endereco_cidade)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.endereco_uf)
+            </td>
+            <td>
+                @Html.ActionLink("Editar", "Edit", new { id = item.endereco_cod }, new { @class = "btn btn-primary", @style = "width: 116px;" })
+                @Html.ActionLink("Deletar", "Delete", new { id = item.endereco_cod}, new { @class = "btn btn-danger", @style = "width: 116px;"})
+            </td>
+        </tr>
+    }
+
+</table>

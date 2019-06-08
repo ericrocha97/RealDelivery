@@ -1,0 +1,153 @@
+﻿@model RealDelivery.ViewModels.LoginClienteViewModel
+@{
+    ViewBag.Title = "Login";
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head runat="server">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta charset="utf-8">
+    <meta name="author" content="Kodinger">
+    <title>@ViewBag.Title - RealDelivery</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+    <link rel="stylesheet" type="text/css" href="~/Content/css/my-login.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="apple-touch-icon" sizes="57x57" href="~/Favicon/apple-icon-57x57.png">
+    <link rel="apple-touch-icon" sizes="60x60" href="~/Favicon/apple-icon-60x60.png">
+    <link rel="apple-touch-icon" sizes="72x72" href="~/Favicon/apple-icon-72x72.png">
+    <link rel="apple-touch-icon" sizes="76x76" href="~/Favicon/apple-icon-76x76.png">
+    <link rel="apple-touch-icon" sizes="114x114" href="~/Favicon/apple-icon-114x114.png">
+    <link rel="apple-touch-icon" sizes="120x120" href="~/Favicon/apple-icon-120x120.png">
+    <link rel="apple-touch-icon" sizes="144x144" href="~/Favicon/apple-icon-144x144.png">
+    <link rel="apple-touch-icon" sizes="152x152" href="~/Favicon/apple-icon-152x152.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="~/Favicon/apple-icon-180x180.png">
+    <link rel="icon" type="image/png" sizes="192x192" href="~/Favicon/android-icon-192x192.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="~/Favicon/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="96x96" href="~/Favicon/favicon-96x96.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="~/Favicon/favicon-16x16.png">
+    <link rel="manifest" href="~/Favicon/manifest.json">
+    <meta name="msapplication-TileColor" content="#ffffff">
+    <meta name="msapplication-TileImage" content="~/Favicon/ms-icon-144x144.png">
+    <meta name="theme-color" content="#a3a5a8">
+    <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
+</head>
+<body class="bg-white">
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        @Html.ActionLink("Some Food", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Alterna navegação">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item">
+                    @Html.ActionLink("Início", "Index", "Home", "", new { @class = "nav-link" })
+                </li>
+                <li class="nav-item">
+                    @Html.ActionLink("Sobre", "About", "Home", "", new { @class = "nav-link" })
+                </li>
+                <li class="nav-item">
+                    @Html.ActionLink("Contato", "Contact", "Home", "", new { @class = "nav-link" })
+                </li>
+            </ul>
+            <div class="form-inline">
+                <!--@Html.ActionLink("Carrinho", "Index", "Carrinho", "", new { @class = "btn btn-primary mr-2" })-->
+                <a href="/Carrinho/index" class="btn btn-primary mr-2">
+                    Carrinho <i class="fas fa-shopping-cart"></i>
+                </a>
+                @if (User.Identity.IsAuthenticated)
+                {
+                    //@Html.ActionLink("Sair", "Logout", "Administrador", "", new { @class = "btn btn-danger" })
+                    <a class="btn btn-success my-2 my-sm-0 mr-2" href="/Cliente/Panel">
+                        Painel <i class="fas fa-user"></i>
+                    </a>
+                    <a class="btn btn-danger my-2 my-sm-0 " href="/Cliente/Logout">
+                        Logout <i class="fas fa-sign-out-alt"></i>
+                    </a>
+
+                }
+                else
+                {
+                    //@Html.ActionLink("Login", "Login", "Administrador", "", new { @class = "btn btn-success" })
+                    <a class="btn btn-success my-2 my-sm-0 active" href="/Cliente/Login">
+                        Login <i class="fas fa-sign-in-alt"></i>
+                    </a>
+                }
+                <!--  <button class="btn btn-success mr-2"> Login</button>-->
+            </div>
+        </div>
+    </nav>
+    <div class="my-login-page">
+        <section class="h-100">
+            <div class="container h-100">
+                <div class="row justify-content-md-center h-100">
+                    <div class="card-wrapper">
+                        <div class="brand shadow-lg mb-3">
+                            <img src="~/Imagem/Adminstrador/logo512x512.png">
+                        </div>
+                        <div class="card fat bg-dark text-white">
+                            <div class="card-body bg-dark">
+                                <h4 class="card-title">Login</h4>
+                                <div class="was-validated">
+                                    @using (Html.BeginForm("Login", "Cliente", FormMethod.Post, new { enctype = "mulpipart/form-data" }))
+                                    {
+                                        <div>
+                                            <div class="form-group">
+                                                <label for="cliente_email">Login</label>
+                                                <input id="cliente_email" type="email" class="form-control" name="cliente_email" value="" required autofocus>
+                                                <div class="invalid-feedback">Digite um e-mail valido.</div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="password">
+                                                    Senha
+                                                    <a href="forgot.aspx" class="float-right text-primary">
+                                                        Esqueceu a senha?
+                                                    </a>
+                                                </label>
+                                                <input id="password" type="password" class="form-control" name="password" required data-eye>
+                                            </div>
+                                            <div class="form-group">
+                                                <div class="custom-checkbox custom-control">
+                                                    <input type="checkbox" name="remember" id="remember" class="custom-control-input">
+                                                    <label for="remember" class="custom-control-label">Lembre-me</label>
+                                                </div>
+                                            </div>
+                                            <div class="form-group no-margin">
+                                                <button type="submit" class="btn btn-success btn-block">
+                                                    Login
+                                                </button>
+                                            </div>
+
+                                            <div class="margin-top20 text-center">
+                                                Não tem uma conta? @Html.ActionLink("Crie uma conta", "Create", "Cliente", new { area = "" }, new { @class = "text-primary" })
+                                            </div>
+                                        </div>
+                                    }
+                                </div>
+                            </div>
+                        </div>
+                        <div class="footer">
+                            &copy; @DateTime.Now.Year - RealDelivery
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </div>
+
+    <script src="~/Scripts/js/jquery.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+    <script src="~/Scripts/js/my-login.js"></script>
+</body>
+</html>
+
+@section scripts {
+    <script src="~/Scripts/jquery.validate.min.js"></script>
+    <script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
+}

@@ -1,0 +1,6 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<parameters>
+  <parameter name="db_a464fd_realdevEntities-Web.config Connection String" description="db_a464fd_realdevEntities A Cadeia de Conexão usada em web.config pelo aplicativo para acessar o banco de dados." defaultValue="metadata=res://*/Banco.csdl|res://*/Banco.ssdl|res://*/Banco.msl;provider=MySql.Data.MySqlClient;provider connection string=&quot;server=mysql5014.site4now.net;user id=a464fd_realdev;password=nq1u2hi1;database=db_a464fd_realdev&quot;" tags="SqlConnectionString">
+    <parameterEntry kind="XmlFile" scope="C:\\Users\\ericr\\Documents\\RealDelivery\\RealDelivery\\RealDelivery\\obj\\Release\\Package\\PackageTmp\\Web\.config$" match="/configuration/connectionStrings/add[@name='db_a464fd_realdevEntities']/@connectionString" />
+  </parameter>
+</parameters>

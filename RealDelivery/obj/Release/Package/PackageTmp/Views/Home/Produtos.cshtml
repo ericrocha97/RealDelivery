@@ -1,0 +1,39 @@
+﻿@model IEnumerable<RealDelivery.produto>
+
+    @{
+    ViewBag.Title = "Produtos";
+
+    }
+    <h2 class="text-center mt-2">Cardapío</h2>
+
+
+    <table class="table table-hover">
+
+        @foreach (var item in Model)
+    {
+        <tr>
+            <td class="text-center align-middle">
+                @if (item.produto_img != null)
+                {
+                <img src="@Html.DisplayFor(modelItem => item.produto_img)" alt=" image" class="img-thumbnail" style="width:128px;height:128px;" />
+                }
+                else
+                {
+                <img src="/Imagem/sem-foto.png" alt=" image" class="img-thumbnail" style="width:128px;height:128px;" />
+                }
+            </td>
+            <td class="text-center align-middle">
+                @Html.DisplayFor(modelItem => item.produto_nome)
+            </td>
+            <td class="text-center align-middle">
+                @Html.DisplayFor(modelItem => item.produto_preco)
+            </td>
+            <td class="text-center align-middle">
+                @Html.DisplayFor(modelItem => item.produto_desc)
+            </td>
+            <td class="text-center align-middle">
+                @Html.ActionLink("Adicionar ao carrinho", "add_prod", "Carrinho", new { id_prod = item.produto_cod, quantidade = 1 }, new { @class = "btn btn-info" })
+            </td>
+        </tr>
+    }
+    </table>
