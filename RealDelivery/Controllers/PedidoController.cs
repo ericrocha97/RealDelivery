@@ -30,7 +30,8 @@ namespace RealDelivery.Controllers
         public List<ItensPedidoViewModel> _ItemPedido;
 
         [Authorize(Roles = "Cliente")]
-        public ActionResult ConcluirPedido(CarrinhoViewModel Carrinho)
+        [HttpGet]
+        public ActionResult ConcluirPedido([Bind(Include = "car")]CarrinhoViewModel Carrinho)
         {
             if (User.Identity.IsAuthenticated)
             {
