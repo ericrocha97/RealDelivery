@@ -1,0 +1,11 @@
+﻿@model RealDelivery.pedido
+@{
+    ViewBag.Title = "Concluir Pedido";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>ConcluirPedido</h2>
+
+<div class="form-horizontal">
+    @Html.ActionLink("Finalizar", "FinalizarPedido","", new { @class = "btn btn-primary", @style = "width: 116px;" })
+</div>

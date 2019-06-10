@@ -1,0 +1,65 @@
+﻿@model IEnumerable<RealDelivery.endereco>
+@{
+    ViewBag.Title = "Concluir Pedido";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Concluir Pedido</h2>
+
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.endereco_rua)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.endereco_num)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.endereco_comp)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.endereco_bairro)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.endereco_cep)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.endereco_cidade)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.endereco_uf)
+        </th>
+        <th>Escolha o endereço</th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.endereco_rua)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.endereco_num)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.endereco_comp)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.endereco_bairro)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.endereco_cep)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.endereco_cidade)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.endereco_uf)
+            </td>
+            <td>
+                @Html.ActionLink("Escolher endereço", "EscolheEndereco", new { id = item.endereco_cod }, new { @class = "btn btn-primary"})
+            </td>
+        </tr>
+    }
+
+</table>
