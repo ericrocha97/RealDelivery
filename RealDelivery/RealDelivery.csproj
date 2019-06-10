@@ -366,8 +366,6 @@
     <Content Include="Views\Endereco\Create.cshtml" />
     <Content Include="Views\Endereco\Edit.cshtml" />
     <Content Include="Views\Endereco\Index.cshtml" />
-<<<<<<< Updated upstream
-=======
     <Content Include="Views\Pedido\Create.cshtml" />
     <Content Include="Views\Pedido\Delete.cshtml" />
     <Content Include="Views\Pedido\Details.cshtml" />
@@ -376,7 +374,6 @@
     <Content Include="Views\Pedido\ConcluirPedido.cshtml" />
     <Content Include="Views\Pedido\ConcluirPedidoNext.cshtml" />
     <Content Include="Views\Pedido\FinalizaPedido.cshtml" />
->>>>>>> Stashed changes
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
