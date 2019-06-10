@@ -7,6 +7,7 @@ using System.Security.Claims;
 using RealDelivery.ViewModels;
 using System.Security.Cryptography;
 using System.Text;
+using static RealDelivery.CustomAuthorizeAttributed;
 
 namespace RealDelivery.Controllers
 {
@@ -59,7 +60,7 @@ namespace RealDelivery.Controllers
                 return RedirectToAction("Panel", "Administrador");
 
         }
-        [Authorize(Roles = "Administrador")]
+        [CustomAuthorizeAttribute(Roles = "Administrador")]
         public ActionResult Panel()
         {
             return View();

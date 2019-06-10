@@ -178,6 +178,7 @@
     <Compile Include="Controllers\PedidoController.cs" />
     <Compile Include="Controllers\produtoController.cs" />
     <Compile Include="Controllers\UsuarioController.cs" />
+    <Compile Include="CustomAuthorizeAttibute.cs" />
     <Compile Include="endereco.cs">
       <DependentUpon>Banco.tt</DependentUpon>
     </Compile>

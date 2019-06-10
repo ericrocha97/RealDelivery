@@ -9,6 +9,7 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using RealDelivery;
+using static RealDelivery.CustomAuthorizeAttributed;
 
 
 namespace RealDelivery.Controllers
@@ -19,14 +20,14 @@ namespace RealDelivery.Controllers
 
 
         // GET: produto
-        [Authorize(Roles = "Administrador")]
+        [CustomAuthorizeAttribute(Roles = "Administrador")]
         public ActionResult Index()
         {
             var s = "S";
             var dataset = db.produto.Where(x => x.produto_ativo == s).ToList();
             return View(dataset);
         }
-        [Authorize(Roles = "Administrador")]
+        [CustomAuthorizeAttribute(Roles = "Administrador")]
         public ActionResult Buscar()
         {
             return View();
@@ -34,7 +35,7 @@ namespace RealDelivery.Controllers
 
         //GET
         [HttpGet]
-        [Authorize(Roles = "Administrador")]
+        [CustomAuthorizeAttribute(Roles = "Administrador")]
         public ActionResult Buscar(string texto, string ativo)
         {
             if (ativo == null)
@@ -47,7 +48,7 @@ namespace RealDelivery.Controllers
         }
 
         // GET: produto/Details/5
-        [Authorize(Roles = "Administrador")]
+        [CustomAuthorizeAttribute(Roles = "Administrador")]
         public ActionResult Details(long? id)
         {
             if (id == null)
@@ -63,7 +64,7 @@ namespace RealDelivery.Controllers
         }
 
         // GET: produto/Create
-        [Authorize(Roles = "Administrador")]
+        [CustomAuthorizeAttribute(Roles = "Administrador")]
         public ActionResult Create()
         {
             //ViewBag.grupo_cod = new SelectList(db.grupo, "grupo_cod", "grupo_nome");
@@ -77,7 +78,7 @@ namespace RealDelivery.Controllers
         // Para se proteger de mais ataques, ative as propriedades específicas a que você quer se conectar. Para 
         // obter mais detalhes, consulte https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
-        [Authorize(Roles = "Administrador")]
+        [CustomAuthorizeAttribute(Roles = "Administrador")]
         public ActionResult Create([Bind(Include = "produto_cod,produto_nome,grupo_cod,produto_preco,produto_custo,produto_ativo,impress_cod,produto_desc,produto_img, img_produto")] produto produto, HttpPostedFile img_produto)
         {
             if (db.produto.Count(u => u.produto_nome == produto.produto_nome) > 0)
@@ -168,7 +169,7 @@ namespace RealDelivery.Controllers
         }
 
         // GET: produto/Edit/5
-        [Authorize(Roles = "Administrador")]
+        [CustomAuthorizeAttribute(Roles = "Administrador")]
         public ActionResult Edit(long? id)
         {
             if (id == null)
@@ -192,7 +193,7 @@ namespace RealDelivery.Controllers
         // Para se proteger de mais ataques, ative as propriedades específicas a que você quer se conectar. Para 
         // obter mais detalhes, consulte https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
-        [Authorize(Roles = "Administrador")]
+        [CustomAuthorizeAttribute(Roles = "Administrador")]
         public ActionResult Edit([Bind(Include = "produto_cod,produto_nome,grupo_cod,produto_preco,produto_custo,produto_ativo,impress_cod,produto_desc,produto_img, img_produto")] produto produto)
         {
             if (db.produto.Count(u => u.produto_nome == produto.produto_nome && u.produto_cod != produto.produto_cod) > 0)

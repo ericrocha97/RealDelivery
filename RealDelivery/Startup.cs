@@ -15,7 +15,7 @@ namespace RealDelivery
             app.UseCookieAuthentication(new CookieAuthenticationOptions
             {
                 AuthenticationType = "ApplicationCookie",
-                LoginPath = new PathString("/Administrador/Login")
+                LoginPath = new PathString("/Cliente/Login")
             });
         }
     }
