@@ -11,40 +11,39 @@ namespace RealDelivery.ViewModels
     
     public class Pedido
     {
-        public List<ItemPedido> _ItemPedido { get; set; }
+        //public List<ItemPedido> _ItemPedido { get; set; }
+        public List<ItemPedido> _ItemPedido = new List<ItemPedido>();
+        //ADD
+        public void AdicionarItem(produto pro, int qtd)
+        {
+            ItemPedido item = _ItemPedido.FirstOrDefault(p => p.Produto.produto_cod == pro.produto_cod);
+            if (item == null)
+            {
+                _ItemPedido.Add(new ItemPedido
+                {
+                    Produto = pro,
+                    Quantidade = qtd
+                });
+            }
+            else
+            {
+                item.Quantidade += qtd;
+            }
+        }
         //pedido
-        public int pedido_cod { get; set; }
-        public System.DateTime pedido_data { get; set; }
-        public float pedido_valor { get; set; }
-        public string pedido_obs { get; set; }
-        public string pedido_ent { get; set; }
-        public string pedido_fpgto { get; set; }
-        public float pedido_troco { get; set; }
+        public pedido _Pedido { get; set; }
         //cliente
-        public int cliente_cod { get; set; }
-        public string cliente_nome { get; set; }
-        public string cliente_telefone { get; set; }
-        public string cliente_email { get; set; }
+        public cliente Cliente { get; set; }
         //endereco
-        public int endereco_cod { get; set; }
-        public string endereco_cep { get; set; }
-        public string endereco_rua { get; set; }
-        public string endereco_bairro { get; set; }
-        public string endereco_cidade { get; set; }
-        public string endereco_uf { get; set; }
-        public string endereco_comp { get; set; }
-        public string endereco_num { get; set; }
+        public endereco Endereco { get; set; }
 
 
     }
 
     public class ItemPedido
     {
-       // public int item_pedido_cod { get; set; }
-        //public int pedido_cod { get; set; }
-        public int produto_cod { get; set; }
-        public int item_pedido_qtd { get; set; }
-        public float produto_valor { get; set; }
-        public string produto_nome { get; set; }
+
+        public produto Produto { get; set; }
+        public int Quantidade { get; set; }
     }
 }

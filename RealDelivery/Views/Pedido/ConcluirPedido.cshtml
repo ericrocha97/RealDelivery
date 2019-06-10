@@ -4,7 +4,7 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>ConcluirPedido</h2>
+<h2>Concluir Pedido</h2>
 
 <table class="table">
     <tr>
@@ -29,7 +29,7 @@
         <th>
             @Html.DisplayNameFor(model => model.endereco_uf)
         </th>
-        <th></th>
+        <th>Escolha o endereço</th>
     </tr>
 
     @foreach (var item in Model)
@@ -57,7 +57,7 @@
                 @Html.DisplayFor(modelItem => item.endereco_uf)
             </td>
             <td>
-               
+                @Html.ActionLink("Escolher endereço", "EscolheEndereco", new { id = item.endereco_cod }, new { @class = "btn btn-primary"})
             </td>
         </tr>
     }

@@ -377,6 +377,8 @@
     <Content Include="Views\Pedido\Edit.cshtml" />
     <Content Include="Views\Pedido\Index.cshtml" />
     <Content Include="Views\Pedido\ConcluirPedido.cshtml" />
+    <Content Include="Views\Pedido\ConcluirPedidoNext.cshtml" />
+    <Content Include="Views\Pedido\FinalizaPedido.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

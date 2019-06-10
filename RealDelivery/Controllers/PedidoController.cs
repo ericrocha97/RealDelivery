@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using System.Data;
 using System.Data.Entity;
+using System.Data.Entity.Validation;
+using System.Diagnostics;
 using System.Linq;
 using System.Net;
 using System.Web;
@@ -13,95 +15,144 @@ namespace RealDelivery.Controllers
 {
     public class PedidoController : Controller
     {
-        private db_a464fd_realdevEntities db = new db_a464fd_realdevEntities();
-
-        public PedidoViewModel ObterPedido()
+        private readonly db_a464fd_realdevEntities db = new db_a464fd_realdevEntities();
+        //public float? total;
+        private Carrinho ObterCarrinho()
         {
-
-            PedidoViewModel PedidoView = (PedidoViewModel)Session["PedidoView"];
-            if (PedidoView == null)
+            Carrinho carrinho = (Carrinho)Session["Carrinho"];
+            if (carrinho == null)
             {
-                PedidoView = new PedidoViewModel();
-                Session["PedidoView"] = PedidoView;
+                carrinho = new Carrinho();
+                Session["Carrinho"] = carrinho;
             }
-
-            return PedidoView;
+            return carrinho;
         }
-        public List<ItensPedidoViewModel> _ItemPedido;
+        public Pedido ObterPedido()
+        {
+            Pedido pedido = (Pedido)Session["pedido"];
+            if (pedido == null)
+            {
+                pedido = new Pedido();
+                Session["pedido"] = pedido;
+            }
+            return pedido;
+        }
+        public ItensPedidoViewModel ObterItemPedido()
+        {
+            ItensPedidoViewModel PedidoItensView = (ItensPedidoViewModel)Session["PedidoItensView"];
+            if (PedidoItensView == null)
+            {
+                PedidoItensView = new ItensPedidoViewModel();
+                Session["PedidoItensView"] = PedidoItensView;
+            }
+            return PedidoItensView;
+        }
 
         [Authorize(Roles = "Cliente")]
-        [HttpGet]
-        public ActionResult ConcluirPedido([Bind(Include = "car")]CarrinhoViewModel Carrinho)
+        public ActionResult ConcluirPedido()
         {
+            var Carrinho = new CarrinhoViewModel
+            {
+                car = ObterCarrinho()
+            };
             if (User.Identity.IsAuthenticated)
             {
-                //ObterPedido().iped.item_pedido_cod = Carrinho.car.ItensCarrinho()
-                var PedidoView = new PedidoViewModel();
-                var itensPed = new ItensPedidoViewModel();
-                
-                foreach(var item in Carrinho.car.ItensCarrinho)
+                var PedidoView = new PedidoViewModel
                 {
-                    /*
-                        public int item_pedido_cod { get; set; }
-                        public int pedido_cod { get; set; }
-                        public int produto_cod { get; set; }
-                        public int item_pedido_qtd { get; set; }
-                        public float produto_valor { get; set; }
-                        public string produto_nome { get; set; }
-                     */
-
-                    //_ItemPedido.Add()
-                    itensPed.iped.produto_cod = item.Produto.produto_cod;
-                    itensPed.iped.produto_nome = item.Produto.produto_nome;
-                    itensPed.iped.produto_valor = (float)item.Produto.produto_preco;
-                    itensPed.iped.item_pedido_qtd = item.Quantidade;
-                    _ItemPedido.Add(itensPed);
-
-
+                    ped = new Pedido()
+                };
+                ObterItemPedido();
+                var itensPed = new ItemPedido();
+                foreach (var item in Carrinho.car.ItensCarrinho)
+                {
+                    itensPed.Produto = item.Produto;
+                    itensPed.Quantidade = item.Quantidade;
+                    var itempedido = new ItensPedidoViewModel
+                    {
+                        iped = itensPed
+                    };
+                    ObterPedido().AdicionarItem(itempedido.iped.Produto, itempedido.iped.Quantidade);
+                    //PedidoView.ped._ItemPedido.Add(itempedido.iped);
                 }
-                
                 //ObterPedido().ped._ItemPedido.Add() = Carrinho.car.ItensCarrinho;
                 var total = Carrinho.car.ObterValorTotal();
+                var teste = ObterPedido();
                 var userName = User.Identity.Name;
                 var cliente = db.cliente.FirstOrDefault(x => x.cliente_email == userName);
-
+                ObterPedido().Cliente = cliente;
                 if (cliente != null)
                 {
                     int? id = cliente.cliente_cod;
                     if (id == null)
                     {
-                        return View("index", "Carrinho");
+                        return RedirectToAction("index", "Carrinho");
+
                     }
                     var endereco = db.endereco.Where(e => e.cliente_cod == id);
                     if (endereco == null)
                     {
-                        return View("index", "Carrinho");
+                        return RedirectToAction("index", "Carrinho");
                     }
-
-
                     return View(endereco.ToList());
                 }
-
-
-
-                /*
-                    PedidoView.ped.cliente_cod = cliente.cliente_cod;
-                    PedidoView.ped.cliente_nome = cliente.cliente_nome;
-                    PedidoView.ped.pedido_valor = (float)total;    
-             */
-
             }
-
-            return View("index", "Carrinho");
-
+            return RedirectToAction("index", "Carrinho");
         }
         [Authorize(Roles = "Cliente")]
-        [HttpPost]
-        public ActionResult ConcluirPedido([Bind(Include = "pedido_cod,cliente_cod,pedido_data,pedido_valor,pedido_obs,pedido_ent,endereco_cod,pedido_fpgto,pedido_troco")] pedido pedido)
+        public ActionResult EscolheEndereco(int? id)
         {
-
-
-            return View();
+            ObterPedido().Endereco = db.endereco.Find(id);
+            return View("ConcluirPedidoNext");
+        }
+        [Authorize(Roles = "Cliente")]
+        public ActionResult FinalizarPedido([Bind(Include = "pedido_cod,cliente_cod,pedido_data,pedido_valor,pedido_obs,pedido_ent,endereco_cod,pedido_fpgto,pedido_troco")] pedido pedido)
+        {
+            //var Pedido = new pedido();
+            pedido.cliente_cod = ObterPedido().Cliente.cliente_cod;
+            pedido.endereco_cod = ObterPedido().Endereco.endereco_cod;
+            pedido.pedido_data = DateTime.Now;
+            var aux = pedido.pedido_data;
+            pedido.pedido_ent = "S";
+            pedido.pedido_fpgto = "3";
+            pedido.pedido_obs = "";
+            pedido.pedido_troco = 0;
+            pedido.pedido_valor = (float)ObterCarrinho().ObterValorTotal();
+            var item_pedido = new item_pedido();
+            ObterCarrinho().LimparCarrinho();
+            try
+            {
+                if (ModelState.IsValid)
+                {
+                    db.pedido.Add(pedido);
+                    db.SaveChanges();
+                    var data = db.pedido.Max(x => x.pedido_cod);
+                    {
+                        var itens = ObterPedido()._ItemPedido;
+                        foreach (var item in itens)
+                        {
+                            item_pedido.pedido_cod = data;
+                            item_pedido.produto_cod = item.Produto.produto_cod;
+                            item_pedido.item_pedido_qtd = item.Quantidade;
+                            item_pedido.produto_valor = (float)item.Produto.produto_preco;
+                            item_pedido.produto_nome = item.Produto.produto_nome;
+                            db.item_pedido.Add(item_pedido);
+                            db.SaveChanges();
+                        }
+                    }
+                    return RedirectToAction("Panel", "Cliente");
+                }
+            }
+            catch (DbEntityValidationException ex)
+            {
+                foreach (var entityValidationErrors in ex.EntityValidationErrors)
+                {
+                    foreach (var dbValidationError in entityValidationErrors.ValidationErrors)
+                    {
+                        Trace.TraceInformation(" PropertyName: {0} ErrorMessage: {1} ", dbValidationError.PropertyName, dbValidationError.ErrorMessage);
+                    }
+                }
+            };
+            return RedirectToAction("Panel", "Cliente");
         }
 
         // GET: Pedido

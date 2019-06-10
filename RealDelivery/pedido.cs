@@ -34,5 +34,12 @@ namespace RealDelivery
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<item_pedido> item_pedido { get; set; }
         public virtual endereco endereco { get; set; }
+
+        public enum formaPagamento
+        {
+            Dinheiro,
+            Credito,
+            Debito
+        }
     }
 }

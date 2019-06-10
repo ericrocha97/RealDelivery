@@ -1,5 +1,7 @@
 ﻿@model RealDelivery.ViewModels.CarrinhoViewModel
-
+@{ 
+    var carrinho = Model.car;
+}
 @{
     Layout = "~/Views/Shared/_Layout.cshtml";
     ViewBag.Title = "Carrinho";
@@ -14,8 +16,10 @@
 
     </div>
     <div class="col-4 ">
+
+        @Html.ActionLink("Concluir Pedido", "ConcluirPedido", "Pedido", new { car = carrinho }, new { @class = "btn btn-success mt-2 float-right" })
         
-        @Html.ActionLink("Concluir Pedido", "ConcluirPedido", "Pedido", new { Carrinho = Model }, new { @class = "btn btn-success mt-2 float-right" })
+        
 
     </div>
 
