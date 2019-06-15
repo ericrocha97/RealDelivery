@@ -11,14 +11,22 @@ namespace RealDelivery
 {
     using System;
     using System.Collections.Generic;
-    
+    using System.ComponentModel;
+    using System.ComponentModel.DataAnnotations;
+
     public partial class item_pedido
     {
         public int item_pedido_cod { get; set; }
+        [DisplayName("Número do pedido")]
         public int pedido_cod { get; set; }
+        [DisplayName("Código do produto")]
         public int produto_cod { get; set; }
+        [DisplayName("Quantidade")]
         public int item_pedido_qtd { get; set; }
+        [DisplayName("Valor unitário")]
+        [DisplayFormat(DataFormatString = "{0:C2}", ApplyFormatInEditMode = true)]
         public float produto_valor { get; set; }
+        [DisplayName("Nome do Produto")]
         public string produto_nome { get; set; }
     
         public virtual produto produto { get; set; }

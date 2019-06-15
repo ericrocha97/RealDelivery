@@ -11,8 +11,7 @@ namespace RealDelivery
 {
     using System;
     using System.Collections.Generic;
-    using System.ComponentModel;
-
+    
     public partial class usuario
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
@@ -22,13 +21,9 @@ namespace RealDelivery
         }
     
         public int usuario_cod { get; set; }
-        [DisplayName("E-mail")]
         public string usuario_email { get; set; }
-        [DisplayName("Senha")]
         public string usuario_senha { get; set; }
-        [DisplayName("Nome")]
         public string usuario_nome { get; set; }
-        [DisplayName("Telefone")]
         public string usuario_cel { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

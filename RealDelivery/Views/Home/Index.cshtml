@@ -5,31 +5,36 @@
 
 }
 
-<h2 class="text-center mt-2">Cardapío</h2>
+<h2 class="text-center mt-2">Cardápio</h2>
+
+<div class="table-responsive-sm">
+    <table class="table table-hover">
+
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td class="align-items-center align-middle row" colspan="3">
+                    <div class="p-1 col-12 col-sm-4 col-lg-4 col-md-4 col-xl-4 text-center align-middle">
+                        @Html.DisplayFor(modelItem => item.grupo_nome)
+                    </div>
+                    <div class="p-1 col-12 col-sm-4 col-lg-4 col-md-4 col-xl-4 text-center align-middle">
+                        @if (item.grupo_img != null)
+                        {
+                            <img src="@Html.DisplayFor(modelItem => item.grupo_img)" alt=" image" class="img-thumbnail" style="width:128px;height:128px;" />
+                        }
+                        else
+                        {
+                            <img src="/Imagem/sem-foto.png" alt=" image" class="img-thumbnail" style="width:128px;height:128px;" />
+                        }
+                    </div>
+                    <div class="p-1 col-12 col-sm-4 col-lg-4 col-md-4 col-xl-4 text-center align-middle">
+                        @Html.ActionLink("Produtos", "Produtos", new { id = item.grupo_cod }, new { @class = "btn btn-info", @style = "width: 116px;" })
+                    </div>
 
 
-<table class="table table-hover">
- 
-    @foreach (var item in Model)
-    {
-        <tr>
-            <td class="text-center align-middle">
-                @Html.DisplayFor(modelItem => item.grupo_nome)
-            </td>
-            <td class="text-center align-middle">
-                @if (item.grupo_img != null)
-                {
-                    <img src="@Html.DisplayFor(modelItem => item.grupo_img)" alt=" image" class="img-thumbnail" style="width:128px;height:128px;" />
-                }
-                else
-                {
-                    <img src="/Imagem/sem-foto.png" alt=" image" class="img-thumbnail" style="width:128px;height:128px;" />
-                }
-            </td>
-            <td class="text-center align-middle">
-                @Html.ActionLink("Produtos", "Produtos", new { id = item.grupo_cod }, new { @class = "btn btn-info", @style = "width: 116px;" })
-            </td>
-        </tr>
-    }
+                </td>
+            </tr>
+        }
 
-</table>
+    </table>
+</div>

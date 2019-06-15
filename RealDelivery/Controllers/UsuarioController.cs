@@ -9,6 +9,7 @@ using System.Text;
 using System.Web;
 using System.Web.Mvc;
 using RealDelivery;
+using static RealDelivery.CustomAuthorizeAttributed;
 
 namespace RealDelivery.Controllers
 {
@@ -17,41 +18,39 @@ namespace RealDelivery.Controllers
         private db_a464fd_realdevEntities db = new db_a464fd_realdevEntities();
 
         // GET: Usuario
-        [Authorize]
+        [CustomAuthorizeAttribute(Roles = "Administrador")]
         public ActionResult Index()
         {
             return View(db.usuario.ToList());
         }
 
-
         // GET: Usuario/Create
-        [Authorize]
+        [CustomAuthorizeAttribute(Roles = "Administrador")]
         public ActionResult Create()
         {
             return View();
         }
+
         public static string GerarHashMd5(string input)
         {
             MD5 md5Hash = MD5.Create();
             // Converter a String para array de bytes, que é como a biblioteca trabalha.
             byte[] data = md5Hash.ComputeHash(Encoding.UTF8.GetBytes(input));
-
             // Cria-se um StringBuilder para recompôr a string.
             StringBuilder sBuilder = new StringBuilder();
-
             // Loop para formatar cada byte como uma String em hexadecimal
             for (int i = 0; i < data.Length; i++)
             {
                 sBuilder.Append(data[i].ToString("x2"));
             }
-
             return sBuilder.ToString();
         }
+
         // POST: Usuario/Create
         // Para se proteger de mais ataques, ative as propriedades específicas a que você quer se conectar. Para 
         // obter mais detalhes, consulte https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
-        [Authorize]
+        [CustomAuthorizeAttribute(Roles = "Administrador")]
         public ActionResult Create([Bind(Include = "usuario_cod,usuario_email,usuario_senha,usuario_nome,usuario_cel")] usuario usuario)
         {
             if (db.usuario.Count(u => u.usuario_email == usuario.usuario_email) > 0)
@@ -59,7 +58,6 @@ namespace RealDelivery.Controllers
                 ModelState.AddModelError("usuario_email", "Esse e-mail já está cadastrado");
                 return View(usuario);
             }
-
             if (ModelState.IsValid)
             {
                 var SenhaMD5 = GerarHashMd5(usuario.usuario_senha);
@@ -68,10 +66,10 @@ namespace RealDelivery.Controllers
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-
             return View(usuario);
         }
-        [Authorize]
+
+        [CustomAuthorizeAttribute(Roles = "Administrador")]
         public ActionResult Buscar()
         {
             return View();
@@ -79,17 +77,15 @@ namespace RealDelivery.Controllers
 
         //GET
         [HttpGet]
-        [Authorize]
+        [CustomAuthorizeAttribute(Roles = "Administrador")]
         public ActionResult Buscar(string texto)
         {
-
             var dataset = db.usuario.Where(x => (x.usuario_nome.Contains(texto) || x.usuario_email.Contains(texto) || x.usuario_cel.Contains(texto))).ToList();
             return View(dataset);
-
         }
 
         // GET: Usuario/Edit/5
-        [Authorize]
+        [CustomAuthorizeAttribute(Roles = "Administrador")]
         public ActionResult Edit(int? id)
         {
             if (id == null)
@@ -108,20 +104,19 @@ namespace RealDelivery.Controllers
         // Para se proteger de mais ataques, ative as propriedades específicas a que você quer se conectar. Para 
         // obter mais detalhes, consulte https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
-        [Authorize]
+        [CustomAuthorizeAttribute(Roles = "Administrador")]
         public ActionResult Edit([Bind(Include = "usuario_cod,usuario_email,usuario_senha,usuario_nome,usuario_cel")] usuario usuario)
         {
             if (ModelState.IsValid)
             {
-
-
                 db.Entry(usuario).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
             return View(usuario);
         }
-        [Authorize]
+
+        [CustomAuthorizeAttribute(Roles = "Administrador")]
         public ActionResult EditPassword(int? id)
         {
             if (id == null)
@@ -135,8 +130,9 @@ namespace RealDelivery.Controllers
             }
             return View(usuario);
         }
+
         [HttpPost]
-        [Authorize]
+        [CustomAuthorizeAttribute(Roles = "Administrador")]
         public ActionResult EditPassword([Bind(Include = "usuario_cod,usuario_email,usuario_senha,usuario_nome,usuario_cel")] usuario usuario, string senha_nova, string senha_nova_confirm)
         {
             if (ModelState.IsValid)
@@ -151,7 +147,6 @@ namespace RealDelivery.Controllers
                         usuario.usuario_senha = GerarHashMd5(senha_nova);
                     }
                 }
-
                 db.Entry(usuario).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Index");
@@ -167,7 +162,5 @@ namespace RealDelivery.Controllers
             }
             base.Dispose(disposing);
         }
-
-        
     }
 }

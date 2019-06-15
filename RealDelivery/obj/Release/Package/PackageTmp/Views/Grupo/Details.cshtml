@@ -12,36 +12,43 @@
     <hr />
     <table class="table table-hover table-bordered">
         <tr>
-            <th>
+            <th class="text-center align-middle">
                 @Html.DisplayNameFor(model => model.grupo_nome)
             </th>
-            <th>
+            <th class="text-center align-middle">
                 @Html.DisplayNameFor(model => model.grupo_ativo)
             </th>
-            <th>
+            <th class="text-center align-middle">
                 @Html.DisplayNameFor(model => model.grupo_desc)
             </th>
-            <th>
+            <th class="text-center align-middle">
                 @Html.DisplayNameFor(model => model.grupo_img)
             </th>
         </tr>
         <tr>
-            <td>
+            <td class="text-center align-middle">
                 @Html.DisplayFor(model => model.grupo_nome)
             </td>
-            <td>
+            <td class="text-center align-middle">
                 @Html.DisplayFor(model => model.grupo_ativo)
             </td>
-            <td>
+            <td class="text-center align-middle">
                 @Html.DisplayFor(model => model.grupo_desc)
             </td>
-            <td>
-                @Html.DisplayFor(model => model.grupo_img)
+            <td class="text-center align-middle">
+                @if (Model.grupo_img != null)
+                {
+                    <img src="@Model.grupo_img" alt="@Model.grupo_img image" class="img-thumbnail" style="width:128px;height:128px;" />
+                }
+                else
+                {
+                    <img src="/Imagem/sem-foto.png" alt=" image" class="img-thumbnail" style="width:128px;height:128px;" />
+                }
             </td>
         </tr>
     </table>
 </div>
 <p>
-    @Html.ActionLink("Editar", "Edit", new { id = Model.grupo_cod }, new { @class = "btn btn-success", @style = "width: 116px;" }) 
+    @Html.ActionLink("Editar", "Edit", new { id = Model.grupo_cod }, new { @class = "btn btn-success", @style = "width: 116px;" })
     @Html.ActionLink("Voltar", "Index", "", new { @class = "btn btn-primary", @style = "width: 116px;" })
 </p>

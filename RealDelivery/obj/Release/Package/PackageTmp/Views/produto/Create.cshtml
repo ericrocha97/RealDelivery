@@ -8,10 +8,8 @@
 <h2 class="text-center text-uppercase mt-2">Adicionar produto</h2>
 
 
-@using (Html.BeginForm())
+@using (Html.BeginForm("Create", "produto", FormMethod.Post, new { enctype = "multipart/form-data" }))
 {
-
-
     <div class="form-horizontal">
         <h4 class=" mt-3">Adicionar novos produtos</h4>
         <hr />
@@ -28,6 +26,7 @@
             <label for="grupo_cod" class="control-label col-md-2">Grupo do produto</label>
             <div class="col-md-10">
                 @Html.DropDownList("grupo_cod", null, htmlAttributes: new { @class = "form-control" })
+               
                 @Html.ValidationMessageFor(model => model.grupo_cod, "", new { @class = "text-danger" })
             </div>
         </div>
@@ -55,14 +54,14 @@
             </div>
         </div>
 
-        <div class="form-group"> 
+        <div class="form-group">
             <label for="impress_cod" class="control-label col-md-2">Impressora do produto</label>
             <div class="col-md-10">
                 @Html.DropDownList("impress_cod", null, htmlAttributes: new { @class = "form-control" })
                 @Html.ValidationMessageFor(model => model.impress_cod, "", new { @class = "text-danger" })
             </div>
         </div>
-        
+
         <div class="form-group">
             @Html.LabelFor(model => model.produto_desc, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
@@ -71,16 +70,15 @@
             </div>
         </div>
 
-
         <div class="form-group">
-
             <div class="custom-file">
+                @Html.LabelFor(model => model.produto_img, htmlAttributes: new { @class = "control-label col-md-2" })
                 <div class="col-md-10">
+                    @Html.ValidationMessageFor(model => model.img_produto, "", new { @class = "text-danger" })
                     <label class="btn btn-primary" for="img_produto">Escolher a imagem do produto...</label>
                     <input type="file" name="img_produto" class="invisible" id="img_produto">
                 </div>
             </div>
-
         </div>
 
         <div class="form-group">

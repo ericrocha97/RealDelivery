@@ -11,7 +11,10 @@ namespace RealDelivery
 {
     using System;
     using System.Collections.Generic;
-    
+    using System.ComponentModel;
+    using System.ComponentModel.DataAnnotations;
+    using System.Web;
+
     public partial class pedido
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
@@ -19,15 +22,24 @@ namespace RealDelivery
         {
             this.item_pedido = new HashSet<item_pedido>();
         }
-    
+        [DisplayName("Número do pedido")]
         public int pedido_cod { get; set; }
+        [DisplayName("Cliente")]
         public int cliente_cod { get; set; }
+        [DisplayName("Data e hora do pedido")]
         public System.DateTime pedido_data { get; set; }
+        [DisplayName("Valor de pedido")]
+        [DisplayFormat(DataFormatString = "{0:C2}", ApplyFormatInEditMode = true)]
         public float pedido_valor { get; set; }
+        [DisplayName("Obervações")]
         public string pedido_obs { get; set; }
+        [DisplayName("Forma de entrega")]
         public string pedido_ent { get; set; }
+        [DisplayName("Endereço")]
         public Nullable<int> endereco_cod { get; set; }
+        [DisplayName("Forma de pagamento")]
         public string pedido_fpgto { get; set; }
+        [DisplayName("Troco para")]
         public Nullable<float> pedido_troco { get; set; }
     
         public virtual cliente cliente { get; set; }

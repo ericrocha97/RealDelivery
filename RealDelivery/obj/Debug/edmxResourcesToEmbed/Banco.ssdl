@@ -60,6 +60,10 @@
     <Property Name="pedido_data" Type="datetime" Precision="0" Nullable="false" />
     <Property Name="pedido_valor" Type="float" Nullable="false" />
     <Property Name="pedido_obs" Type="mediumtext" />
+    <Property Name="pedido_ent" Type="varchar" MaxLength="1" />
+    <Property Name="endereco_cod" Type="int" />
+    <Property Name="pedido_fpgto" Type="varchar" MaxLength="1" Nullable="false" />
+    <Property Name="pedido_troco" Type="float" />
   </EntityType>
   <EntityType Name="produto">
     <Key>
@@ -126,6 +130,18 @@
       </Principal>
       <Dependent Role="pedido">
         <PropertyRef Name="cliente_cod" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="Ped_End_Const">
+    <End Role="endereco" Type="Self.endereco" Multiplicity="0..1" />
+    <End Role="pedido" Type="Self.pedido" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="endereco">
+        <PropertyRef Name="endereco_cod" />
+      </Principal>
+      <Dependent Role="pedido">
+        <PropertyRef Name="endereco_cod" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
@@ -197,6 +213,10 @@
     </AssociationSet>
     <AssociationSet Name="Ped_Cli_Const" Association="Self.Ped_Cli_Const">
       <End Role="cliente" EntitySet="cliente" />
+      <End Role="pedido" EntitySet="pedido" />
+    </AssociationSet>
+    <AssociationSet Name="Ped_End_Const" Association="Self.Ped_End_Const">
+      <End Role="endereco" EntitySet="endereco" />
       <End Role="pedido" EntitySet="pedido" />
     </AssociationSet>
     <AssociationSet Name="Ped_item_Const" Association="Self.Ped_item_Const">

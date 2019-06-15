@@ -26,6 +26,7 @@
     <Property Name="endereco_comp" Type="String" MaxLength="65535" FixedLength="false" Unicode="false" />
     <Property Name="endereco_num" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
     <NavigationProperty Name="cliente" Relationship="Self.Clie_End_Const" FromRole="endereco" ToRole="cliente" />
+    <NavigationProperty Name="pedido" Relationship="db_a464fd_realdevModel.Ped_End_Const" FromRole="endereco" ToRole="pedido" />
   </EntityType>
   <EntityType Name="grupo">
     <Key>
@@ -67,8 +68,13 @@
     <Property Name="pedido_data" Type="DateTime" Nullable="false" />
     <Property Name="pedido_valor" Type="Single" Nullable="false" />
     <Property Name="pedido_obs" Type="String" MaxLength="16777215" FixedLength="false" Unicode="false" />
+    <Property Name="pedido_ent" Type="String" MaxLength="1" FixedLength="false" Unicode="false" />
+    <Property Name="endereco_cod" Type="Int32" />
+    <Property Name="pedido_fpgto" Type="String" MaxLength="1" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="pedido_troco" Type="Single" />
     <NavigationProperty Name="cliente" Relationship="Self.Ped_Cli_Const" FromRole="pedido" ToRole="cliente" />
     <NavigationProperty Name="item_pedido" Relationship="Self.Ped_item_Const" FromRole="pedido" ToRole="item_pedido" />
+    <NavigationProperty Name="endereco" Relationship="db_a464fd_realdevModel.Ped_End_Const" FromRole="pedido" ToRole="endereco" />
   </EntityType>
   <EntityType Name="produto">
     <Key>
@@ -229,5 +235,21 @@
       <End Role="usuario" EntitySet="usuario" />
       <End Role="usuario_perm" EntitySet="usuario_perm" />
     </AssociationSet>
+    <AssociationSet Name="Ped_End_Const" Association="db_a464fd_realdevModel.Ped_End_Const">
+      <End Role="endereco" EntitySet="endereco" />
+      <End Role="pedido" EntitySet="pedido" />
+    </AssociationSet>
   </EntityContainer>
+  <Association Name="Ped_End_Const">
+    <End Type="db_a464fd_realdevModel.endereco" Role="endereco" Multiplicity="0..1" />
+    <End Type="db_a464fd_realdevModel.pedido" Role="pedido" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="endereco">
+        <PropertyRef Name="endereco_cod" />
+      </Principal>
+      <Dependent Role="pedido">
+        <PropertyRef Name="endereco_cod" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
 </Schema>

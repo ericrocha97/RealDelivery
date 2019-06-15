@@ -30,6 +30,10 @@ namespace RealDelivery.ViewModels
                 item.Quantidade += qtd;
             }
         }
+        public void LimparPedido()
+        {
+            _ItemPedido.Clear();
+        }
         //pedido
         public pedido _Pedido { get; set; }
         //cliente

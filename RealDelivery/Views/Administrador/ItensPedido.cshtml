@@ -1,0 +1,82 @@
+﻿@model IEnumerable<RealDelivery.item_pedido>
+
+
+@{
+    Layout = "~/Views/Administrador/_LayoutPanel.cshtml";
+    float total_pedido = 0;
+    ViewBag.Title = "Itens do pedido";
+
+}
+
+    <a href="@Request.UrlReferrer" class="btn btn-danger float-left">Voltar</a><h2 class="text-center mt-2">Itens do pedido</h2>
+
+
+
+
+
+<table class="table table-hover table-bordered">
+    <tr>
+        <th class="text-center align-middle">
+            @Html.DisplayNameFor(model => model.pedido_cod)
+        </th>
+        <th class="text-center align-middle">
+            @Html.DisplayNameFor(model => model.produto_nome)
+        </th>
+        <th class="text-center align-middle">
+            @Html.DisplayNameFor(model => model.item_pedido_qtd)
+        </th>
+        <th class="text-center align-middle">
+            @Html.DisplayNameFor(model => model.produto_valor)
+        </th>
+        <th class="text-center align-middle">
+            Valor total
+        </th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td class="text-center align-middle">
+                @Html.DisplayFor(modelItem => item.pedido_cod)
+            </td>
+            <td class="text-center align-middle">
+                @Html.DisplayFor(modelItem => item.produto_nome)
+            </td>
+            <td class="text-center align-middle">
+                @Html.DisplayFor(modelItem => item.item_pedido_qtd)
+            </td>
+            <td class="text-center align-middle">
+                @Html.DisplayFor(modelItem => item.produto_valor)
+            </td>
+            <td class="text-center align-middle">
+                @{
+                    var produto_valor_str = Html.DisplayFor(modelItem => item.produto_valor).ToString();
+                    var item_pedido_qtd_str = Html.DisplayFor(modelItem => item.item_pedido_qtd).ToString();
+                    produto_valor_str = produto_valor_str.Replace("R$ ", "").Replace("R$","");;
+                    float produto_valor = (float)Convert.ToDouble(produto_valor_str);
+                    int item_pedido_qtd = int.Parse(item_pedido_qtd_str);
+                    var total = produto_valor * item_pedido_qtd;
+                    total_pedido = total_pedido + total;
+                    var valorFormatado = string.Format("{0:C}", total);
+
+                    @valorFormatado
+
+                }
+            </td>
+        </tr>
+    }
+    <tr>
+        <td class="text-center align-middle">
+            <strong class="text-center align-middle">Total do pedido</strong>
+        </td>
+        <td colspan="3"></td>
+        <td class="text-center align-middle">
+            @{
+                var valor_totalFormatado = string.Format("{0:C}", total_pedido);
+            }
+            @valor_totalFormatado
+        </td>
+    </tr>
+</table>
+
+

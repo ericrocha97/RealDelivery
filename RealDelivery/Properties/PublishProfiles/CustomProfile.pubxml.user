@@ -6,7 +6,7 @@ ao editar este arquivo MSBuild. Para saber mais sobre isso, visite https://go.mi
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup>
     <TimeStampOfAssociatedLegacyPublishXmlFile />
-    <EncryptedPassword>AQAAANCMnd8BFdERjHoAwE/Cl+sBAAAAl+osetpAkEG9g/2DkvTESwAAAAACAAAAAAAQZgAAAAEAACAAAADo1vrvE8o2ZAZ6nTyXQ6AbdaJcuWbrYSWGxjT39h0h0wAAAAAOgAAAAAIAACAAAADn/93zbLniW8QIGVM4QTsPr09NmpRgA7gw9hMylfezYyAAAAD/tTToTTl+PKGgBRn92pm/BibrcTxLkh4x2Voh+An/4EAAAAAQRHWt9LjL/NbaarZChcy3j4NandGzoPFxY989fNoXRXz5+s/HiCm6VXgiz5IgY3vhrPelBhl5rIfyVlVfGR8Q</EncryptedPassword>
+    <EncryptedPassword>AQAAANCMnd8BFdERjHoAwE/Cl+sBAAAAl+osetpAkEG9g/2DkvTESwAAAAACAAAAAAAQZgAAAAEAACAAAAD9n+oQIUsCSRTQ/Ia9J61I0v0jLg/ewIggnMa07/RCLAAAAAAOgAAAAAIAACAAAABxmOG4Qhu15T0ufmpImdCQ2jufgmUUfrebUfwdSRducCAAAAABWEFqvEGduec7fhx43AP48kIm9k5gYsT7vDfTcDZktkAAAAB+rzGhXdqpKe+0QKKT49iv12gNAQw7WI+hOFY9zo4BKhxO1N6WkYI8gME3bE+MKai4A09Zb0Was3T1quEw4EBL</EncryptedPassword>
     <_PublishTargetUrl>ftp://ftp.site4now.net/site1</_PublishTargetUrl>
   </PropertyGroup>
   <ItemGroup>

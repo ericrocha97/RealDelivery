@@ -1,0 +1,56 @@
+﻿div#products {
+
+}
+div#products ul {
+    list-style: none;
+    margin:0;
+    padding:0;
+    
+
+}
+
+div#products ul li {
+    display:inline-block;
+    margin-right:15px;
+    padding:15px;
+    height:100%;
+    max-height:450px;
+    width:100%;
+    max-width:300px;
+}
+
+div#img{
+    display:flex;
+    justify-content:center;
+    align-content:center;
+}
+
+div#product-dados {
+    margin-top: 15px;
+   
+}
+
+
+div#product-name {
+    line-height: 1.5;
+    display: flex;
+    justify-content: center;
+    align-content: center;
+}
+div#product-desc {
+    line-height: 1.5;
+    display: flex;
+    justify-content: center;
+    align-content: center;
+}
+div#product-price {
+    display: flex;
+    justify-content: center;
+    align-content: center;
+}
+div#product-action {
+    margin-top: 15px;
+    display: flex;
+    justify-content: center;
+    align-content: center;
+}

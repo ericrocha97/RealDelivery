@@ -5,61 +5,68 @@
     ViewBag.Title = "Detalhes do produto";
 }
 
-    <h2 class="text-center text-uppercase mt-2">Detalhes do produto</h2>
+<h2 class="text-center text-uppercase mt-2">Detalhes do produto</h2>
 
 <div>
     <h4 class=" mt-3">Detalhes do cadastro do produto</h4>
     <hr />
     <table class="table table-hover table-bordered">
         <tr>
-            <td>
+            <td class="text-center align-middle">
                 @Html.DisplayNameFor(model => model.produto_nome)
             </td>
-            <td>
-                 @Html.DisplayNameFor(model => model.produto_preco)
+            <td class="text-center align-middle">
+                @Html.DisplayNameFor(model => model.produto_preco)
             </td>
-            <td>
-                 @Html.DisplayNameFor(model => model.produto_custo)
+            <td class="text-center align-middle">
+                @Html.DisplayNameFor(model => model.produto_custo)
             </td>
-            <td>
+            <td class="text-center align-middle">
                 @Html.DisplayNameFor(model => model.produto_ativo)
             </td>
-            <td>
+            <td class="text-center align-middle">
                 @Html.DisplayNameFor(model => model.produto_desc)
             </td>
-            <td>
-                 @Html.DisplayNameFor(model => model.produto_img)
+            <td class="text-center align-middle">
+                @Html.DisplayNameFor(model => model.produto_img)
             </td>
-            <td>
+            <td class="text-center align-middle">
                 @Html.DisplayNameFor(model => model.grupo.grupo_nome)
             </td>
-            <td>
+            <td class="text-center align-middle">
                 @Html.DisplayNameFor(model => model.impress.impress_cod)
             </td>
         </tr>
         <tr>
-            <td>
-                 @Html.DisplayFor(model => model.produto_nome)
+            <td class="text-center align-middle">
+                @Html.DisplayFor(model => model.produto_nome)
             </td>
-            <td>
-                 @Html.DisplayFor(model => model.produto_preco)
+            <td class="text-center align-middle">
+                @Html.DisplayFor(model => model.produto_preco)
             </td>
-            <td>
-                 @Html.DisplayFor(model => model.produto_custo)
+            <td class="text-center align-middle">
+                @Html.DisplayFor(model => model.produto_custo)
             </td>
-            <td>
-                 @Html.DisplayFor(model => model.produto_ativo)
+            <td class="text-center align-middle">
+                @Html.DisplayFor(model => model.produto_ativo)
             </td>
-            <td>
-                 @Html.DisplayFor(model => model.produto_desc)
+            <td class="text-center align-middle">
+                @Html.DisplayFor(model => model.produto_desc)
             </td>
-            <td>
-                 @Html.DisplayFor(model => model.produto_img)
+            <td class="text-center align-middle">
+                @if (Model.produto_img != null)
+                {
+                    <img src="@Model.produto_img" alt="@Model.produto_img image" class="img-thumbnail" style="width:128px;height:128px;" />
+                }
+                else
+                {
+                    <img src="/Imagem/sem-foto.png" alt=" image" class="img-thumbnail" style="width:128px;height:128px;" />
+                }
             </td>
-            <td>
+            <td class="text-center align-middle">
                 @Html.DisplayFor(model => model.grupo.grupo_nome)
             </td>
-            <td>
+            <td class="text-center align-middle">
                 @Html.DisplayFor(model => model.impress.impress_cod)
             </td>
         </tr>

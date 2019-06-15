@@ -1,0 +1,100 @@
+﻿@model IEnumerable<RealDelivery.pedido>
+
+@{
+    ViewBag.Title = "Pedidos";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+<a href="@Request.UrlReferrer" class="btn btn-danger float-left">Voltar</a>
+<h2 class="text-center text-uppercase mt-2">Meus Pedidos</h2>
+
+
+<div class="table-responsive">
+    <table class="table">
+        <tr>
+            <th class="text-center align-middle">
+                @Html.DisplayNameFor(model => model.pedido_cod)
+            </th>
+            <th class="text-center align-middle">
+                @Html.DisplayNameFor(model => model.pedido_valor)
+            </th>
+            <th class="text-center align-middle">
+                @Html.DisplayNameFor(model => model.pedido_obs)
+            </th>
+            <th class="text-center align-middle">
+                @Html.DisplayNameFor(model => model.pedido_ent)
+            </th>
+            <th class="text-center align-middle">
+                @Html.DisplayNameFor(model => model.pedido_fpgto)
+            </th>
+            <th class="text-center align-middle">
+                Endereço
+            </th>
+            <th class="text-center align-middle">
+                @Html.DisplayNameFor(model => model.pedido_data)
+            </th>
+            <th class="text-center align-middle">
+                Detalhes do pedido
+            </th>
+        </tr>
+
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td class="text-center align-middle">
+                    @Html.DisplayFor(modelItem => item.pedido_cod)
+                </td>
+                <td class="text-center align-middle">
+                    @Html.DisplayFor(modelItem => item.pedido_valor)
+                </td>
+                <td class="text-center align-middle">
+                    @Html.DisplayFor(modelItem => item.pedido_obs)
+                </td>
+                <td class="text-center align-middle">
+                    @{
+                        var pedido_ent = Html.DisplayFor(modelItem => item.pedido_ent).ToString();
+                        if (pedido_ent == "0")
+                        {
+                            <p>Retirar no balcão</p>
+                        }
+                        if (pedido_ent == "1")
+                        {
+                            <p>Delivery</p>
+                        }
+
+                    }
+                </td>
+                <td class="text-center align-middle">
+                    @{
+                        var pedido_fpgto = Html.DisplayFor(modelItem => item.pedido_fpgto).ToString();
+                        if (pedido_fpgto == "0")
+                        {
+                            <p>Dinheiro</p>
+                        }
+                        if (pedido_fpgto == "1")
+                        {
+                            <p>Cartão de crédito</p>
+
+                        }
+                        if (pedido_fpgto == "2")
+                        {
+                            <p>Cartão de débito</p>
+
+                        }
+                    }
+                </td>
+                <td class="text-center align-middle">
+                    @Html.DisplayFor(modelItem => item.endereco.endereco_cep)
+                </td>
+                <td class="text-center align-middle">
+                    @Html.DisplayFor(modelItem => item.pedido_data)
+                </td>
+                <td class="text-center align-middle">
+                    @Html.ActionLink("Detalhes", "DetalhePedido", "Cliente", new { id = item.pedido_cod }, new { @class = "btn btn-info" })
+                </td>
+            </tr>
+        }
+
+    </table>
+</div>

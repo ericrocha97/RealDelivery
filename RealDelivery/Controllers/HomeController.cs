@@ -17,6 +17,7 @@ namespace RealDelivery.Controllers
             var dataset = db.grupo.Where(x => x.grupo_ativo == s).ToList();
             return View(dataset);
         }
+
         public ActionResult Produtos(long? id)
         {
             if (id == null)
@@ -24,7 +25,6 @@ namespace RealDelivery.Controllers
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
             //produto produto = db.produto.;
-
             var dataset = db.produto.Where(x => x.grupo_cod == id && x.produto_ativo == "S").ToList();
             if (dataset == null)
             {
@@ -36,15 +36,12 @@ namespace RealDelivery.Controllers
         public ActionResult About()
         {
             ViewBag.Message = "Descrição da Pagina.";
-
             return View();
         }
 
         public ActionResult Contact()
         {
             ViewBag.Message = "Pagina de contato.";
-            
-
             return View();
         }
     }

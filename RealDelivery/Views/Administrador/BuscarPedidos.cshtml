@@ -1,0 +1,108 @@
+﻿@model IEnumerable<RealDelivery.pedido>
+
+@{
+    ViewBag.Title = "Pedidos";
+    Layout = "~/Views/Administrador/_LayoutPanel.cshtml";
+}
+
+
+<h2 class="text-center text-uppercase mt-2">Pedidos</h2>
+
+<div class="float-left mb-2">
+    @using (Html.BeginForm("BuscarPedidos", "Administrador", FormMethod.Get))
+    {
+        <div class="form-inline">
+            <input type="text" name="texto" class="form-control mr-2" />
+            <input type="submit" name="enviar" value="Buscar" class="btn btn-info" />
+        </div>
+    }
+
+
+</div>
+
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.pedido_cod)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.pedido_valor)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.pedido_obs)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.pedido_ent)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.pedido_fpgto)
+        </th>
+        <th>
+            Cliente
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.pedido_data)
+        </th>
+        <th>
+            Detalhes do pedido
+        </th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.pedido_cod)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.pedido_valor)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.pedido_obs)
+            </td>
+            <td>
+                @{
+                    var pedido_ent = Html.DisplayFor(modelItem => item.pedido_ent).ToString();
+                    if (pedido_ent == "0")
+                    {
+                        <p>Retirar no balcão</p>
+                    }
+                    if (pedido_ent == "1")
+                    {
+                        <p>Delivery</p>
+                    }
+
+                }
+            </td>
+            <td>
+                @{
+                    var pedido_fpgto = Html.DisplayFor(modelItem => item.pedido_fpgto).ToString();
+                    if (pedido_fpgto == "0")
+                    {
+                        <p>Dinheiro</p>
+                    }
+                    if (pedido_fpgto == "1")
+                    {
+                        <p>Cartão de crédito</p>
+
+                    }
+                    if (pedido_fpgto == "2")
+                    {
+                        <p>Cartão de débito</p>
+
+                    }
+                }
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.cliente.cliente_nome)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.pedido_data)
+            </td>
+            <td>
+                @Html.ActionLink("Detalhes", "DetalhePedido", "Administrador", new { id = item.pedido_cod }, new { @class = "btn btn-info" })
+            </td>
+        </tr>
+    }
+
+</table>

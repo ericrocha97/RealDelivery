@@ -1,19 +1,25 @@
 ﻿
 @{
-    ViewBag.Title = "Contact";
-    
+    ViewBag.Title = "Contato";
+
 }
-<h2>@ViewBag.Title.</h2>
-<h3>@ViewBag.Message</h3>
+<h2 class="text-center mt-2">Contato</h2>
 
-<address>
-    One Microsoft Way a<br />
-    Redmond, WA 98052-6399<br />
-    <abbr title="Phone">P:</abbr>
-    425.555.0100
-</address>
 
-<address>
-    <strong>Support:</strong>   <a href="mailto:Support@example.com">Support@example.com</a><br />
-    <strong>Marketing:</strong> <a href="mailto:Marketing@example.com">Marketing@example.com</a>
-</address>
+
+<form action="" method="post">
+    <div class="form-group mb-3">
+        <label for="nome">Nome:*</label>
+        <input type="text" id="nome" name="nome" class="form-control" aria-label="Nome" aria-describedby="basic-addon1" placeholder="Seu nome completo" size="50" maxlength="50" required="required" onkeyup="validanome();" pattern="^[^-\s][a-zA-ZÀ-ú ]{6,51}$">
+    </div>
+    <div class="form-group mb-3">
+        <label for="email">E-mail:*</label>
+        <input type="email" id="email" name="email" class="form-control" aria-label="Email" aria-describedby="basic-addon1" placeholder="exemplo@dominio.com" size="50" maxlength="80" required="required"  onkeyup="validaemail();">
+    </div>
+    <div class="form-group mb-3">
+        <label for="testemunho">Mensagem:*</label>
+        <textarea class="form-control" id="testemunho" name="testemunho" rows="5" cols="80" aria-label="Com textarea" placeholder="Digite sua mensagem" size="50" maxlength="250" required="required" onkeyup="validamsg();" style="resize: none;"></textarea>
+    </div>
+    <br>
+    <input type="submit" class="btn btn-primary" value="Enviar" >
+</form>

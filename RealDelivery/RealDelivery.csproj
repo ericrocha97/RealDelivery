@@ -175,8 +175,10 @@
     <Compile Include="Controllers\EnderecoController.cs" />
     <Compile Include="Controllers\GrupoController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\PedidoController.cs" />
     <Compile Include="Controllers\produtoController.cs" />
     <Compile Include="Controllers\UsuarioController.cs" />
+    <Compile Include="CustomAuthorizeAttibute.cs" />
     <Compile Include="endereco.cs">
       <DependentUpon>Banco.tt</DependentUpon>
     </Compile>
@@ -192,6 +194,7 @@
     <Compile Include="item_pedido.cs">
       <DependentUpon>Banco.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\TipoUsuario.cs" />
     <Compile Include="pedido.cs">
       <DependentUpon>Banco.tt</DependentUpon>
     </Compile>
@@ -211,6 +214,8 @@
     <Compile Include="ViewModels\CarrinhoViewModel.cs" />
     <Compile Include="ViewModels\LoginClienteViewModel.cs" />
     <Compile Include="ViewModels\LoginViewModel.cs" />
+    <Compile Include="ViewModels\Pedido.cs" />
+    <Compile Include="ViewModels\PedidoViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Banco.Context.tt">
@@ -229,6 +234,8 @@
     <Content Include="Content\bootstrap-reboot.min.css" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\css\cart.css" />
+    <Content Include="Content\css\product.css" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
     <Content Include="Imagem\sem-foto.png" />
@@ -366,20 +373,20 @@
     <Content Include="Views\Endereco\Create.cshtml" />
     <Content Include="Views\Endereco\Edit.cshtml" />
     <Content Include="Views\Endereco\Index.cshtml" />
-    <Content Include="Views\Pedido\Create.cshtml" />
-    <Content Include="Views\Pedido\Delete.cshtml" />
-    <Content Include="Views\Pedido\Details.cshtml" />
-    <Content Include="Views\Pedido\Edit.cshtml" />
-    <Content Include="Views\Pedido\Index.cshtml" />
     <Content Include="Views\Pedido\ConcluirPedido.cshtml" />
     <Content Include="Views\Pedido\ConcluirPedidoNext.cshtml" />
     <Content Include="Views\Pedido\FinalizaPedido.cshtml" />
+    <Content Include="Views\Cliente\Pedidos.cshtml" />
+    <Content Include="Views\Cliente\DetalhePedido.cshtml" />
+    <Content Include="Views\Administrador\Pedidos.cshtml" />
+    <Content Include="Views\Administrador\DetalhePedido.cshtml" />
+    <Content Include="Views\Administrador\ItensPedido.cshtml" />
+    <Content Include="Views\Administrador\BuscarPedidos.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Imagem\Grupos\" />
     <Folder Include="Imagem\Produto\" />
-    <Folder Include="Models\" />
     <Folder Include="Views\Imagem\Grupos\" />
   </ItemGroup>
   <ItemGroup>

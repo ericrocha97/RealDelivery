@@ -10,7 +10,6 @@ namespace RealDelivery.ViewModels
 {
     public class Carrinho
     {
-
         private readonly List<ItemCarrinho> _itemCarrinho = new List<ItemCarrinho>();
 
         //ADD
@@ -35,6 +34,12 @@ namespace RealDelivery.ViewModels
         public void RemevorItem(produto pro)
         {
             _itemCarrinho.RemoveAll(l => l.Produto.produto_cod == pro.produto_cod);
+        }
+
+        public void Remevor(produto pro)
+        {
+            var item = _itemCarrinho.Find(l => l.Produto.produto_cod == pro.produto_cod);
+            _itemCarrinho.Remove(item);
         }
 
         //TOTAL

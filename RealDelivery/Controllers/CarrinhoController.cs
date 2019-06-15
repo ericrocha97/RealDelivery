@@ -10,6 +10,7 @@ namespace RealDelivery.Controllers
     public class CarrinhoController : Controller
     {
         private db_a464fd_realdevEntities db = new db_a464fd_realdevEntities();
+
         private Carrinho ObterCarrinho()
         {
             Carrinho carrinho = (Carrinho)Session["Carrinho"];
@@ -18,9 +19,9 @@ namespace RealDelivery.Controllers
                 carrinho = new Carrinho();
                 Session["Carrinho"] = carrinho;
             }
-
             return carrinho;
         }
+
         // GET: Carrinho
         public ViewResult Index()
         {
@@ -34,18 +35,28 @@ namespace RealDelivery.Controllers
         [HttpGet]
         public ActionResult add_prod(int id_prod, int quantidade)
         {
-
             produto produto = db.produto.Find(id_prod);
             ObterCarrinho().AdicionarItem(produto, quantidade);
-
-            return RedirectToAction("index","home");
-
+            return RedirectToAction("index", "home");
         }
+
         [HttpGet]
         public ActionResult remove(int id_prod)
         {
             produto produto = db.produto.Find(id_prod);
             ObterCarrinho().RemevorItem(produto);
+            return RedirectToAction("index");
+        }
+        public ActionResult removeOne(int id_prod)
+        {
+            produto produto = db.produto.Find(id_prod);
+            ObterCarrinho().Remevor(produto);
+            return RedirectToAction("index");
+        }
+        public ActionResult addOne(int id_prod, int quantidade)
+        {
+            produto produto = db.produto.Find(id_prod);
+            ObterCarrinho().AdicionarItem(produto, quantidade);
             return RedirectToAction("index");
         }
 
@@ -56,6 +67,5 @@ namespace RealDelivery.Controllers
             return RedirectToAction("index", "home");
         }
     }
-
 }
 

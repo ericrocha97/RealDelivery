@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="db_a464fd_realdevModel.Store" Provider="MySql.Data.MySqlClient" ProviderManifestToken="5.6" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="db_a464fd_realdevModel.Store" Provider="MySql.Data.MySqlClient" ProviderManifestToken="5.6" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="cliente">
           <Key>
             <PropertyRef Name="cliente_cod" />
@@ -65,6 +65,10 @@
           <Property Name="pedido_data" Type="datetime" Precision="0" Nullable="false" />
           <Property Name="pedido_valor" Type="float" Nullable="false" />
           <Property Name="pedido_obs" Type="mediumtext" />
+          <Property Name="pedido_ent" Type="varchar" MaxLength="1" />
+          <Property Name="endereco_cod" Type="int" />
+          <Property Name="pedido_fpgto" Type="varchar" MaxLength="1" Nullable="false" />
+          <Property Name="pedido_troco" Type="float" />
         </EntityType>
         <EntityType Name="produto">
           <Key>
@@ -131,6 +135,18 @@
             </Principal>
             <Dependent Role="pedido">
               <PropertyRef Name="cliente_cod" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="Ped_End_Const">
+          <End Role="endereco" Type="Self.endereco" Multiplicity="0..1" />
+          <End Role="pedido" Type="Self.pedido" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="endereco">
+              <PropertyRef Name="endereco_cod" />
+            </Principal>
+            <Dependent Role="pedido">
+              <PropertyRef Name="endereco_cod" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -204,6 +220,10 @@
             <End Role="cliente" EntitySet="cliente" />
             <End Role="pedido" EntitySet="pedido" />
           </AssociationSet>
+          <AssociationSet Name="Ped_End_Const" Association="Self.Ped_End_Const">
+            <End Role="endereco" EntitySet="endereco" />
+            <End Role="pedido" EntitySet="pedido" />
+          </AssociationSet>
           <AssociationSet Name="Ped_item_Const" Association="Self.Ped_item_Const">
             <End Role="pedido" EntitySet="pedido" />
             <End Role="item_pedido" EntitySet="item_pedido" />
@@ -221,8 +241,7 @@
             <End Role="usuario_perm" EntitySet="usuario_perm" />
           </AssociationSet>
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="db_a464fd_realdevModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -252,6 +271,7 @@
           <Property Name="endereco_comp" Type="String" MaxLength="65535" FixedLength="false" Unicode="false" />
           <Property Name="endereco_num" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
           <NavigationProperty Name="cliente" Relationship="Self.Clie_End_Const" FromRole="endereco" ToRole="cliente" />
+          <NavigationProperty Name="pedido" Relationship="db_a464fd_realdevModel.Ped_End_Const" FromRole="endereco" ToRole="pedido" />
         </EntityType>
         <EntityType Name="grupo">
           <Key>
@@ -293,8 +313,13 @@
           <Property Name="pedido_data" Type="DateTime" Nullable="false" />
           <Property Name="pedido_valor" Type="Single" Nullable="false" />
           <Property Name="pedido_obs" Type="String" MaxLength="16777215" FixedLength="false" Unicode="false" />
+          <Property Name="pedido_ent" Type="String" MaxLength="1" FixedLength="false" Unicode="false" />
+          <Property Name="endereco_cod" Type="Int32" />
+          <Property Name="pedido_fpgto" Type="String" MaxLength="1" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="pedido_troco" Type="Single" />
           <NavigationProperty Name="cliente" Relationship="Self.Ped_Cli_Const" FromRole="pedido" ToRole="cliente" />
           <NavigationProperty Name="item_pedido" Relationship="Self.Ped_item_Const" FromRole="pedido" ToRole="item_pedido" />
+          <NavigationProperty Name="endereco" Relationship="db_a464fd_realdevModel.Ped_End_Const" FromRole="pedido" ToRole="endereco" />
         </EntityType>
         <EntityType Name="produto">
           <Key>
@@ -455,7 +480,23 @@
             <End Role="usuario" EntitySet="usuario" />
             <End Role="usuario_perm" EntitySet="usuario_perm" />
           </AssociationSet>
+          <AssociationSet Name="Ped_End_Const" Association="db_a464fd_realdevModel.Ped_End_Const">
+            <End Role="endereco" EntitySet="endereco" />
+            <End Role="pedido" EntitySet="pedido" />
+          </AssociationSet>
         </EntityContainer>
+        <Association Name="Ped_End_Const">
+          <End Type="db_a464fd_realdevModel.endereco" Role="endereco" Multiplicity="0..1" />
+          <End Type="db_a464fd_realdevModel.pedido" Role="pedido" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="endereco">
+              <PropertyRef Name="endereco_cod" />
+            </Principal>
+            <Dependent Role="pedido">
+              <PropertyRef Name="endereco_cod" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -526,6 +567,10 @@
                 <ScalarProperty Name="pedido_data" ColumnName="pedido_data" />
                 <ScalarProperty Name="pedido_valor" ColumnName="pedido_valor" />
                 <ScalarProperty Name="pedido_obs" ColumnName="pedido_obs" />
+                <ScalarProperty Name="pedido_ent" ColumnName="pedido_ent" />
+                <ScalarProperty Name="endereco_cod" ColumnName="endereco_cod" />
+                <ScalarProperty Name="pedido_fpgto" ColumnName="pedido_fpgto" />
+                <ScalarProperty Name="pedido_troco" ColumnName="pedido_troco" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

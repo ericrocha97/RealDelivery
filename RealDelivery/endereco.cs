@@ -15,6 +15,12 @@ namespace RealDelivery
 
     public partial class endereco
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public endereco()
+        {
+            this.pedido = new HashSet<pedido>();
+        }
+    
         public int endereco_cod { get; set; }
         public int cliente_cod { get; set; }
         [DisplayName("Cep")]
@@ -33,5 +39,7 @@ namespace RealDelivery
         public string endereco_num { get; set; }
     
         public virtual cliente cliente { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<pedido> pedido { get; set; }
     }
 }

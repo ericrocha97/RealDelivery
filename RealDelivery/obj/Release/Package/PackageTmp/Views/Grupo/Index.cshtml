@@ -27,28 +27,27 @@
 
 <table class="table table-hover table-bordered">
     <tr>
-        <th style="width: 150px;">
+        <th class="text-center align-middle">
             @Html.DisplayNameFor(model => model.grupo_nome)
         </th>
-        <th style="width: 75px;">
+        <th class="text-center align-middle">
             @Html.DisplayNameFor(model => model.grupo_ativo)
         </th>
-        <th style="width: 125px;"></th>
+        <th class="text-center align-middle"></th>
     </tr>
 
     @foreach (var item in Model)
     {
         <tr>
-            <td>
+            <td class="text-center align-middle">
                 @Html.DisplayFor(modelItem => item.grupo_nome)
             </td>
-            <td>
+            <td class="text-center align-middle">
                 @Html.DisplayFor(modelItem => item.grupo_ativo)
             </td>
-            <td>
+            <td class="text-center align-middle">
                 @Html.ActionLink("Editar", "Edit", new { id = item.grupo_cod }, new { @class = "btn btn-primary", @style = "width: 116px;" })
                 @Html.ActionLink("Detalhes", "Details", new { id = item.grupo_cod }, new { @class = "btn btn-warning", @style = "width: 116px;" })
-
             </td>
         </tr>
     }

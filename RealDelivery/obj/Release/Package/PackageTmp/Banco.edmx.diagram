@@ -4,17 +4,24 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="9b35e71db3a143d58c2a024c62bd6371" Name="Diagram1">
-        <EntityTypeShape EntityType="db_a464fd_realdevModel.endereco" Width="1.5" PointX="3" PointY="1.125" IsExpanded="true" />
-        <EntityTypeShape EntityType="db_a464fd_realdevModel.grupo" Width="1.5" PointX="5.75" PointY="1.5" IsExpanded="true" />
-        <EntityTypeShape EntityType="db_a464fd_realdevModel.impress" Width="1.5" PointX="5.75" PointY="5.875" IsExpanded="true" />
-        <EntityTypeShape EntityType="db_a464fd_realdevModel.produto" Width="1.5" PointX="8" PointY="1" IsExpanded="true" />
-        <EntityTypeShape EntityType="db_a464fd_realdevModel.usuario" Width="1.5" PointX="0.75" PointY="2.625" IsExpanded="true" />
-        <EntityTypeShape EntityType="db_a464fd_realdevModel.usuario_perm" Width="1.5" PointX="3" PointY="4.75" IsExpanded="true" />
-        <AssociationConnector Association="db_a464fd_realdevModel.Usu_End_Const" ManuallyRouted="false" />
+      <Diagram DiagramId="d2313c4631d14937bbbb342183a437ab" Name="Diagram1">
+        <EntityTypeShape EntityType="db_a464fd_realdevModel.cliente" Width="1.5" PointX="0.75" PointY="9.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="db_a464fd_realdevModel.endereco" Width="1.5" PointX="4.25" PointY="12.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="db_a464fd_realdevModel.grupo" Width="1.5" PointX="0.75" PointY="1.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="db_a464fd_realdevModel.impress" Width="1.5" PointX="0.75" PointY="6" IsExpanded="true" />
+        <EntityTypeShape EntityType="db_a464fd_realdevModel.item_pedido" Width="1.5" PointX="5.25" PointY="1.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="db_a464fd_realdevModel.pedido" Width="1.5" PointX="3.375" PointY="8.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="db_a464fd_realdevModel.produto" Width="1.5" PointX="3" PointY="1" IsExpanded="true" />
+        <EntityTypeShape EntityType="db_a464fd_realdevModel.usuario" Width="1.5" PointX="2.75" PointY="5.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="db_a464fd_realdevModel.usuario_perm" Width="1.5" PointX="5" PointY="6.125" IsExpanded="true" />
+        <AssociationConnector Association="db_a464fd_realdevModel.Clie_End_Const" ManuallyRouted="false" />
+        <AssociationConnector Association="db_a464fd_realdevModel.Ped_Cli_Const" ManuallyRouted="false" />
         <AssociationConnector Association="db_a464fd_realdevModel.Pro_Gru_Const" ManuallyRouted="false" />
         <AssociationConnector Association="db_a464fd_realdevModel.Pro_Imp_Const" ManuallyRouted="false" />
+        <AssociationConnector Association="db_a464fd_realdevModel.item_pedido_ibfk_1" ManuallyRouted="false" />
+        <AssociationConnector Association="db_a464fd_realdevModel.Ped_item_Const" ManuallyRouted="false" />
         <AssociationConnector Association="db_a464fd_realdevModel.usu_usuperm_constraint" ManuallyRouted="false" />
+        <AssociationConnector Association="db_a464fd_realdevModel.Ped_End_Const" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

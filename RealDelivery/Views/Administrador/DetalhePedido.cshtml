@@ -1,0 +1,97 @@
+﻿@model RealDelivery.pedido
+@{
+    Layout = "~/Views/Administrador/_LayoutPanel.cshtml";
+
+    ViewBag.Title = "Detalhes do pedido";
+
+}
+
+    <a href="@Request.UrlReferrer" class="btn btn-danger float-left">Voltar</a><h2 class="text-center mt-2">Detalhes do pedido</h2> 
+    
+
+
+
+
+
+
+
+<table class="table table-hover table-bordered">
+    <tr>
+        <th class="text-center align-middle">
+            @Html.DisplayNameFor(model => model.pedido_cod)
+        </th>
+        <th class="text-center align-middle">
+            @Html.DisplayNameFor(model => model.pedido_valor)
+        </th>
+        <th class="text-center align-middle">
+            @Html.DisplayNameFor(model => model.pedido_obs)
+        </th>
+        <th class="text-center align-middle">
+            @Html.DisplayNameFor(model => model.pedido_ent)
+        </th>
+        <th class="text-center align-middle">
+            Cliente
+        </th>
+        <th class="text-center align-middle">
+            Endereço
+        </th>
+        <th>
+
+        </th>
+    </tr>
+
+
+    <tr>
+        <td class="text-center align-middle">
+            @{
+                var id = Html.DisplayFor(model => model.pedido_cod);
+            }
+            @id
+        </td>
+        <td class="text-center align-middle">
+            @Html.DisplayFor(model => model.pedido_valor)
+        </td>
+        <td class="text-center align-middle">
+            @Html.DisplayFor(model => model.pedido_obs)
+        </td>
+        <td class="text-center align-middle">
+            @Html.DisplayFor(model => model.pedido_ent)
+        </td>
+        <td class="text-center align-middle">
+            Nome:       @Html.DisplayFor(model => model.cliente.cliente_nome) <br />
+            Telefone:   @Html.DisplayFor(model => model.cliente.cliente_telefone) <br />
+        </td>
+        <td class="text-center align-middle">
+            @{
+                if (Model.endereco != null)
+                {
+                    var endereco_rua = Html.DisplayFor(model => model.endereco.endereco_rua);
+                    var endereco_num = Html.DisplayFor(model => model.endereco.endereco_num);
+                    var endereco_comp = Html.DisplayFor(model => model.endereco.endereco_comp);
+                    var endereco_bairro = Html.DisplayFor(model => model.endereco.endereco_bairro);
+                    var endereco_cep = Html.DisplayFor(model => model.endereco.endereco_cep);
+                    var endereco_cidade = Html.DisplayFor(model => model.endereco.endereco_cidade);
+                    var endereco_uf = Html.DisplayFor(model => model.endereco.endereco_uf);
+
+
+                    var endereco_completo_1 = endereco_rua + ", " + endereco_num + ", " + endereco_comp;
+                    var endereco_completo_2 = endereco_bairro + ", " + endereco_cep;
+                    var endereco_completo_3 = endereco_cidade + ", " + endereco_uf;
+
+                    <div>
+                        @endereco_completo_1 <br />
+                        @endereco_completo_2 <br />
+                        @endereco_completo_3
+                    </div>
+                }
+            }
+
+        </td>
+        <td class="text-center align-middle">
+            @Html.ActionLink("Itens do pedido", "ItensPedido", "Administrador", new { id = id }, new { @class = "btn btn-info" })
+        </td>
+    </tr>
+
+</table>
+
+

@@ -14,7 +14,7 @@ namespace RealDelivery.Controllers
     {
         private db_a464fd_realdevEntities db = new db_a464fd_realdevEntities();
 
-        [Authorize]
+        [Authorize(Roles = "Cliente")]
         // GET: Endereco
         public ActionResult Index(int? id)
         {
@@ -22,7 +22,6 @@ namespace RealDelivery.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-
             var endereco = db.endereco.Where(e => e.cliente_cod == id);
             if (endereco == null)
             {
@@ -31,37 +30,33 @@ namespace RealDelivery.Controllers
             return View(endereco.ToList());
         }
 
-
-        [Authorize]
+        [Authorize(Roles = "Cliente")]
         // GET: Endereco/Create
         public ActionResult Create(Int32 id)
         {
             endereco endereco = new endereco();
             endereco.cliente_cod = id;
-
             return View(endereco);
-
-
         }
 
         // POST: Endereco/Create
         // Para se proteger de mais ataques, ative as propriedades específicas a que você quer se conectar. Para 
         // obter mais detalhes, consulte https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
-        [Authorize]
+        [Authorize(Roles = "Cliente")]
         public ActionResult Create([Bind(Include = "endereco_cod,cliente_cod,endereco_cep,endereco_rua,endereco_bairro,endereco_cidade,endereco_uf,endereco_comp,endereco_num")] endereco endereco)
         {
             if (ModelState.IsValid)
             {
                 db.endereco.Add(endereco);
                 db.SaveChanges();
-                return RedirectToAction("Panel","Cliente");
+                return RedirectToAction("Panel", "Cliente");
             }
-
             ViewBag.cliente_cod = endereco.cliente_cod;
             return View(endereco);
         }
-        [Authorize]
+
+        [Authorize(Roles = "Cliente")]
         // GET: Endereco/Edit/5
         public ActionResult Edit(int? id)
         {
@@ -78,11 +73,10 @@ namespace RealDelivery.Controllers
             return View(endereco);
         }
 
-      
         // Para se proteger de mais ataques, ative as propriedades específicas a que você quer se conectar. Para 
         // obter mais detalhes, consulte https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
-        [Authorize]
+        [Authorize(Roles = "Cliente")]
         public ActionResult Edit([Bind(Include = "endereco_cod,cliente_cod,endereco_cep,endereco_rua,endereco_bairro,endereco_cidade,endereco_uf,endereco_comp,endereco_num")] endereco endereco)
         {
             if (ModelState.IsValid)
@@ -91,15 +85,15 @@ namespace RealDelivery.Controllers
                 db.Entry(endereco).State = EntityState.Modified;
                 db.SaveChanges();
                 return Redirect("~/Endereco/Index/" + id);
-                
             }
             ViewBag.cliente_cod = new SelectList(db.cliente, "cliente_cod", "cliente_nome", endereco.cliente_cod);
             return View(endereco);
         }
-        [Authorize]
+
+        [Authorize(Roles = "Cliente")]
         public ActionResult Delete(int id)
         {
-            
+
             endereco endereco = db.endereco.Find(id);
             var cod = endereco.cliente_cod;
             db.endereco.Remove(endereco);
