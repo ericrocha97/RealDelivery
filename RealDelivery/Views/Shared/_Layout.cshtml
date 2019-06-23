@@ -26,6 +26,7 @@
     <title>@ViewBag.Title - RealDelivery</title>
     <style>
 
+
         body {
             font-family: 'Roboto', sans-serif !important;
         }
@@ -58,11 +59,34 @@
             <div class="form-inline my-2 my-lg-0">
 
 
+                @using RealDelivery.ViewModels;
+                @{
+                    Carrinho ObterCarrinho()
+                    {
+                        Carrinho carrinho = (Carrinho)Session["Carrinho"];
+                        if (carrinho == null)
+                        {
+                            carrinho = new Carrinho();
+                            Session["Carrinho"] = carrinho;
+                        }
+                        return carrinho;
+                    }
 
 
+                    var qtd = ObterCarrinho().ItensCarrinho.Count();
+                }
                 <a href="/Carrinho/index" class="btn btn-outline-primary mr-2">
-                    Carrinho <i class="fas fa-shopping-cart"></i>
+                    Carrinho <i class="fas fa-shopping-cart"></i> <span class="badge badge-pill badge-primary">@qtd</span>
                 </a>
+
+
+
+
+
+
+
+
+
 
 
 
@@ -75,37 +99,37 @@
                 @if (User.Identity.IsAuthenticated)
                 {
                     //@Html.ActionLink("Sair", "Logout", "Administrador", "", new { @class = "btn btn-danger" })
-                    <a class="btn btn-outline-success my-2 my-sm-0 mr-2" href="/Cliente/Panel">
-                        Painel <i class="fas fa-user"></i>
-                    </a>
-                    <a class="btn btn-outline-danger my-2 my-sm-0 " href="/Cliente/Logout">
-                        Logout <i class="fas fa-sign-out-alt"></i>
-                    </a>
+                <a class="btn btn-outline-success my-2 my-sm-0 mr-2" href="/Cliente/Panel">
+                    Painel <i class="fas fa-user"></i>
+                </a>
+                <a class="btn btn-outline-danger my-2 my-sm-0 " href="/Cliente/Logout">
+                    Logout <i class="fas fa-sign-out-alt"></i>
+                </a>
 
-                }
-                else
-                {
-                    //@Html.ActionLink("Login", "Login", "Administrador", "", new { @class = "btn btn-success" })
-                    <a class="btn btn-outline-success my-2 my-sm-0" href="/Cliente/Login">
-                        Login <i class="fas fa-sign-in-alt"></i>
-                    </a>
-                }
-            </div>
-        </div>
-    </nav>
+            }
+            else
+            {
+                //@Html.ActionLink("Login", "Login", "Administrador", "", new { @class = "btn btn-success" })
+                <a class="btn btn-outline-success my-2 my-sm-0" href="/Cliente/Login">
+                    Login <i class="fas fa-sign-in-alt"></i>
+                </a>
+            }
+</div>
+</div>
+</nav>
 
-    <div class="container body-content">
-        @RenderBody()
-        <hr />
-        <footer>
-            <p>&copy; @DateTime.Now.Year - RealDelivery</p>
-        </footer>
-    </div>
+<div class="container body-content">
+    @RenderBody()
+    <hr />
+    <footer>
+        <p>&copy; @DateTime.Now.Year - RealDelivery</p>
+    </footer>
+</div>
 
 
-    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
-    @RenderSection("scripts", required: false)
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+@RenderSection("scripts", required: false)
 </body>
 </html>

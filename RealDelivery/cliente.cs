@@ -12,6 +12,7 @@ namespace RealDelivery
     using System;
     using System.Collections.Generic;
     using System.ComponentModel;
+    using System.ComponentModel.DataAnnotations;
 
     public partial class cliente
     {
@@ -26,6 +27,7 @@ namespace RealDelivery
         [DisplayName("Nome")]
         public string cliente_nome { get; set; }
         [DisplayName("Telefone")]
+        [DisplayFormat(DataFormatString = "{0:(##) #####-####}")]
         public string cliente_telefone { get; set; }
         [DisplayName("E-mail")]
         public string cliente_email { get; set; }

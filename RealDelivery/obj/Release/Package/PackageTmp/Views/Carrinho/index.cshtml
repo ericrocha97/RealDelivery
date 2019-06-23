@@ -31,7 +31,7 @@
     @if(Model.car.ItensCarrinho.Count() == 0){ 
         <tr>
             <td class="align-middle row align-items-center" colspan="5">
-                <div class="col-12 col-sm-12 col-lg-12 col-md-12 col-xl-12 p-1 text-center"><h2>Carrinho vazio.</h2></div>
+                <div class="col-12 col-sm-12 col-lg-12 col-md-12 col-xl-12 p-1 text-center"><h2>Carrinho está vazio.</h2></div>
             </td>
         </tr>
     }
@@ -74,7 +74,7 @@
                                data-val-required="O campo Quantidade é obrigatório." id="item_Quantidade"
                                name="item.Quantidade" type="number" value="@qtd" readonly>
                         <div class="input-group-append">
-                            @Html.ActionLink("-", "removeOne", "Carrinho", new { id_prod = item.Produto.produto_cod }, new { @class = "btn btn-sm btn-danger d-flex align-items-center" })
+                            @Html.ActionLink("-", "removeOne", "Carrinho", new { id_prod = item.Produto.produto_cod, quantidade = 1 }, new { @class = "btn btn-sm btn-danger d-flex align-items-center" })
                         </div>
 
                     </div>

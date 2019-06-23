@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Data;
 using System.Data.Entity;
 using System.Drawing;
+using System.Drawing.Imaging;
 using System.IO;
 using System.Linq;
 using System.Net;
@@ -74,6 +75,7 @@ namespace RealDelivery.Controllers
 
         // POST: produto/Create
         // Para se proteger de mais ataques, ative as propriedades específicas a que você quer se conectar. Para 
+
         // obter mais detalhes, consulte https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [CustomAuthorizeAttribute(Roles = "Administrador")]
@@ -123,7 +125,7 @@ namespace RealDelivery.Controllers
                     return View(produto);
                 }
             }
-            //if (ModelState.IsValid)
+            if (ModelState.IsValid)
             {
                 if (produto.produto_ativo == null)
                 {
@@ -136,14 +138,38 @@ namespace RealDelivery.Controllers
                     using (var img = System.Drawing.Image.FromStream(produto.img_produto.InputStream))
                     {
                         produto.produto_img = String.Format("/Imagem/Produto/{0}{1}", imagemNome, extensao);
+                        var produto_img_img = String.Format("~/Imagem/Produto/{0}{1}", imagemNome, extensao);
+
                         // Salva imagem 
-                        SalvarNaPasta(img, produto.produto_img);
+                        SalvarNaPasta(img, produto_img_img);
+                    }
+                }
+                db.produto.Add(produto);
+                db.SaveChanges();
+                return RedirectToAction("Index");
+            }else
+            {
+                if (produto.produto_ativo == null)
+                {
+                    produto.produto_ativo = "N";
+                }
+                if (produto.img_produto != null)
+                {
+                    var imagemNome = String.Format("{0:yyyyMMdd-HHmmssfff}", DateTime.Now);
+                    var extensao = System.IO.Path.GetExtension(produto.img_produto.FileName).ToLower();
+                    using (var img = System.Drawing.Image.FromStream(produto.img_produto.InputStream))
+                    {
+                        produto.produto_img = String.Format("~/Imagem/Produto/{0}{1}", imagemNome, extensao);
+                        var produto_img_img = String.Format("~/Imagem/Produto/{0}{1}", imagemNome, extensao);
+                        // Salva imagem 
+                        SalvarNaPasta(img, produto_img_img);
                     }
                 }
                 db.produto.Add(produto);
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
+            return RedirectToAction("Index");
         }
 
         // GET: produto/Edit/5
@@ -216,7 +242,7 @@ namespace RealDelivery.Controllers
                     return View(produto);
                 }
             }
-            //if (ModelState.IsValid)
+            if (ModelState.IsValid)
             {
                 if (produto.produto_ativo == null)
                 {
@@ -226,33 +252,83 @@ namespace RealDelivery.Controllers
                 {
                     var imagemNome = String.Format("{0:yyyyMMdd-HHmmssfff}", DateTime.Now);
                     var extensao = System.IO.Path.GetExtension(produto.img_produto.FileName).ToLower();
+                    var file = String.Format(imagemNome, extensao);
                     using (var img = System.Drawing.Image.FromStream(produto.img_produto.InputStream))
                     {
                         produto.produto_img = String.Format("/Imagem/Produto/{0}{1}", imagemNome, extensao);
+                        var produto_img_img = String.Format("~/Imagem/Produto/{0}{1}", imagemNome, extensao);
                         // Salva imagem 
-                        SalvarNaPasta(img, produto.produto_img);
+                        SalvarNaPasta(img, produto_img_img);
                     }
                 }
                 db.Entry(produto).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            /*var s = "S";
+            var s = "S";
             ViewBag.grupo_cod = new SelectList(db.grupo.Where(x => x.grupo_ativo == s), "grupo_cod", "grupo_nome", produto.grupo_cod);
             ViewBag.impress_cod = new SelectList(db.impress, "impress_cod", "impress_cod", produto.impress_cod);
-            return View(produto);*/
+            return View(produto);
         }
 
         private void SalvarNaPasta(Image img, string caminho)
         {
+            /*Bitmap myBitmap;
+            ImageCodecInfo myImageCodecInfo;
+            Encoder myEncoder;
+            EncoderParameter myEncoderParameter;
+            EncoderParameters myEncoderParameters;*/
             // Obtém a nova resolução
             //Size tamanhoImagem = NovoTamanhoImagem(img.Size, novoTamanho);
-            using (System.Drawing.Image novaImagem = new Bitmap(img))
-            {
-                novaImagem.Save(Server.MapPath(caminho), img.RawFormat);
-            }
-        }
+            using (Image novaImagem = new Bitmap(img))
+             {
+                 var x = Server.MapPath(caminho);
+                var j = caminho;
+                 novaImagem.Save(x, img.RawFormat);
+             }
+            /*myEncoder = Encoder.Quality;
+            myEncoderParameters = new EncoderParameters(1);
+            myEncoderParameter = new EncoderParameter(myEncoder, 75L);
+            myEncoderParameters.Param[0] = myEncoderParameter;
+            myImageCodecInfo = GetEncoderInfo("image/jpeg");
+            myBitmap = new Bitmap(img);
+            myBitmap.Save(nome, myImageCodecInfo, myEncoderParameters);*/
 
+        }
+        private static ImageCodecInfo GetEncoderInfo(String mimeType)
+        {
+            int j;
+            ImageCodecInfo[] encoders;
+            encoders = ImageCodecInfo.GetImageEncoders();
+            for (j = 0; j < encoders.Length; ++j)
+            {
+                if (encoders[j].MimeType == mimeType)
+                    return encoders[j];
+            }
+            return null;
+        }
+        /*
+         // Save the bitmap as a JPEG file with quality level 75.
+    myEncoderParameter = new EncoderParameter(myEncoder, 75L);
+    myEncoderParameters.Param[0] = myEncoderParameter;
+    myImageCodecInfo = GetEncoderInfo("image/jpeg");
+    myBitmap = new Bitmap("Shapes.bmp");
+    myBitmap.Save("Shapes075.jpg", myImageCodecInfo, myEncoderParameters);
+
+
+     myBitmap = new Bitmap("Shapes.bmp");
+
+    // Get an ImageCodecInfo object that represents the JPEG codec.
+
+
+    // Create an Encoder object based on the GUID
+
+    // for the Quality parameter category.
+    myEncoder = Encoder.Quality;
+         */
+    
+        //Save(String, ImageFormat)	
+        //Salva essa Image no arquivo especificado no formato especificado.
         protected override void Dispose(bool disposing)
         {
             if (disposing)

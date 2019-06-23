@@ -36,19 +36,32 @@ namespace RealDelivery.ViewModels
             _itemCarrinho.RemoveAll(l => l.Produto.produto_cod == pro.produto_cod);
         }
 
-        public void Remevor(produto pro)
+        public void Remevor(produto pro, int qtd)
         {
-            var item = _itemCarrinho.Find(l => l.Produto.produto_cod == pro.produto_cod);
-            _itemCarrinho.Remove(item);
+            ItemCarrinho item = _itemCarrinho.FirstOrDefault(p => p.Produto.produto_cod == pro.produto_cod);
+            if (item == null)
+            {
+                _itemCarrinho.Add(new ItemCarrinho
+                {
+                    Produto = pro,
+                    Quantidade = qtd
+                });
+            }
+            else
+            {
+                item.Quantidade -= qtd;
+                if (item.Quantidade < 1)
+                {
+                    var del = _itemCarrinho.Find(l => l.Produto.produto_cod == pro.produto_cod);
+                    _itemCarrinho.Remove(del);
+                }
+            }
         }
 
         //TOTAL
-        //[DisplayFormat(DataFormatString = "{0:C2}", ApplyFormatInEditMode = true)]
         public float? ObterValorTotal()
         {
             var resultado = _itemCarrinho.Sum(e => e.Produto.produto_preco * e.Quantidade);
-            //var valorFormatado = string.Format("{0:C}", resultado.ToString());
-            //var valorFormatado = string.Format(CultureInfo.GetCultureInfo("pt-BR"), "{0:C}", resultado);
             return resultado;
         }
 

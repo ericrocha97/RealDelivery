@@ -11,7 +11,7 @@ namespace RealDelivery.Controllers
     {
         private db_a464fd_realdevEntities db = new db_a464fd_realdevEntities();
 
-        private Carrinho ObterCarrinho()
+        public Carrinho ObterCarrinho()
         {
             Carrinho carrinho = (Carrinho)Session["Carrinho"];
             if (carrinho == null)
@@ -47,10 +47,10 @@ namespace RealDelivery.Controllers
             ObterCarrinho().RemevorItem(produto);
             return RedirectToAction("index");
         }
-        public ActionResult removeOne(int id_prod)
+        public ActionResult removeOne(int id_prod, int quantidade)
         {
             produto produto = db.produto.Find(id_prod);
-            ObterCarrinho().Remevor(produto);
+            ObterCarrinho().Remevor(produto, quantidade);
             return RedirectToAction("index");
         }
         public ActionResult addOne(int id_prod, int quantidade)

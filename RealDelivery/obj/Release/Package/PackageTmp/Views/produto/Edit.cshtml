@@ -15,6 +15,9 @@
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
         @Html.HiddenFor(model => model.produto_cod)
         @Html.HiddenFor(model => model.produto_img)
+        @{ 
+            var valor = Model.produto_preco;
+        }
 
         <div class="form-group">
             @Html.LabelFor(model => model.produto_nome, htmlAttributes: new { @class = "control-label col-md-2" })
@@ -33,7 +36,8 @@
         <div class="form-group">
             @Html.LabelFor(model => model.produto_preco, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.TextBoxFor(model => model.produto_preco, new { type = "text", @class = "form-control" })
+
+                <input type="text" name="produto_preco" class="form-control" value="@valor" />
                 @Html.ValidationMessageFor(model => model.produto_preco, "", new { @class = "text-danger" })
             </div>
         </div>
