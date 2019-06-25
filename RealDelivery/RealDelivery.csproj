@@ -382,6 +382,7 @@
     <Content Include="Views\Administrador\DetalhePedido.cshtml" />
     <Content Include="Views\Administrador\ItensPedido.cshtml" />
     <Content Include="Views\Administrador\BuscarPedidos.cshtml" />
+    <Content Include="Views\Administrador\Error.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

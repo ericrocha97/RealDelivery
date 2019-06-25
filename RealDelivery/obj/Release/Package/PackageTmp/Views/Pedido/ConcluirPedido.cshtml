@@ -5,70 +5,71 @@
 }
 
 <h2>Concluir Pedido</h2>
-
-<table class="table">
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.endereco_rua)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.endereco_num)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.endereco_comp)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.endereco_bairro)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.endereco_cep)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.endereco_cidade)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.endereco_uf)
-        </th>
-        <th>Escolha o endereço</th>
-    </tr>
-    <tr>
-        <th colspan="8">
-            <div class="align-content-lg-center justify-content-center text-center">
-            
-                @Html.ActionLink("Retirar no balcão", "EscolheEndereco", new { id = 0 }, new { @class = "btn btn-danger" })
-
-            </div>
-        </th>
-    </tr>
-
-    @foreach (var item in Model)
-    {
+<div class="table-responsive">
+    <table class="table">
         <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.endereco_rua)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.endereco_num)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.endereco_comp)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.endereco_bairro)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.endereco_cep)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.endereco_cidade)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.endereco_uf)
-            </td>
-            <td>
-                @Html.ActionLink("Escolher endereço", "EscolheEndereco", new { id = item.endereco_cod }, new { @class = "btn btn-primary" })
-            </td>
+            <th>
+                @Html.DisplayNameFor(model => model.endereco_rua)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.endereco_num)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.endereco_comp)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.endereco_bairro)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.endereco_cep)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.endereco_cidade)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.endereco_uf)
+            </th>
+            <th>Escolha o endereço</th>
         </tr>
-    }
+        <tr>
+            <th colspan="8">
+                <div class="align-content-lg-center justify-content-center text-center">
 
-</table>
+                    @Html.ActionLink("Retirar no balcão", "EscolheEndereco", new { id = 0 }, new { @class = "btn btn-danger" })
+
+                </div>
+            </th>
+        </tr>
+
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.endereco_rua)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.endereco_num)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.endereco_comp)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.endereco_bairro)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.endereco_cep)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.endereco_cidade)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.endereco_uf)
+                </td>
+                <td>
+                    @Html.ActionLink("Escolher endereço", "EscolheEndereco", new { id = item.endereco_cod }, new { @class = "btn btn-primary" })
+                </td>
+            </tr>
+        }
+
+    </table>
+</div>
